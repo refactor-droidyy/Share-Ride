@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".HelpCall">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:layout_width="match_parent"
+            android:id="@+id/appbar"
+            android:layout_height="wrap_content">
+
+            <androidx.appcompat.widget.Toolbar
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/close"
+                        android:src="@drawable/ic_arrow_back_black_24dp"
+                        android:layout_centerVertical="true"
+                        android:layout_alignParentStart="true"/>
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_toEndOf="@id/close"
+                        android:layout_marginStart="10dp"
+                        android:textStyle="bold"
+                        android:textColor="#ffffff"
+                        android:textSize="20sp"
+                        android:text="Request Help "/>
+
+
+                </RelativeLayout>
+
+
+
+            </androidx.appcompat.widget.Toolbar>
+
+
+
+        </com.google.android.material.appbar.AppBarLayout>
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:layout_below="@id/appbar"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:orientation="vertical"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_below="@id/linear1"
+                    android:id="@+id/linear2"
+                    android:layout_marginTop="30dp"
+                    android:orientation="vertical"
+                    android:padding="30dp"
+                    android:layout_height="wrap_content">
+
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="From"
+                        android:inputType="text"
+                        android:layout_marginTop="10dp"
+                        android:id="@+id/from_upload"/>
+
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="To"
+                        android:layout_marginTop="20dp"
+                        android:inputType="text"
+                        android:id="@+id/to_upload"/>
+
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Description"
+                        android:inputType="text"
+                        android:layout_marginTop="20dp"
+                        android:id="@+id/description"/>
+
+                    <Button
+                        android:layout_width="match_parent"
+                        android:layout_marginTop="30dp"
+                        android:textColor="#ffffff"
+                        android:id="@+id/upload"
+                        android:background="@drawable/button_design"
+                        android:layout_height="wrap_content"
+                        android:text="Upload"
+                        />
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </RelativeLayout>
+
+
+
+    </RelativeLayout>
+</ScrollView>
