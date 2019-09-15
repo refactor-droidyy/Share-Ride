@@ -17,8 +17,8 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/name_tv"
-        android:layout_toLeftOf="@id/button"
+        android:id="@+id/NAME"
+        android:layout_toLeftOf="@id/buttonacc"
         android:layout_toRightOf="@id/profile"
         android:layout_marginLeft="10dp"
         android:layout_gravity="center"
@@ -32,7 +32,7 @@
         android:textColor="#ffffff"
         android:background="@drawable/button_design"
         android:layout_alignParentEnd="true"
-        android:id="@+id/button"
+        android:id="@+id/buttonacc"
         android:text="Accept"/>
 
     </RelativeLayout>

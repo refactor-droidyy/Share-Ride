@@ -26,6 +26,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.HashMap;
 import java.util.Objects;
 
 public class Custompopup extends Activity {
@@ -85,10 +86,11 @@ public class Custompopup extends Activity {
             @SuppressLint("SetTextI18n")
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-
-                if(dataSnapshot.hasChild(curretUser.getUid())){
-                    String req = Objects.requireNonNull(dataSnapshot.child(curretUser.getUid()).child("request_type").getValue()).toString();
-                    if(req.equals("recieved")){
+                for(DataSnapshot snapshot : dataSnapshot.getChildren()){
+                    Regain regain = snapshot.getValue(Regain.class);
+                    assert regain != null;
+                    String type = regain.getRequesttype();
+                    if(type.equals("recieved")){
                         request.setEnabled(true);
                         request.setText("Cancel Request");
                         Current_state  = 1;
@@ -137,28 +139,48 @@ public class Custompopup extends Activity {
         if(Current_state == 0){
 
             assert idd != null;
-            reference.child(idd).child(curretUser.getUid()).child("request_type").setValue("recieved").addOnCompleteListener(new OnCompleteListener<Void>() {
+
+            HashMap<String,String> hashMap = new HashMap<>();
+            hashMap.put("requesttype","sent");
+            hashMap.put("id",idd);
+            hashMap.put("friend","true");
+            reference.child(curretUser.getUid()).child(idd).setValue(hashMap).addOnCompleteListener(new OnCompleteListener<Void>() {
                 @Override
                 public void onComplete(@NonNull Task<Void> task) {
+                    HashMap<String,String> hashMap = new HashMap<>();
+                    hashMap.put("requesttype","recieved");
+                    hashMap.put("id",curretUser.getUid());
+                    hashMap.put("friend","false");
+                    reference.child(idd).child(curretUser.getUid()).setValue(hashMap).addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void aVoid) {
 
-                    if(task.isSuccessful()){
+                                request.setEnabled(true);
+                                request.setText("Cancel Request");
+                                Current_state  = 1;
 
-                        request.setEnabled(true);
-                        request.setText("Cancel Request");
-                        Current_state  = 1;
-                    }
+                        }
+                    });
+
+
                 }
             });
         }
 
         if(Current_state == 1){
             assert idd != null;
-            reference.child(curretUser.getUid()).child(idd).removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
+            reference.child(idd).child(curretUser.getUid()).removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
                 @Override
                 public void onComplete(@NonNull Task<Void> task) {
-                    request.setEnabled(true);
-                    Current_state = 0;
-                    request.setText("Request For Share Ride");
+                    reference.child(curretUser.getUid()).child(idd).removeValue().addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void aVoid) {
+                            request.setEnabled(true);
+                            Current_state = 0;
+                            request.setText("Request For Share Ride");
+                        }
+                    });
+
                 }
             });
 

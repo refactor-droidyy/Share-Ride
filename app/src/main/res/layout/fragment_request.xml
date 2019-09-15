@@ -11,6 +11,12 @@
        android:padding="10dp"
        android:id="@+id/RecyclerVieww"/>
 
+<!--   <TextView-->
+<!--       android:layout_width="wrap_content"-->
+<!--       android:layout_height="wrap_content"-->
+<!--      android:id="@+id/idview"-->
+<!--      />-->
+
 
 
 </LinearLayout>

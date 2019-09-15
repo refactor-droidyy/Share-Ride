@@ -6,16 +6,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".Group">
 
-<!--   <androidx.recyclerview.widget.RecyclerView-->
-<!--       android:layout_width="match_parent"-->
-<!--       android:layout_height="match_parent"-->
-<!--       android:padding="10dp"-->
-<!--       android:id="@+id/recyclerview"/>-->
-    <ListView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/listview"
-        android:padding="10dp"/>
+<TextView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/textt"
+    android:textSize="18sp"/>
 
    <com.google.android.material.floatingactionbutton.FloatingActionButton
        android:layout_width="wrap_content"

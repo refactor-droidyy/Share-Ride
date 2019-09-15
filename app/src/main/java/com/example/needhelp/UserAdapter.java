@@ -42,7 +42,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
             public void onClick(View view) {
                 Intent intent = new Intent(mContext,Message.class);
                 intent.putExtra("ID",user.getId());
-                //Toast.makeText(mContext.getApplicationContext(),user.getUsername_item() + " " + user.getId(),Toast.LENGTH_SHORT).show();
+                //Toast.makeText(mContext.getApplicationContext(),userr.getUsername_item() + " " + userr.getId(),Toast.LENGTH_SHORT).show();
                 mContext.startActivity(intent);
             }
         });
