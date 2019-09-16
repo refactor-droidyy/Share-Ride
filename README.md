@@ -1,4 +1,4 @@
 # Share-Ride
-Share Ride App
+Share Ride Application
 
-Its an application that solve the issue of convienience for college students
+An application that solve the major issue of convienience of college students. This app can help them to save money and time too.Using this app the students can know wheather they need help by other and hence can help them.
