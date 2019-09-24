@@ -1,12 +1,15 @@
 package com.example.needhelp;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -43,15 +46,32 @@ public class MyUploadAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.Vi
       //  holder.username_item.setText(upload.getUsername());
         holder.time.setText(upload.getTime());
        // holder.email.setText(upload.getEmail());
-//        holder.relativeLayout.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Intent intent = new Intent(mContext.getApplicationContext(), Custompopup.class);
-//                intent.putExtra("Id", upload.getId());
-//                intent.putExtra("username", upload.getUsername());
-//                mContext.startActivity(intent);
-//            }
-//        });
+        holder.relativeLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+//                final AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(mContext);
+//                alertDialogBuilder.setTitle(" Delete ");
+//                alertDialogBuilder.setIcon(R.drawable.ic_delete_sweep_black_24dp);
+//
+//                alertDialogBuilder.setMessage("Are You Sure Want To delete")
+//                        .setCancelable(false)
+//                        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+//                            @Override
+//                            public void onClick(DialogInterface dialogInterface, int i) {
+//
+//                            }
+//                        })
+//                        .setNegativeButton("No", new DialogInterface.OnClickListener() {
+//                            @Override
+//                            public void onClick(DialogInterface dialogInterface, int i) {
+//
+//                                dialogInterface.cancel();
+//                            }
+//                        });
+                Toast.makeText(mContext.getApplicationContext(),""+upload.getFrom(),Toast.LENGTH_SHORT).show();
+            }
+        });
 
     }
 
@@ -71,7 +91,7 @@ public class MyUploadAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.Vi
             description = itemView.findViewById(R.id.description);
            // username_item = itemView.findViewById(R.id.username_item);
             time = itemView.findViewById(R.id.time);
-           // relativeLayout = itemView.findViewById(R.id.relative);
+           relativeLayout = itemView.findViewById(R.id.relative);
            // email = itemView.findViewById(R.id.emailwa);
         }
     }
