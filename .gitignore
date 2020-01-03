@@ -1,2 +1,5 @@
-workplace
 
+/*/build/
+/*/local.properties
+/*/out
+/*/*/build

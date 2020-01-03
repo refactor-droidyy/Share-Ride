@@ -33,7 +33,6 @@ public class Message extends AppCompatActivity {
     private TextView username;
     private ImageView close;
     private TextView  statuss;
-   // private ImageView  attachement;
 
     FirebaseUser fireBse;
     DatabaseReference reference;

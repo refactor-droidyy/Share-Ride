@@ -18,10 +18,13 @@ import android.view.View;
 import android.webkit.MimeTypeMap;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -36,6 +39,7 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.StorageTask;
 import com.google.firebase.storage.UploadTask;
+import com.squareup.picasso.Picasso;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -73,11 +77,18 @@ public class Profile extends AppCompatActivity {
 
         addinfo = findViewById(R.id.upload_new);
         dialog = new ProgressDialog(this);
+        postref = FirebaseStorage.getInstance().getReference("uploads");
+        reference = FirebaseDatabase.getInstance().getReference("Users").child(FirebaseAuth.getInstance().getCurrentUser().getUid());
 
         photo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                openFileChooser();
+                if (mUploadTask != null && mUploadTask.isInProgress()) {
+                    Toast.makeText(getApplicationContext(), "Upload In Progress", LENGTH_LONG).show();
+                } else {
+                    openFileChooser();
+                }
+
             }
         });
         addinfo.setOnClickListener(new View.OnClickListener() {
@@ -93,8 +104,11 @@ public class Profile extends AppCompatActivity {
                 finish();
             }
         });
-        reference = FirebaseDatabase.getInstance().getReference("Users").child(Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid());
 
+      updateinfo();
+    }
+
+    private void updateinfo() {
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -102,10 +116,17 @@ public class Profile extends AppCompatActivity {
                 String username = Objects.requireNonNull(dataSnapshot.child("username_item").getValue()).toString();
                 String emaill = Objects.requireNonNull(dataSnapshot.child("email").getValue()).toString();
                 phonee = Objects.requireNonNull(dataSnapshot.child("phone").getValue()).toString();
-
+                String url = Objects.requireNonNull(dataSnapshot.child("imageURL").getValue()).toString();
+                Toast.makeText(getApplicationContext(),url,LENGTH_LONG).show();
+                String s = "gs://needhelp-29d3b.appspot.com/uploads/1573743240371.jpg";
+                Picasso.get()
+                        .load(s)
+                        .resize(100,100)
+                        .into(photo);
                 name.setText(username);
                 email.setText(emaill);
                 phone.setText(phonee);
+
 
             }
 
@@ -117,28 +138,51 @@ public class Profile extends AppCompatActivity {
     }
 
     private void uploadimagetofirebasedatabase() {
-        if(mImageUri == null){
-            makeText(this, "Please Select A Photo From Gallery", LENGTH_SHORT).show();
-        }else {
-            postref = FirebaseStorage.getInstance().getReference().child("Profile_Images").child(Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid());
-            final String s = mImageUri.toString();
-            postref.child(FirebaseAuth.getInstance().getCurrentUser().getUid()).putFile(mImageUri).addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
+        final ProgressDialog pd = new ProgressDialog(getApplicationContext());
+        pd.setMessage("Uploading");
+        if(mImageUri != null){
+            final StorageReference fileref = postref.child(System.currentTimeMillis() + "." + getFileExtension(mImageUri));
+            mUploadTask = fileref.putFile(mImageUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                 @Override
-                public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
-
-                    Toast.makeText(Profile.this, "Please check your email for verification .....", Toast.LENGTH_SHORT).show();
-                    DatabaseReference database = FirebaseDatabase.getInstance().getReference("Users").child(FirebaseAuth.getInstance().getCurrentUser().getUid());
-                    database.child("imageURL").setValue(mImageUri.toString()).addOnCompleteListener(new OnCompleteListener<Void>() {
+                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                    fileref.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                         @Override
-                        public void onComplete(@NonNull Task<Void> task) {
-                            Toast.makeText(Profile.this,"Imageurl succesfully save",Toast.LENGTH_SHORT).show();
+                        public void onSuccess(Uri uri) {
+                            String downloadUrl = String.valueOf(mImageUri);
+                            DatabaseReference dbref = FirebaseDatabase.getInstance().getReference("Users").child(FirebaseAuth.getInstance().getCurrentUser().getUid());
+                            HashMap<String,Object> hashMap=new HashMap<>();
+                            hashMap.put("imageURL",downloadUrl);
+                            dbref.updateChildren(hashMap).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                @Override
+                                public void onSuccess(Void aVoid) {
+                                    dialog.dismiss();
+                                    Toast.makeText(getApplicationContext(), "Upload Successful", Toast.LENGTH_LONG).show();
+                                                                  }
+                            });
+
+                        }
+                    }).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            Toast.makeText(getApplicationContext(), "Upload UnSuccessful", Toast.LENGTH_LONG).show();
                         }
                     });
                 }
             });
+
+        }else{
+            Toast.makeText(getApplicationContext(),"Please Select A Image",LENGTH_LONG).show();
+            pd.dismiss();
         }
+
     }
 
+    private String getFileExtension(Uri uri)
+    {
+        ContentResolver cr = getContentResolver();
+        MimeTypeMap mime = MimeTypeMap.getSingleton();
+        return mime.getExtensionFromMimeType(cr.getType(uri));
+    }
     private void openFileChooser() {
         Intent intent = new Intent(Intent.ACTION_PICK);
         intent.setType("image/*");

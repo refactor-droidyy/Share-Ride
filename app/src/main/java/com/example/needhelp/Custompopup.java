@@ -71,7 +71,7 @@ public class Custompopup extends Activity {
 
         close = findViewById(R.id.close);
         text = findViewById(R.id.username_item);
-        Currentstate = "not_friend";
+//        Currentstate = "not_friend";
         final String name = Objects.requireNonNull(getIntent().getExtras()).getString("username");
         text.setText(name);
 
@@ -81,29 +81,29 @@ public class Custompopup extends Activity {
 
         assert idd != null;
 
-        // checking if the request is performed or not
-        reference.child(idd).addValueEventListener(new ValueEventListener() {
-            @SuppressLint("SetTextI18n")
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                for(DataSnapshot snapshot : dataSnapshot.getChildren()){
-                    Regain regain = snapshot.getValue(Regain.class);
-                    assert regain != null;
-                    String type = regain.getRequesttype();
-                    if(type.equals("recieved")){
-                        request.setEnabled(true);
-                        request.setText("Cancel Request");
-                        Current_state  = 1;
-                    }
-
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
+//        // checking if the request is performed or not
+//        reference.child(idd).addValueEventListener(new ValueEventListener() {
+//            @SuppressLint("SetTextI18n")
+//            @Override
+//            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+//                for(DataSnapshot snapshot : dataSnapshot.getChildren()){
+//                    Regain regain = snapshot.getValue(Regain.class);
+//                    assert regain != null;
+//                    String type = regain.getRequesttype();
+//                    if(type.equals("recieved")){
+//                        request.setEnabled(true);
+//                        request.setText("Cancel Request");
+//                        Current_state  = 1;
+//                    }
+//
+//                }
+//            }
+//
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError databaseError) {
+//
+//            }
+//        });
 
 
         chatting.setOnClickListener(new View.OnClickListener() {
@@ -120,13 +120,13 @@ public class Custompopup extends Activity {
         });
 
 
-        request.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                sendRequest();
-            }
-        });
+//        request.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//
+//                sendRequest();
+//            }
+//        });
 
 
 

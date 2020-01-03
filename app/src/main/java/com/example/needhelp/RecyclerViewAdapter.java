@@ -13,6 +13,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
+import de.hdodenhof.circleimageview.CircleImageView;
+
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder>{
 
     private Context mContext;
@@ -61,10 +63,12 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
     static class ViewHolder extends RecyclerView.ViewHolder{
         TextView ffrom, tto, description, username,time,email;
+        CircleImageView imgg;
         RelativeLayout relativeLayout;
         ViewHolder(@NonNull View itemView) {
             super(itemView);
             ffrom = itemView.findViewById(R.id.from);
+            imgg = itemView.findViewById(R.id.profile_list);
             tto = itemView.findViewById(R.id.to);
             description = itemView.findViewById(R.id.description);
             username= itemView.findViewById(R.id.username);
