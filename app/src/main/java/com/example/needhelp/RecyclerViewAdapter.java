@@ -5,11 +5,14 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -44,12 +47,17 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         holder.username.setText(upload.getUsername());
         holder.time.setText(upload.getTime());
         holder.email.setText(upload.getEmail());
+        Picasso.get()
+                .load(upload.getImageURL())
+                .resize(100,100)
+                .into(holder.imgg);
         holder.relativeLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(mContext.getApplicationContext(),Custompopup.class);
                 intent.putExtra("Id",upload.getId());
                 intent.putExtra("username",upload.getUsername());
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 mContext.startActivity(intent);
             }
         });
@@ -61,7 +69,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         return mUploads.size();
     }
 
-    static class ViewHolder extends RecyclerView.ViewHolder{
+     static class ViewHolder extends RecyclerView.ViewHolder{
         TextView ffrom, tto, description, username,time,email;
         CircleImageView imgg;
         RelativeLayout relativeLayout;

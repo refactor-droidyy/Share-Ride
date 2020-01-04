@@ -4,20 +4,24 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.ContentResolver;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.media.Image;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.view.View;
 import android.webkit.MimeTypeMap;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -40,6 +44,8 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.StorageTask;
 import com.google.firebase.storage.UploadTask;
 import com.squareup.picasso.Picasso;
+import com.theartofdev.edmodo.cropper.CropImage;
+import com.theartofdev.edmodo.cropper.CropImageView;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -52,9 +58,11 @@ import static android.widget.Toast.*;
 public class Profile extends AppCompatActivity {
 
     private static final int IMAGE_REQUEST = 1;
-    public TextView name;
-    public TextView email;
-    public TextView phone;
+    private static final int REQUEST_WRITE_PERMISSION = 12;
+    private TextView name;
+    private TextView email;
+    private TextView phone;
+    private LinearLayout call;
     public ImageView close, photo;
     private TextView addinfo;
     String phonee, datetime;
@@ -63,6 +71,8 @@ public class Profile extends AppCompatActivity {
     private Uri mImageUri;
     private ProgressDialog dialog;
     private StorageTask mUploadTask;
+
+    String fileName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,12 +84,19 @@ public class Profile extends AppCompatActivity {
         phone = findViewById(R.id.phone_number);
         photo = findViewById(R.id.select_post_image);
         close = findViewById(R.id.close);
+        call = findViewById(R.id.make_call);
 
         addinfo = findViewById(R.id.upload_new);
         dialog = new ProgressDialog(this);
         postref = FirebaseStorage.getInstance().getReference("uploads");
         reference = FirebaseDatabase.getInstance().getReference("Users").child(FirebaseAuth.getInstance().getCurrentUser().getUid());
 
+        call.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+               // makeCallIntent();
+            }
+        });
         photo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -94,7 +111,7 @@ public class Profile extends AppCompatActivity {
         addinfo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                uploadimagetofirebasedatabase();
+               uploadimagetofirebasedatabase();
             }
         });
         close.setOnClickListener(new View.OnClickListener() {
@@ -105,7 +122,7 @@ public class Profile extends AppCompatActivity {
             }
         });
 
-      updateinfo();
+        updateinfo();
     }
 
     private void updateinfo() {
@@ -117,10 +134,8 @@ public class Profile extends AppCompatActivity {
                 String emaill = Objects.requireNonNull(dataSnapshot.child("email").getValue()).toString();
                 phonee = Objects.requireNonNull(dataSnapshot.child("phone").getValue()).toString();
                 String url = Objects.requireNonNull(dataSnapshot.child("imageURL").getValue()).toString();
-                Toast.makeText(getApplicationContext(),url,LENGTH_LONG).show();
-                String s = "gs://needhelp-29d3b.appspot.com/uploads/1573743240371.jpg";
                 Picasso.get()
-                        .load(s)
+                        .load(url)
                         .resize(100,100)
                         .into(photo);
                 name.setText(username);
@@ -141,14 +156,14 @@ public class Profile extends AppCompatActivity {
         final ProgressDialog pd = new ProgressDialog(getApplicationContext());
         pd.setMessage("Uploading");
         if(mImageUri != null){
-            final StorageReference fileref = postref.child(System.currentTimeMillis() + "." + getFileExtension(mImageUri));
+            final StorageReference fileref = postref.child(fileName);
             mUploadTask = fileref.putFile(mImageUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                 @Override
                 public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                     fileref.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                         @Override
                         public void onSuccess(Uri uri) {
-                            String downloadUrl = String.valueOf(mImageUri);
+                            String downloadUrl = String.valueOf(uri);
                             DatabaseReference dbref = FirebaseDatabase.getInstance().getReference("Users").child(FirebaseAuth.getInstance().getCurrentUser().getUid());
                             HashMap<String,Object> hashMap=new HashMap<>();
                             hashMap.put("imageURL",downloadUrl);
@@ -177,30 +192,47 @@ public class Profile extends AppCompatActivity {
 
     }
 
-    private String getFileExtension(Uri uri)
-    {
-        ContentResolver cr = getContentResolver();
-        MimeTypeMap mime = MimeTypeMap.getSingleton();
-        return mime.getExtensionFromMimeType(cr.getType(uri));
-    }
-    private void openFileChooser() {
-        Intent intent = new Intent(Intent.ACTION_PICK);
-        intent.setType("image/*");
-        startActivityForResult(intent,0);
-    }
 
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        if (requestCode == REQUEST_WRITE_PERMISSION && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+            CropImage.startPickImageActivity(Profile.this);
+        }
+    }
+
+    private void openFileChooser() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            requestPermissions(new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, REQUEST_WRITE_PERMISSION);
+        } else {
+            CropImage.startPickImageActivity(Profile.this);
+        }
+    }
+
+
+    @Override
+    @SuppressLint("NewApi")
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+
         super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode == 0 && resultCode == Activity.RESULT_OK && data != null){
-            mImageUri  = data.getData();
-            Bitmap bitmap = null;
-            try {
-                bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(),mImageUri);
-            } catch (IOException e) {
-                e.printStackTrace();
+        if (requestCode == CropImage.PICK_IMAGE_CHOOSER_REQUEST_CODE && resultCode == Activity.RESULT_OK) {
+            Uri imageUri = CropImage.getPickImageResultUri(this, data);
+
+            CropImage.activity(imageUri)
+                    .setGuidelines(CropImageView.Guidelines.ON)
+                    .setMultiTouchEnabled(true)
+                    .setAspectRatio(1, 1)
+                    .start(this);
+        }
+
+        if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE) {
+            CropImage.ActivityResult result = CropImage.getActivityResult(data);
+            if (resultCode == RESULT_OK) {
+               mImageUri = (result.getUri());
+                if (mImageUri.getScheme().equals("file")) {
+                    fileName = mImageUri.getLastPathSegment();
+                }
+                photo.setImageURI(result.getUri());
             }
-            photo.setImageBitmap(bitmap);
         }
     }
 }

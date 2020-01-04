@@ -101,22 +101,6 @@
                     android:src="@drawable/ic_about"
                     tools:ignore="ContentDescription,UnusedAttribute" />
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="16dp"
-                    android:clickable="true"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal"
-                    android:paddingLeft="16dp"
-                    android:layout_marginBottom="10dp"
-                    android:focusable="true"
-                    android:paddingRight="16dp">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Subhead" />
 
                     <TextView
                         android:id="@+id/app_version"
@@ -124,10 +108,11 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
                         android:textSize="18sp"
+                        android:layout_marginLeft="30dp"
                         android:text="@string/versionno"
                         android:textColor="#000000"
                         android:textAppearance="@style/TextAppearance.AppCompat.Caption" />
-                </LinearLayout>
+
 
             </LinearLayout>
 
@@ -195,12 +180,13 @@
                 android:textAppearance="@style/TextAppearance.AppCompat.Body2" />
 
             <LinearLayout
-                android:id="@+id/Govind_about"
+                android:id="@+id/rohit_github"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center_vertical"
                 android:orientation="horizontal"
                 android:paddingLeft="16dp"
+                android:layout_margin="1dp"
                 android:clickable="true"
                 android:paddingRight="16dp">
 
@@ -211,27 +197,18 @@
                     android:src="@drawable/ic_github_circle_white_24dp"
                     tools:ignore="ContentDescription,UnusedAttribute" />
 
-                <LinearLayout
-                    android:layout_width="match_parent"
+                <TextView
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="32dp"
-                    android:layout_marginStart="32dp"
-                    android:orientation="vertical"
-                    android:paddingBottom="8dp"
-                    android:paddingTop="8dp">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="refactor-droidyy"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Subhead" />
-                </LinearLayout>
-
+                    android:text="refactor-droidyy"
+                    android:layout_marginLeft="30dp"
+                    android:textSize="18sp"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Subhead"/>
 
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/write_an_email"
+                android:id="@+id/rohit_email"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:clickable="true"
@@ -256,6 +233,7 @@
                     android:paddingBottom="8dp"
                     android:paddingTop="8dp"
                     android:text="Email"
+                    android:textSize="18sp"
                     android:textAppearance="@style/TextAppearance.AppCompat.Subhead" />
 
             </LinearLayout>
@@ -319,6 +297,7 @@
                     android:layout_marginStart="32dp"
                     android:paddingBottom="8dp"
                     android:paddingTop="8dp"
+                    android:textSize="18sp"
                     android:text="Submit Your Aricle Or Reviews here"
                     android:textAppearance="@style/TextAppearance.AppCompat.Subhead" />
 

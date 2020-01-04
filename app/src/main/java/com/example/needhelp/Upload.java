@@ -8,6 +8,34 @@ public class Upload {
     private String time;
     private String email;
     private String id;
+    private String imageURL;
+
+    public Upload(String from, String username_item, String to, String description, String time, String email, String id, String imageURL) {
+        this.from = from;
+        this.username_item = username_item;
+        this.to = to;
+        this.description = description;
+        this.time = time;
+        this.email = email;
+        this.id = id;
+        this.imageURL = imageURL;
+    }
+
+    public String getUsername_item() {
+        return username_item;
+    }
+
+    public void setUsername_item(String username_item) {
+        this.username_item = username_item;
+    }
+
+    public String getImageURL() {
+        return imageURL;
+    }
+
+    public void setImageURL(String imageURL) {
+        this.imageURL = imageURL;
+    }
 
     public Upload(){
 
@@ -19,16 +47,6 @@ public class Upload {
 
     public void setUsername(String username) {
         this.username_item = username;
-    }
-
-    public Upload(String from, String username_item, String to, String description,String time,String email,String id) {
-        this.from = from;
-        this.username_item = username_item;
-        this.to = to;
-        this.description = description;
-        this.time = time;
-        this.email=email;
-        this.id = id;
     }
 
     public String getEmail() {

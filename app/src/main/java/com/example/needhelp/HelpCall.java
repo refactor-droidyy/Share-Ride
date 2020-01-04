@@ -85,6 +85,7 @@ public class HelpCall extends AppCompatActivity {
                             if(dataSnapshot.exists()){
                                 String Username = Objects.requireNonNull(dataSnapshot.child("username_item").getValue()).toString();
                                 String email = Objects.requireNonNull(dataSnapshot.child("email").getValue()).toString();
+                                String imageURL = Objects.requireNonNull(dataSnapshot.child("imageURL").getValue()).toString();
                                 HashMap<String,String> hashMap = new HashMap<>();
                                 hashMap.put("from",fromm);
                                 hashMap.put("to",too);
@@ -93,6 +94,7 @@ public class HelpCall extends AppCompatActivity {
                                 hashMap.put("time",datetime);
                                 hashMap.put("email",email);
                                 hashMap.put("id",id);
+                                hashMap.put("imageUrl",imageURL);
                                 mDatabaseReference.child(id+datetime).setValue(hashMap).addOnCompleteListener(new OnCompleteListener<Void>() {
                                     @Override
                                     public void onComplete(@NonNull Task<Void> task) {
