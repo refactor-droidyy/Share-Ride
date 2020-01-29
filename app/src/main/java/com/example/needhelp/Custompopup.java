@@ -25,9 +25,12 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.squareup.picasso.Picasso;
 
 import java.util.HashMap;
 import java.util.Objects;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class Custompopup extends Activity {
     private ImageView profile;
@@ -36,6 +39,7 @@ public class Custompopup extends Activity {
     private ImageView close;
     private Button chatting;
     private FirebaseUser user;
+    private CircleImageView profile_image;
     private String idd;
     private Button request;
     int Current_state = 0;
@@ -51,6 +55,7 @@ public class Custompopup extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_custompopup);
 
+        profile_image = findViewById(R.id.profle_image);
         chatting = findViewById(R.id.chating);
         request = findViewById(R.id.request);
         user = FirebaseAuth.getInstance().getCurrentUser();
@@ -78,6 +83,12 @@ public class Custompopup extends Activity {
         curretUser = FirebaseAuth.getInstance().getCurrentUser();
         reference= FirebaseDatabase.getInstance().getReference().child("Friend_Request");
         idd = getIntent().getExtras().getString("Id");
+        final String imageUrl = getIntent().getExtras().getString("imageUrl");
+
+        Picasso.get()
+                .load(imageUrl)
+                .resize(100,100)
+                .into(profile_image);
 
         assert idd != null;
 
@@ -113,6 +124,7 @@ public class Custompopup extends Activity {
                 if (!user.getUid().equals(idd)) {
                     Intent intt = new Intent(Custompopup.this, Message.class);
                     intt.putExtra("ID", idd);
+                    intt.putExtra("imgUrl",imageUrl);
                     startActivity(intt);
                     finish();
                 }

@@ -95,7 +95,7 @@ public class Request extends Fragment {
 
     private void showRequest() {
         mUsers = new ArrayList<>();
-        ref = FirebaseDatabase.getInstance().getReference("Users");
+        ref = FirebaseDatabase.getInstance().getReference("USERS");
         ref.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {

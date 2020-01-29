@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -23,7 +22,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     private Context mContext;
     private List<Upload> mUploads;
 
-    public RecyclerViewAdapter(Context mContext, List<Upload> mUploads) {
+    RecyclerViewAdapter(Context mContext, List<Upload> mUploads) {
         this.mContext = mContext;
         this.mUploads = mUploads;
     }
@@ -39,7 +38,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull final ViewHolder holder, int position) {
         final Upload upload = mUploads.get(position);
         holder.ffrom.setText(upload.getFrom());
         holder.tto.setText(upload.getTo());
@@ -48,15 +47,16 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         holder.time.setText(upload.getTime());
         holder.email.setText(upload.getEmail());
         Picasso.get()
-                .load(upload.getImageURL())
+                .load(upload.getImageUrl())
                 .resize(100,100)
-                .into(holder.imgg);
+                .into(holder.imageUrl);
         holder.relativeLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(mContext.getApplicationContext(),Custompopup.class);
                 intent.putExtra("Id",upload.getId());
                 intent.putExtra("username",upload.getUsername());
+                intent.putExtra("imageUrl",upload.getImageUrl());
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 mContext.startActivity(intent);
             }
@@ -71,12 +71,12 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
      static class ViewHolder extends RecyclerView.ViewHolder{
         TextView ffrom, tto, description, username,time,email;
-        CircleImageView imgg;
+        CircleImageView imageUrl;
         RelativeLayout relativeLayout;
         ViewHolder(@NonNull View itemView) {
             super(itemView);
             ffrom = itemView.findViewById(R.id.from);
-            imgg = itemView.findViewById(R.id.profile_list);
+            imageUrl = itemView.findViewById(R.id.profile_list);
             tto = itemView.findViewById(R.id.to);
             description = itemView.findViewById(R.id.description);
             username= itemView.findViewById(R.id.username);

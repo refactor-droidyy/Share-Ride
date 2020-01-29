@@ -22,6 +22,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -44,6 +45,7 @@ public class Message extends AppCompatActivity {
     List<Chat> mchats;
     RecyclerView recyclerView;
     String userid;
+
 
     Intent intent;
 
@@ -74,10 +76,16 @@ public class Message extends AppCompatActivity {
         intent = getIntent();
 
         userid = intent.getStringExtra("ID");
+        final String imageUrl = getIntent().getExtras().getString("imgUrl");
+
+        Picasso.get()
+                .load(imageUrl)
+                .resize(100,100)
+                .into(profile_image);
 
         fireBse = FirebaseAuth.getInstance().getCurrentUser();
         assert userid != null;
-        reference = FirebaseDatabase.getInstance().getReference("Users").child(userid);
+        reference = FirebaseDatabase.getInstance().getReference("USERS").child(userid);
 
         send.setOnClickListener(new View.OnClickListener() {
             @Override

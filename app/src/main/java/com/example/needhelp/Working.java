@@ -120,6 +120,7 @@ public class Working extends AppCompatActivity {
                     }
 
                     adapter = new RecyclerViewAdapter(getApplicationContext(), mUploads);
+
                     recyclerView.setAdapter(adapter);
                 }
             }
@@ -162,13 +163,11 @@ public class Working extends AppCompatActivity {
                 finish();
                 break;
 
-
         }
         return true;
     }
 
     private void initialfabMenu() {
-
 
         first = findViewById(R.id.back);
         second = findViewById(R.id.upload);
@@ -199,7 +198,6 @@ public class Working extends AppCompatActivity {
         secondd.setVisibility(View.VISIBLE);
         thirdd.setVisibility(View.VISIBLE);
         linearLayout.setAlpha(1);
-
 
         main.animate().setInterpolator(interpolator).rotation(45f).setDuration(600).start();
         first.animate().translationY(0f).alpha(1f).setInterpolator(interpolator).setDuration(600).start();

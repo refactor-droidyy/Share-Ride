@@ -1,5 +1,2 @@
-
-/*/build/
-/*/local.properties
-/*/out
-/*/*/build
+/build
+/.idea

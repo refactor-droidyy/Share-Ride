@@ -59,7 +59,7 @@ public class HelpCall extends AppCompatActivity {
         username_data = getIntent().getStringExtra("nameee");
 
         mDatabaseReference = FirebaseDatabase.getInstance().getReference().child("item_details");
-        uploadd = FirebaseDatabase.getInstance().getReference().child("Users");
+        uploadd = FirebaseDatabase.getInstance().getReference().child("USERS");
 
         upload.setOnClickListener(new View.OnClickListener() {
             @Override

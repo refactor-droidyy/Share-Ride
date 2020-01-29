@@ -89,7 +89,7 @@ public class Profile extends AppCompatActivity {
         addinfo = findViewById(R.id.upload_new);
         dialog = new ProgressDialog(this);
         postref = FirebaseStorage.getInstance().getReference("uploads");
-        reference = FirebaseDatabase.getInstance().getReference("Users").child(FirebaseAuth.getInstance().getCurrentUser().getUid());
+        reference = FirebaseDatabase.getInstance().getReference("USERS").child(FirebaseAuth.getInstance().getCurrentUser().getUid());
 
         call.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -164,7 +164,7 @@ public class Profile extends AppCompatActivity {
                         @Override
                         public void onSuccess(Uri uri) {
                             String downloadUrl = String.valueOf(uri);
-                            DatabaseReference dbref = FirebaseDatabase.getInstance().getReference("Users").child(FirebaseAuth.getInstance().getCurrentUser().getUid());
+                            DatabaseReference dbref = FirebaseDatabase.getInstance().getReference("USERS").child(FirebaseAuth.getInstance().getCurrentUser().getUid());
                             HashMap<String,Object> hashMap=new HashMap<>();
                             hashMap.put("imageURL",downloadUrl);
                             dbref.updateChildren(hashMap).addOnSuccessListener(new OnSuccessListener<Void>() {
