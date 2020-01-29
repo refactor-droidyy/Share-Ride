@@ -29,7 +29,6 @@
                 android:layout_marginLeft="25dp"
                 app:civ_circle_background_color="#ffffff"
                 android:layout_centerHorizontal="true"
-                android:src="@drawable/ic_account_circle_black_24dp"
                 android:id="@+id/img_toolbar_mess"
                 />
 
@@ -59,7 +58,6 @@
 
             </LinearLayout>
         </androidx.appcompat.widget.Toolbar>
-
 
 
     </com.google.android.material.appbar.AppBarLayout>

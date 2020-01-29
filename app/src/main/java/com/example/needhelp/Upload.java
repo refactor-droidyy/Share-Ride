@@ -8,7 +8,7 @@ public class Upload {
     private String time;
     private String email;
     private String id;
-    private String imageURL;
+    private String imageUrl;
 
     public Upload(String from, String username_item, String to, String description, String time, String email, String id, String imageURL) {
         this.from = from;
@@ -18,7 +18,7 @@ public class Upload {
         this.time = time;
         this.email = email;
         this.id = id;
-        this.imageURL = imageURL;
+        this.imageUrl = imageURL;
     }
 
     public String getUsername_item() {
@@ -29,12 +29,12 @@ public class Upload {
         this.username_item = username_item;
     }
 
-    public String getImageURL() {
-        return imageURL;
+    public String getImageUrl() {
+        return imageUrl;
     }
 
-    public void setImageURL(String imageURL) {
-        this.imageURL = imageURL;
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 
     public Upload(){
