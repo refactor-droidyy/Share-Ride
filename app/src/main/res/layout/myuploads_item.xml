@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:layout_width="match_parent"
     app:cardCornerRadius="8dp"
@@ -14,41 +15,66 @@
         android:id="@+id/relative">
 
         <TextView
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="UserName"
             android:textColor="@color/colorPrimaryDark"
             android:id="@+id/time"
             android:textSize="14sp"
-            android:textAlignment="center"
             android:layout_marginStart="15dp"
             android:layout_marginTop="20dp"/>
 
         <LinearLayout
+            android:layout_width="98dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="10dp"
+            android:padding="10dp">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/edit_data"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginEnd="10dp"
+                android:background="@drawable/ic_mode_edit_black_24dp" />
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/delete_data"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:background="@drawable/ic_delete_sweep_black_24dp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/linear2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_below="@id/time"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="0dp"
             android:orientation="vertical"
-            android:id="@+id/linear2"
-            android:padding="5dp"
-            android:layout_below="@id/time">
+            android:padding="5dp">
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="From"
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="10dp"
-                android:textSize="20sp"/>
+                android:text="From"
+                android:textSize="20sp" />
+
             <TextView
+                android:id="@+id/from"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textStyle="bold"
-                android:layout_marginRight="10dp"
-                android:textIsSelectable="true"
                 android:layout_marginLeft="10dp"
-                android:text="Lucknow mre anaam  hae chamei  mai hu babdu f efu bbibf buibdn uibiudbfj jdbuib dbibciy bbcdisc ijcdisjc idjuscid cusidc ducsd cuidcd"
-                android:id="@+id/from"
+                android:layout_marginRight="10dp"
                 android:padding="5dp"
-                />
+                android:text="Lucknow mre anaam  hae chamei  mai hu babdu f efu bbibf buibdn uibiudbfj jdbuib dbibciy bbcdisc ijcdisjc idjuscid cusidc ducsd cuidcd"
+                android:textIsSelectable="true"
+                android:textStyle="bold" />
         </LinearLayout>
 
         <LinearLayout
@@ -105,7 +131,7 @@
         </LinearLayout>
 
 
-
     </RelativeLayout>
+
 
 </androidx.cardview.widget.CardView>
