@@ -70,9 +70,9 @@ public class HelpCall extends AppCompatActivity {
                 final String description = HelpCall.this.description.getText().toString();
 
                 Calendar c = Calendar.getInstance();
-                @SuppressLint("SimpleDateFormat") SimpleDateFormat dateformat = new SimpleDateFormat("dd MMM,yy hh:mm aa");
+               // @SuppressLint("SimpleDateFormat") SimpleDateFormat dateformat = new SimpleDateFormat("dd MMM,yy hh:mm aa");
                 final long time= System.currentTimeMillis();
-                datetime = dateformat.format(c.getTime());
+               // datetime = dateformat.format(c.getTime());
 
 
                 if(TextUtils.isEmpty(fromm) || TextUtils.isEmpty(too) || TextUtils.isEmpty(description)){
@@ -92,7 +92,7 @@ public class HelpCall extends AppCompatActivity {
                                 hashMap.put("to",too);
                                 hashMap.put("description",description);
                                 hashMap.put("username_item",Username);
-                                hashMap.put("time",datetime);
+                                hashMap.put("time", String.valueOf(time));
                                 hashMap.put("email",email);
                                 hashMap.put("id",id);
                                 hashMap.put("imageUrl",imageURL);

@@ -1,5 +1,6 @@
 package com.example.needhelp;
 
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -20,6 +21,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -48,7 +50,10 @@ public class MyUploadAdapterr extends RecyclerView.Adapter<MyUploadAdapterr.View
         holder.tto.setText(upload.getTo());
         holder.description.setText(upload.getDescription());
         //  holder.username_item.setText(upload.getUsername());
-        holder.time.setText(upload.getTime());
+        @SuppressLint("SimpleDateFormat") SimpleDateFormat dateformat = new SimpleDateFormat("dd MMM,yy hh:mm aa");
+        final long time= Long.parseLong(upload.getTime());
+
+        holder.time.setText(dateformat.format(time));
         // holder.email.setText(upload.getEmail());
 
         holder.relativeLayout.setOnClickListener(new View.OnClickListener() {
