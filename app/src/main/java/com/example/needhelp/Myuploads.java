@@ -26,7 +26,7 @@ public class Myuploads extends AppCompatActivity {
     private ImageView close;
     private RecyclerView recyclerView;
     private FirebaseUser user;
-    private MyUploadAdapter adapter;
+    private MyUploadAdapterr adapter;
     private DatabaseReference reference;
     private List<Upload> mUploads;
 
@@ -66,7 +66,7 @@ public class Myuploads extends AppCompatActivity {
                         mUploads.add(upload);
                     }
 
-                    adapter = new MyUploadAdapter(getApplicationContext(), mUploads);
+                    adapter = new MyUploadAdapterr(getApplicationContext(), mUploads);
                     recyclerView.setAdapter(adapter);
                 }
             }

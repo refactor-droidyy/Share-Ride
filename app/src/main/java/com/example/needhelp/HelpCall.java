@@ -71,6 +71,7 @@ public class HelpCall extends AppCompatActivity {
 
                 Calendar c = Calendar.getInstance();
                 @SuppressLint("SimpleDateFormat") SimpleDateFormat dateformat = new SimpleDateFormat("dd MMM,yy hh:mm aa");
+                final long time= System.currentTimeMillis();
                 datetime = dateformat.format(c.getTime());
 
 
@@ -95,7 +96,7 @@ public class HelpCall extends AppCompatActivity {
                                 hashMap.put("email",email);
                                 hashMap.put("id",id);
                                 hashMap.put("imageUrl",imageURL);
-                                mDatabaseReference.child(id+datetime).setValue(hashMap).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                mDatabaseReference.child(id+time).setValue(hashMap).addOnCompleteListener(new OnCompleteListener<Void>() {
                                     @Override
                                     public void onComplete(@NonNull Task<Void> task) {
 
