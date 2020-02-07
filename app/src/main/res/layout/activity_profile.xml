@@ -68,9 +68,11 @@
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:id="@+id/upload_new"
-            android:background="@drawable/ic_check_black_24dp"
+            android:background="@drawable/ic_mode_edit_black_24dp"
             android:layout_marginLeft="100dp"
             />
+
+
     </LinearLayout>
 
        <LinearLayout

@@ -1,17 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".HelpCall">
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <com.google.android.material.appbar.AppBarLayout
-            android:layout_width="match_parent"
             android:id="@+id/appbar"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
             <androidx.appcompat.widget.Toolbar
@@ -23,93 +24,157 @@
                     android:layout_height="wrap_content">
 
                     <ImageView
+                        android:id="@+id/close"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:id="@+id/close"
-                        android:src="@drawable/ic_arrow_back_black_24dp"
+                        android:layout_alignParentStart="true"
                         android:layout_centerVertical="true"
-                        android:layout_alignParentStart="true"/>
+                        android:src="@drawable/ic_arrow_back_black_24dp" />
+
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_toEndOf="@id/close"
                         android:layout_marginStart="10dp"
-                        android:textStyle="bold"
+                        android:layout_toEndOf="@id/close"
+                        android:text="Request Help "
                         android:textColor="#ffffff"
                         android:textSize="20sp"
-                        android:text="Request Help "/>
+                        android:textStyle="bold" />
 
 
                 </RelativeLayout>
 
 
-
             </androidx.appcompat.widget.Toolbar>
-
 
 
         </com.google.android.material.appbar.AppBarLayout>
 
-
-        <RelativeLayout
+        <ScrollView
             android:layout_width="match_parent"
-            android:orientation="vertical"
-            android:layout_below="@id/appbar"
-            android:layout_height="wrap_content">
-            <LinearLayout
+            android:layout_height="wrap_content"
+            android:layout_below="@id/appbar">
+
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:orientation="vertical"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_below="@id/linear1"
-                    android:id="@+id/linear2"
-                    android:layout_marginTop="30dp"
-                    android:orientation="vertical"
-                    android:padding="30dp"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
 
-                    <EditText
+                    <LinearLayout
+                        android:id="@+id/linear2"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="From"
-                        android:inputType="text"
-                        android:layout_marginTop="10dp"
-                        android:id="@+id/from_upload"/>
-
-                    <EditText
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="To"
-                        android:layout_marginTop="20dp"
-                        android:inputType="text"
-                        android:id="@+id/to_upload"/>
-
-                    <EditText
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="Description"
-                        android:inputType="text"
-                        android:layout_marginTop="20dp"
-                        android:id="@+id/description"/>
-
-                    <Button
-                        android:layout_width="match_parent"
+                        android:layout_below="@id/linear1"
                         android:layout_marginTop="30dp"
-                        android:textColor="#ffffff"
-                        android:id="@+id/upload"
-                        android:background="@drawable/button_design"
-                        android:layout_height="wrap_content"
-                        android:text="Upload"
-                        />
+                        android:orientation="vertical"
+                        android:padding="30dp">
+
+                        <EditText
+                            android:id="@+id/from_upload"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:hint="From"
+                            android:inputType="text" />
+
+                        <EditText
+                            android:id="@+id/to_upload"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="20dp"
+                            android:hint="To"
+                            android:inputType="text" />
+
+                        <EditText
+                            android:id="@+id/description"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="20dp"
+                            android:hint="Description"
+                            android:inputType="text" />
+
+                        <TextView
+                            android:id="@+id/exact_time"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="20dp"
+                            android:text="Journey Start Time (HH:MM)"
+                            android:textSize="18sp" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:orientation="horizontal"
+                            android:weightSum="4">
+
+                            <Spinner
+                                android:id="@+id/hrs"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1.5" />
+
+
+                            <Spinner
+                                android:id="@+id/minu"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1.5" />
+
+
+                            <Spinner
+                                android:id="@+id/pm"
+                                android:layout_width="30dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1" />
+
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:orientation="horizontal"
+                            android:weightSum="2">
+
+                            <EditText
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1.6"
+                                android:hint="Pickup Location"
+                                android:inputType="text" />
+
+                            <ImageView
+                                android:layout_width="30dp"
+                                android:layout_height="30dp"
+                                android:background="@drawable/ic_add_location_black_24dp" />
+
+                        </LinearLayout>
+
+
+                        <Button
+                            android:id="@+id/upload"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="30dp"
+                            android:background="@drawable/button_design"
+                            android:text="Upload"
+                            android:textColor="#ffffff" />
+
+                    </LinearLayout>
+
                 </LinearLayout>
 
-            </LinearLayout>
-
-        </RelativeLayout>
+            </RelativeLayout>
 
 
-
+        </ScrollView>
     </RelativeLayout>
-</ScrollView>
+
+</LinearLayout>

@@ -1,18 +1,24 @@
 package com.example.needhelp;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.squareup.picasso.Picasso;
 
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -44,15 +50,19 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         holder.tto.setText(upload.getTo());
         holder.description.setText(upload.getDescription());
         holder.username.setText(upload.getUsername());
-        holder.time.setText(upload.getTime());
+        @SuppressLint("SimpleDateFormat") final SimpleDateFormat dateformat = new SimpleDateFormat("dd MMM,yyyy hh:mm aa");
+        final long time = Long.parseLong(upload.getTime());
+        holder.time.setText(dateformat.format(time));
         holder.email.setText(upload.getEmail());
         Picasso.get()
                 .load(upload.getImageUrl())
                 .resize(100,100)
                 .into(holder.imageUrl);
+
         holder.relativeLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 Intent intent = new Intent(mContext.getApplicationContext(),Custompopup.class);
                 intent.putExtra("Id",upload.getId());
                 intent.putExtra("username",upload.getUsername());

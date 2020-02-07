@@ -95,7 +95,6 @@ public class Working extends AppCompatActivity {
         });
 
 
-
         recyclerView = findViewById(R.id.Recycle);
         recyclerView.setHasFixedSize(true);
         linearLayoutManager=new LinearLayoutManager(this);

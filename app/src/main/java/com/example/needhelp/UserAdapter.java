@@ -7,12 +7,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.squareup.picasso.Picasso;
+
 import java.util.List;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
 
@@ -42,11 +45,15 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
             public void onClick(View view) {
                 Intent intent = new Intent(mContext,Message.class);
                 intent.putExtra("ID",user.getId());
-                //Toast.makeText(mContext.getApplicationContext(),userr.getUsername_item() + " " + userr.getId(),Toast.LENGTH_SHORT).show();
+                intent.putExtra("imgUrl",user.getImageURL());
                 mContext.startActivity(intent);
             }
         });
 
+        Picasso.get()
+                .load(user.getImageURL())
+                .resize(120,120)
+                .into(holder.imageUrl);
     }
 
     @Override
@@ -59,11 +66,13 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
 
         TextView username;
         LinearLayout linearLayout;
+        CircleImageView imageUrl;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             username = itemView.findViewById(R.id.username_item);
             linearLayout = itemView.findViewById(R.id.linearlayout);
+            imageUrl = itemView.findViewById(R.id.profile_image_chat);
         }
     }
 }

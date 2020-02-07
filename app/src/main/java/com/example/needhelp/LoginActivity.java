@@ -24,13 +24,13 @@ import java.util.Objects;
 
 public class LoginActivity extends AppCompatActivity {
 
-    private ProgressDialog loading;
-    private FirebaseAuth mauth;
-    private Button signin;
-    private EditText uuser, ppaswrd;
-    private TextView newuser, reset;
-    private ImageView close;
-    private String message;
+        private ProgressDialog loading;
+        private FirebaseAuth mauth;
+        private Button signin;
+        private EditText uuser, ppaswrd;
+        private TextView newuser, reset;
+        private ImageView close;
+        private String message;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -71,7 +71,7 @@ public class Profile extends AppCompatActivity {
     private Uri mImageUri;
     private ProgressDialog dialog;
     private StorageTask mUploadTask;
-
+    String url;
     String fileName;
 
     @Override
@@ -91,6 +91,8 @@ public class Profile extends AppCompatActivity {
         postref = FirebaseStorage.getInstance().getReference("uploads");
         reference = FirebaseDatabase.getInstance().getReference("USERS").child(FirebaseAuth.getInstance().getCurrentUser().getUid());
 
+        updateinfo();
+
         call.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -108,10 +110,14 @@ public class Profile extends AppCompatActivity {
 
             }
         });
+
         addinfo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-               uploadimagetofirebasedatabase();
+                Intent intent = new Intent(Profile.this,EditImage.class);
+                intent.putExtra("url",url);
+                startActivity(intent);
+              // uploadimagetofirebasedatabase();
             }
         });
         close.setOnClickListener(new View.OnClickListener() {
@@ -122,7 +128,7 @@ public class Profile extends AppCompatActivity {
             }
         });
 
-        updateinfo();
+
     }
 
     private void updateinfo() {
@@ -133,7 +139,7 @@ public class Profile extends AppCompatActivity {
                 String username = Objects.requireNonNull(dataSnapshot.child("username_item").getValue()).toString();
                 String emaill = Objects.requireNonNull(dataSnapshot.child("email").getValue()).toString();
                 phonee = Objects.requireNonNull(dataSnapshot.child("phone").getValue()).toString();
-                String url = Objects.requireNonNull(dataSnapshot.child("imageURL").getValue()).toString();
+                url = Objects.requireNonNull(dataSnapshot.child("imageURL").getValue()).toString();
                 Picasso.get()
                         .load(url)
                         .resize(100,100)
