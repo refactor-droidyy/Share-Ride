@@ -114,10 +114,10 @@ public class Profile extends AppCompatActivity {
         addinfo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(Profile.this,EditImage.class);
-                intent.putExtra("url",url);
-                startActivity(intent);
-              // uploadimagetofirebasedatabase();
+//                Intent intent = new Intent(Profile.this,EditImage.class);
+//                intent.putExtra("url",url);
+//                startActivity(intent);
+               uploadimagetofirebasedatabase();
             }
         });
         close.setOnClickListener(new View.OnClickListener() {
@@ -127,7 +127,6 @@ public class Profile extends AppCompatActivity {
                 finish();
             }
         });
-
 
     }
 
@@ -147,7 +146,6 @@ public class Profile extends AppCompatActivity {
                 name.setText(username);
                 email.setText(emaill);
                 phone.setText(phonee);
-
 
             }
 
@@ -214,7 +212,6 @@ public class Profile extends AppCompatActivity {
         }
     }
 
-
     @Override
     @SuppressLint("NewApi")
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -229,7 +226,6 @@ public class Profile extends AppCompatActivity {
                     .setAspectRatio(1, 1)
                     .start(this);
         }
-
         if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE) {
             CropImage.ActivityResult result = CropImage.getActivityResult(data);
             if (resultCode == RESULT_OK) {

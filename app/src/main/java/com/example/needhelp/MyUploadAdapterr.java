@@ -55,45 +55,25 @@ public class MyUploadAdapterr extends RecyclerView.Adapter<MyUploadAdapterr.View
         final long time = Long.parseLong(upload.getTime());
         holder.time.setText(dateformat.format(time));
 
-
         holder.delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                AlertDialog.Builder alertDialog = new AlertDialog.Builder(mContext.getApplicationContext());
-                alertDialog.setTitle(" Delete ");
-                alertDialog.setMessage("Are you sure want to delete ?");
-                alertDialog.setView(view);
-                alertDialog.setPositiveButton("CANCEL", new DialogInterface.OnClickListener() {
+                DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
+                Query applesQuery = ref.child("item_details").orderByChild("time").equalTo(upload.getTime());
+                applesQuery.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.cancel();
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                            snapshot.getRef().removeValue();
+                            Toast.makeText(mContext, "Delete Successfully", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+                        Toast.makeText(mContext, databaseError.toException().toString(), Toast.LENGTH_LONG).show();
                     }
                 });
-                alertDialog.setNegativeButton("YES", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
-                        Query applesQuery = ref.child("item_details").orderByChild("time").equalTo(upload.getTime());
-                        applesQuery.addListenerForSingleValueEvent(new ValueEventListener() {
-                            @Override
-                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                                    snapshot.getRef().removeValue();
-                                    Toast.makeText(mContext, "Delete Successfully", Toast.LENGTH_SHORT).show();
-                                }
-                            }
-
-                            @Override
-                            public void onCancelled(@NonNull DatabaseError databaseError) {
-                                Toast.makeText(mContext, databaseError.toException().toString(), Toast.LENGTH_LONG).show();
-                            }
-                        });
-
-                    }
-                });
-
-                AlertDialog dialog = alertDialog.create();
-                dialog.show();
 
             }
         });

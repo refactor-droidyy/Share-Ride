@@ -32,6 +32,7 @@
                     android:layout_toEndOf="@id/close"
                     android:layout_marginStart="10dp"
                     android:textStyle="bold"
+                    android:fontFamily="@font/good"
                     android:textColor="#ffffff"
                     android:textSize="20sp"
                     android:text="About "/>
@@ -80,6 +81,7 @@
                     android:layout_gravity="center_vertical"
                     android:paddingLeft="16dp"
                     android:paddingRight="16dp"
+                    android:fontFamily="@font/good"
                     android:text="@string/app_name"
                     android:textAppearance="@style/TextAppearance.AppCompat.Headline"
                     android:textStyle="bold" />
@@ -109,7 +111,8 @@
                         android:layout_gravity="center_vertical"
                         android:textSize="18sp"
                         android:layout_marginLeft="30dp"
-                        android:text="@string/versionno"
+                        android:fontFamily="@font/good"
+                        android:text="0.."
                         android:textColor="#000000"
                         android:textAppearance="@style/TextAppearance.AppCompat.Caption" />
 
@@ -141,6 +144,7 @@
                     android:layout_marginLeft="32dp"
                     android:layout_marginStart="32dp"
                     android:paddingBottom="8dp"
+                    android:fontFamily="@font/good"
                     android:paddingTop="8dp"
                     android:text="Star Share Ride APP On Github"
                     android:textAppearance="@style/TextAppearance.AppCompat.Subhead" />
@@ -200,6 +204,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:fontFamily="@font/good"
                     android:text="refactor-droidyy"
                     android:layout_marginLeft="30dp"
                     android:textSize="18sp"
@@ -234,6 +239,7 @@
                     android:paddingTop="8dp"
                     android:text="Email"
                     android:textSize="18sp"
+                    android:fontFamily="@font/good"
                     android:textAppearance="@style/TextAppearance.AppCompat.Subhead" />
 
             </LinearLayout>
@@ -297,6 +303,7 @@
                     android:layout_marginStart="32dp"
                     android:paddingBottom="8dp"
                     android:paddingTop="8dp"
+                    android:fontFamily="@font/good"
                     android:textSize="18sp"
                     android:text="Submit Your Aricle Or Reviews here"
                     android:textAppearance="@style/TextAppearance.AppCompat.Subhead" />

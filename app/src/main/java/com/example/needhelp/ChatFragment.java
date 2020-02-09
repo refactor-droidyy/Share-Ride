@@ -60,10 +60,10 @@ public class ChatFragment extends Fragment {
          firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
 
          userList = new HashSet<>();
-
          reference = FirebaseDatabase.getInstance().getReference("Chats");
 
-        reference.addValueEventListener(new ValueEventListener() {
+
+         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 

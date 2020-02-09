@@ -36,6 +36,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="10dp"
                         android:layout_toEndOf="@id/close"
+                        android:fontFamily="@font/good"
                         android:text="Request Help "
                         android:textColor="#ffffff"
                         android:textSize="20sp"
@@ -80,6 +81,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="10dp"
                             android:hint="From"
+                            android:fontFamily="@font/good"
                             android:inputType="text" />
 
                         <EditText
@@ -95,73 +97,82 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="20dp"
+                            android:fontFamily="@font/good"
                             android:hint="Description"
                             android:inputType="text" />
 
-                        <TextView
-                            android:id="@+id/exact_time"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="20dp"
-                            android:text="Journey Start Time (HH:MM)"
-                            android:textSize="18sp" />
+<!--                        <TextView-->
+<!--                            android:id="@+id/exact_date"-->
+<!--                            android:layout_width="match_parent"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:layout_marginTop="20dp"-->
+<!--                            android:text="Click to choose Journey Start Date"-->
+<!--                            android:textSize="18sp" />-->
+<!--                        <TextView-->
+<!--                            android:id="@+id/exact_time"-->
+<!--                            android:layout_width="match_parent"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:layout_marginTop="20dp"-->
+<!--                            android:text="Click to choose Journey Start Time"-->
+<!--                            android:textSize="18sp" />-->
 
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="10dp"
-                            android:orientation="horizontal"
-                            android:weightSum="4">
+<!--                        <LinearLayout-->
+<!--                            android:layout_width="match_parent"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:layout_marginTop="10dp"-->
+<!--                            android:orientation="horizontal"-->
+<!--                            android:weightSum="4">-->
 
-                            <Spinner
-                                android:id="@+id/hrs"
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1.5" />
-
-
-                            <Spinner
-                                android:id="@+id/minu"
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1.5" />
-
-
-                            <Spinner
-                                android:id="@+id/pm"
-                                android:layout_width="30dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1" />
+<!--                            <Spinner-->
+<!--                                android:id="@+id/hrs"-->
+<!--                                android:layout_width="0dp"-->
+<!--                                android:layout_height="wrap_content"-->
+<!--                                android:layout_weight="1.5" />-->
 
 
-                        </LinearLayout>
+<!--                            <Spinner-->
+<!--                                android:id="@+id/minu"-->
+<!--                                android:layout_width="0dp"-->
+<!--                                android:layout_height="wrap_content"-->
+<!--                                android:layout_weight="1.5" />-->
 
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="10dp"
-                            android:orientation="horizontal"
-                            android:weightSum="2">
 
-                            <EditText
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1.6"
-                                android:hint="Pickup Location"
-                                android:inputType="text" />
+<!--                            <Spinner-->
+<!--                                android:id="@+id/pm"-->
+<!--                                android:layout_width="30dp"-->
+<!--                                android:layout_height="wrap_content"-->
+<!--                                android:layout_weight="1" />-->
 
-                            <ImageView
-                                android:layout_width="30dp"
-                                android:layout_height="30dp"
-                                android:background="@drawable/ic_add_location_black_24dp" />
 
-                        </LinearLayout>
+<!--                        </LinearLayout>-->
+
+<!--                        <LinearLayout-->
+<!--                            android:layout_width="match_parent"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:layout_marginTop="10dp"-->
+<!--                            android:orientation="horizontal"-->
+<!--                            android:weightSum="2">-->
+
+<!--                            <EditText-->
+<!--                                android:layout_width="match_parent"-->
+<!--                                android:layout_height="wrap_content"-->
+<!--                                android:layout_weight="1.6"-->
+<!--                                android:hint="Pickup Location"-->
+<!--                                android:inputType="text" />-->
+
+<!--                            <ImageView-->
+<!--                                android:layout_width="30dp"-->
+<!--                                android:layout_height="30dp"-->
+<!--                                android:background="@drawable/ic_add_location_black_24dp" />-->
+
+<!--                        </LinearLayout>-->
 
 
                         <Button
                             android:id="@+id/upload"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:fontFamily="@font/good"
                             android:layout_marginTop="30dp"
                             android:background="@drawable/button_design"
                             android:text="Upload"

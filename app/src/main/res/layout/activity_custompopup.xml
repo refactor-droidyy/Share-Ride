@@ -34,26 +34,30 @@
             android:textStyle="bold"
             android:id="@+id/username_item"
             android:textAlignment="center"
+            android:fontFamily="@font/good"
             android:layout_marginTop="30dp"
             android:textSize="24sp"
             />
 
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="#ffff"
-            android:padding="8dp"
-            android:text="Request For Share Ride"
-            android:id="@+id/request"
-            android:background="@drawable/button_design"
-            android:layout_marginTop="30dp"
-            android:layout_gravity="center"/>
+<!--        <Button-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:textColor="#ffff"-->
+<!--            android:padding="8dp"-->
+<!--            android:fontFamily="@font/good"-->
+<!--            android:text="Request For Share Ride"-->
+<!--            android:id="@+id/request"-->
+<!--            android:background="@drawable/button_design"-->
+<!--            android:layout_marginTop="30dp"-->
+<!--            android:layout_gravity="center"/>-->
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="#ffff"
             android:padding="8dp"
             android:id="@+id/chating"
+            android:fontFamily="@font/good"
+
             android:text="Chat"
             android:background="@drawable/button_design"
             android:layout_marginTop="10dp"

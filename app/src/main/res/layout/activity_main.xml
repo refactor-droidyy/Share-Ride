@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:background="@drawable/carlogo"
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
@@ -11,6 +12,7 @@
         android:layout_height="wrap_content"
         android:text="@string/app_name"
         android:textAlignment="center"
+        android:fontFamily="@font/good"
         android:layout_marginTop="50dp"
         android:textSize="24sp"
         android:textStyle="bold"/>
@@ -19,6 +21,7 @@
         android:layout_height="wrap_content"
         android:text="Get The Help Done Help Others"
         android:textAlignment="center"
+        android:fontFamily="@font/good"
         android:layout_marginTop="100dp"
         android:textSize="24sp"
         android:textStyle="bold"/>
@@ -34,10 +37,12 @@
         android:background="@drawable/button_design"
         android:layout_height="wrap_content"
         android:id="@+id/signin"
+        android:fontFamily="@font/good"
         android:textColor="#ffffff"
         android:text="Sign in" />
     <Button
         android:layout_height="wrap_content"
+        android:fontFamily="@font/good"
         android:layout_width="0dp"
         android:layout_weight="1"
         android:background="@drawable/button_design"

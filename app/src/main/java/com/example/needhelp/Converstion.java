@@ -2,9 +2,11 @@ package com.example.needhelp;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.viewpager.widget.ViewPager;
 
 import android.annotation.SuppressLint;
+import android.app.FragmentManager;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -33,16 +35,19 @@ public class Converstion extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_converstion);
-        tablayout = findViewById(R.id.tablayout);
+        //tablayout = findViewById(R.id.tablayout);
         close = findViewById(R.id.close);
 
-        TabLayout tablayout  = findViewById(R.id.tablayout);
-        ViewPager viewPagerr = findViewById(R.id.viewpager);
-        adapter = new TabAccessAdapter(getSupportFragmentManager());
-        viewPagerr.setAdapter(adapter);
-        tablayout.setupWithViewPager(viewPagerr);
+//        TabLayout tablayout  = findViewById(R.id.tablayout);
+//        ViewPager viewPagerr = findViewById(R.id.viewpager);
+//        adapter = new TabAccessAdapter(getSupportFragmentManager());
+//        viewPagerr.setAdapter(adapter);
+//        tablayout.setupWithViewPager(viewPagerr);
 
-
+        ChatFragment f1= new ChatFragment();
+        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+        fragmentTransaction.add(R.id.frame_layout, f1);
+        fragmentTransaction.commit();
         close.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -50,7 +55,7 @@ public class Converstion extends AppCompatActivity {
                 finish();
             }
         });
-;
+
     }
 
 

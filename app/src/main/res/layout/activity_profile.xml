@@ -32,6 +32,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_toEndOf="@id/close"
+
                     android:layout_marginStart="10dp"
                     android:textStyle="bold"
                     android:textColor="#ffffff"
@@ -68,7 +69,7 @@
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:id="@+id/upload_new"
-            android:background="@drawable/ic_mode_edit_black_24dp"
+            android:background="@drawable/ic_file_upload_black_24dp"
             android:layout_marginLeft="100dp"
             />
 
@@ -96,6 +97,7 @@
                    android:layout_width="match_parent"
                    android:layout_height="wrap_content"
                    android:textSize="18sp"
+                   android:fontFamily="@font/good"
                    android:text="Name"/>
                <TextView
                    android:layout_width="match_parent"
@@ -103,6 +105,7 @@
                    android:layout_marginTop="5dp"
                    android:textStyle="bold"
                    android:id="@+id/userrname"
+                   android:fontFamily="@font/good"
                    android:textSize="16sp"
                    android:text="Rohit Verma"/>
            </LinearLayout>
@@ -130,11 +133,13 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textSize="18sp"
+                    android:fontFamily="@font/good"
                     android:text="Email id"/>
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
+                    android:fontFamily="@font/good"
                     android:textStyle="bold"
                     android:id="@+id/emailid"
                     android:textSize="16sp"
@@ -153,7 +158,7 @@
             <ImageView
                 android:layout_width="30dp"
                 android:layout_height="30dp"
-                android:background="@drawable/ic_phone_black_24dp" />
+                android:background="@drawable/ic_call_black24dp" />
             <LinearLayout
                 android:layout_width="match_parent"
                 android:orientation="vertical"
@@ -164,12 +169,14 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textSize="18sp"
+                    android:fontFamily="@font/good"
                     android:text="Phone No"/>
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
                     android:textIsSelectable="true"
+                    android:fontFamily="@font/good"
                     android:textStyle="bold"
                     android:id="@+id/phone_number"
                     android:textSize="16sp"

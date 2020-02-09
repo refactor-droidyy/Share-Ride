@@ -90,7 +90,7 @@ public class RegisterActivity extends AppCompatActivity {
 
         if (TextUtils.isEmpty(Eemail) || TextUtils.isEmpty(ppass) ||  TextUtils.isEmpty(usernaaam) || TextUtils.isEmpty(phhone)) {
             Toast.makeText(RegisterActivity.this, "All Fields Are Necessary", Toast.LENGTH_SHORT).show();
-        } else {
+        } else if(Eemail.contains("iiitl.ac.in")) {
 
             dialog.setTitle("Creating New Account");
             dialog.setMessage("Please Wait While We Process Your Request");
@@ -109,7 +109,6 @@ public class RegisterActivity extends AppCompatActivity {
                                 String userid = Objects.requireNonNull(auth.getCurrentUser()).getUid();
 
                                 root_reference = FirebaseDatabase.getInstance().getReference("USERS").child(userid);
-
 
                                 HashMap<String, String> hashMap = new HashMap<>();
                                 hashMap.put("id", userid);
@@ -153,6 +152,8 @@ public class RegisterActivity extends AppCompatActivity {
 
                         }
                     });
+        }else{
+            Toast.makeText(RegisterActivity.this,"Please Enter Your College Email-ID",Toast.LENGTH_LONG).show();
         }
     }
 

@@ -24,7 +24,7 @@
             android:textColor="#ffffff"
             android:layout_alignParentEnd="true"
             android:id="@+id/show_message"
-            android:textStyle="bold"
+            android:fontFamily="@font/good"
             android:textSize="15sp"
             android:background="@drawable/background_right"
             android:text="Hello"/>

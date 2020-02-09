@@ -2,11 +2,17 @@ package com.example.needhelp;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.Manifest;
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
@@ -30,6 +36,7 @@ import java.util.List;
 
 public class Message extends AppCompatActivity {
 
+    private static final int REQUEST_CALL = 2342;
     private ImageView profile_image;
     private TextView username;
     private ImageView close;
@@ -45,6 +52,7 @@ public class Message extends AppCompatActivity {
     List<Chat> mchats;
     RecyclerView recyclerView;
     String userid;
+    ImageView makeCall;
 
 
     Intent intent;
@@ -59,7 +67,13 @@ public class Message extends AppCompatActivity {
         message = findViewById(R.id.txt_message);
         send = findViewById(R.id.send);
         recyclerView = findViewById(R.id.recycler_view_mess);
-        statuss = findViewById(R.id.online);
+        makeCall = findViewById(R.id.make_call);
+        makeCall.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                makeCall();
+            }
+        });
 
         close = findViewById(R.id.close);
         recyclerView.setHasFixedSize(true);
@@ -87,7 +101,7 @@ public class Message extends AppCompatActivity {
         assert userid != null;
         reference = FirebaseDatabase.getInstance().getReference("USERS").child(userid);
 
-        send.setOnClickListener(new View.OnClickListener() {
+        send.setOnClickListener( new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
@@ -106,7 +120,6 @@ public class Message extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
-
                 User user = dataSnapshot.getValue(User.class);
                 assert user != null;
 
@@ -122,6 +135,15 @@ public class Message extends AppCompatActivity {
             }
         });
 
+    }
+
+    private void makeCall() {
+        if(ContextCompat.checkSelfPermission(Message.this,Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED){
+
+            ActivityCompat.requestPermissions(Message.this,new String[] {Manifest.permission.CALL_PHONE},REQUEST_CALL);
+        }else{
+            startActivity(new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + "7007229338")));
+        }
     }
 
     private void readMessages(final String myid, final String userid, final String imageurl) {
@@ -153,6 +175,18 @@ public class Message extends AppCompatActivity {
             }
         });
 
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if(requestCode == REQUEST_CALL){
+            if(grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED){
+                makeCall();
+            }else {
+                Toast.makeText(Message.this,"Denied Permission",Toast.LENGTH_LONG).show();
+            }
+        }
     }
 
     private void sendMessage(String sender, String reciever, String messag) {
