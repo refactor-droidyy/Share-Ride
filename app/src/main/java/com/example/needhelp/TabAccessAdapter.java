@@ -39,7 +39,7 @@ public class TabAccessAdapter extends FragmentPagerAdapter {
             case 1:
                 return "Chat";
             case 2:
-                return  "Group";
+                return "Group";
             default:
                 return null;
         }
