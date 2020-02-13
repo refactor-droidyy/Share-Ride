@@ -38,12 +38,6 @@ public class Converstion extends AppCompatActivity {
         //tablayout = findViewById(R.id.tablayout);
         close = findViewById(R.id.close);
 
-//        TabLayout tablayout  = findViewById(R.id.tablayout);
-//        ViewPager viewPagerr = findViewById(R.id.viewpager);
-//        adapter = new TabAccessAdapter(getSupportFragmentManager());
-//        viewPagerr.setAdapter(adapter);
-//        tablayout.setupWithViewPager(viewPagerr);
-
         ChatFragment f1= new ChatFragment();
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
         fragmentTransaction.add(R.id.frame_layout, f1);
@@ -57,6 +51,5 @@ public class Converstion extends AppCompatActivity {
         });
 
     }
-
 
 }
