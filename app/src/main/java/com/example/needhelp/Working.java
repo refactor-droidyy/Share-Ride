@@ -58,38 +58,35 @@ public class Working extends AppCompatActivity {
 
         initialfabMenu();
 
-        first.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                closeMenu();
-            }
-        });
+//        first.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                closeMenu();
+//            }
+//        });
 
-        second.setOnClickListener(new View.OnClickListener() {
+//        second.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Intent intent = new Intent(Working.this, HelpCall.class);
+//                intent.putExtra("nameee", message);
+//                startActivity(intent);
+//            }
+//        });
+
+//        third.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                startActivity(new Intent(Working.this, Converstion.class));
+//            }
+//        });
+//
+        main.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(Working.this, HelpCall.class);
                 intent.putExtra("nameee", message);
                 startActivity(intent);
-
-            }
-        });
-
-        third.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(Working.this, Converstion.class));
-            }
-        });
-
-        main.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (isMenuopen) {
-                    closeMenu();
-                } else {
-                    openMenu();
-                }
             }
         });
 
@@ -166,23 +163,23 @@ public class Working extends AppCompatActivity {
 
     private void initialfabMenu() {
 
-        first = findViewById(R.id.back);
-        second = findViewById(R.id.upload);
-        third = findViewById(R.id.chat);
+//        first = findViewById(R.id.back);
+//        second = findViewById(R.id.upload);
+//        third = findViewById(R.id.chat);
         main = findViewById(R.id.main);
-        linearLayout = findViewById(R.id.linearcolor);
+//        linearLayout = findViewById(R.id.linearcolor);
 
-        firstt = findViewById(R.id.txt_back);
-        secondd = findViewById(R.id.txt_upload);
-        thirdd = findViewById(R.id.txt_chat);
+//        firstt = findViewById(R.id.txt_back);
+//        secondd = findViewById(R.id.txt_upload);
+//        thirdd = findViewById(R.id.txt_chat);
 
-        first.setAlpha(0f);
-        second.setAlpha(0f);
-        third.setAlpha(0f);
-
-        first.setTranslationY(200f);
-        second.setTranslationY(200f);
-        third.setTranslationY(200f);
+//        first.setAlpha(0f);
+//        second.setAlpha(0f);
+//        third.setAlpha(0f);
+//
+//        first.setTranslationY(200f);
+//        second.setTranslationY(200f);
+//        third.setTranslationY(200f);
 
     }
 
