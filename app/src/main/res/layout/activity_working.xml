@@ -1,173 +1,173 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:background="#D3D3D3"
     android:layout_height="match_parent"
+    android:background="#E1F5FE"
     tools:context=".Working">
-        <androidx.recyclerview.widget.RecyclerView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_below="@id/toolbar"
-            android:id="@+id/Recycle"
-            android:padding="10dp">
-        </androidx.recyclerview.widget.RecyclerView>
 
-<com.google.android.material.appbar.AppBarLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:foregroundTint="#ffffff"
-    android:background="@drawable/button_design"
-    android:layout_margin="20dp"
-    android:id="@+id/toolbar">
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/Recycle"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/toolbar"
+        android:padding="10dp">
+
+    </androidx.recyclerview.widget.RecyclerView>
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:background="@drawable/button_design"
+        android:foregroundTint="#ffffff">
 
         <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar_work"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:theme="@style/AppTheme"
             android:foregroundTint="@color/white"
-            android:id="@+id/toolbar_work">
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/app_name"
-                    android:fontFamily="@font/good"
-                    android:textSize="18sp"
-                    android:textColor="#ffffff" />
+            android:theme="@style/AppTheme">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/good"
+                android:text="@string/app_name"
+                android:textColor="#ffffff"
+                android:textSize="18sp" />
 
         </androidx.appcompat.widget.Toolbar>
-</com.google.android.material.appbar.AppBarLayout>
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginRight="20dp"
+        android:layout_marginBottom="30dp"
+        android:gravity="right"
+        android:orientation="vertical">
 
         <LinearLayout
+            android:id="@+id/linearcolor"
             android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:gravity="right"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentRight="true"
-            android:layout_marginBottom="30dp"
-            android:layout_marginRight="20dp"
-            android:orientation="vertical"
-            android:layout_height="wrap_content">
+            android:orientation="vertical">
 
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:gravity="right"
-                    android:id="@+id/linearcolor">
-                        
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
 
                 <TextView
-                    android:layout_width="wrap_content"
-                    android:textAlignment="center"
-                    android:layout_marginTop="10dp"
                     android:id="@+id/txt_back"
-                    android:background="@drawable/button_design"
-                    android:visibility="gone"
-                    android:textColor="#ffffff"
-                    android:padding="3dp"
-                    android:textStyle="bold"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
                     android:layout_marginRight="10dp"
-                    android:layout_height="wrap_content"
-                    android:text="Back button"/>
+                    android:background="@drawable/button_design"
+                    android:padding="3dp"
+                    android:text="Back button"
+                    android:textAlignment="center"
+                    android:textColor="#ffffff"
+                    android:textStyle="bold"
+                    android:visibility="gone" />
 
                 <com.google.android.material.floatingactionbutton.FloatingActionButton
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:tint="#ffffff"
-                    android:backgroundTint="@color/colorPrimary"
-                    android:foregroundTint="@color/white"
-                    app:fabSize="mini"
                     android:id="@+id/back"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_marginBottom="20dp"
+                    android:backgroundTint="@color/colorPrimary"
+                    android:foregroundTint="@color/white"
                     android:src="@drawable/ic_arrow_back_black_24dp"
-                    />
+                    android:tint="#ffffff"
+                    app:fabSize="mini" />
 
-                </LinearLayout>
+            </LinearLayout>
 
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:textAlignment="center"
-                            android:padding="3dp"
-                            android:layout_marginTop="10dp"
-                            android:visibility="gone"
-                            android:id="@+id/txt_upload"
-                            android:background="@drawable/button_design"
-                            android:textColor="#ffffff"
-                            android:textStyle="bold"
-                            android:layout_marginRight="10dp"
-                            android:layout_height="wrap_content"
-                            android:text="Upload"/>
-
-                <com.google.android.material.floatingactionbutton.FloatingActionButton
+                <TextView
+                    android:id="@+id/txt_upload"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:tint="#ffffff"
-                    android:foregroundTint="@color/white"
-                    app:fabSize="mini"
-                    android:backgroundTint="@color/colorPrimary"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginRight="10dp"
+                    android:background="@drawable/button_design"
+                    android:padding="3dp"
+                    android:text="Upload"
+                    android:textAlignment="center"
+                    android:textColor="#ffffff"
+                    android:textStyle="bold"
+                    android:visibility="gone" />
+
+                <com.google.android.material.floatingactionbutton.FloatingActionButton
                     android:id="@+id/upload"
-                    android:layout_marginBottom="20dp"
-                    android:src="@drawable/ic_cloud_upload_black_24dp"
-
-                    />
-                </LinearLayout>
-
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:textAlignment="center"
-                            android:layout_marginTop="10dp"
-                            android:id="@+id/txt_chat"
-                            android:padding="3dp"
-                            android:layout_marginRight="10dp"
-                            android:background="@drawable/button_design"
-                            android:visibility="gone"
-                            android:layout_height="wrap_content"
-                            android:textColor="#ffffff"
-                            android:textStyle="bold"
-                            android:text="Chat"/>
-
-                <com.google.android.material.floatingactionbutton.FloatingActionButton
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:tint="#ffffff"
-                    android:id="@+id/chat"
-                    android:foregroundTint="@color/white"
-                    android:backgroundTint="@color/colorPrimary"
                     android:layout_marginBottom="20dp"
+                    android:backgroundTint="@color/colorPrimary"
+                    android:foregroundTint="@color/white"
+                    android:src="@drawable/ic_cloud_upload_black_24dp"
+                    android:tint="#ffffff"
+                    app:fabSize="mini" />
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/txt_chat"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginRight="10dp"
+                    android:background="@drawable/button_design"
+                    android:padding="3dp"
+                    android:text="Chat"
+                    android:textAlignment="center"
+                    android:textColor="#ffffff"
+                    android:textStyle="bold"
+                    android:visibility="gone" />
+
+                <com.google.android.material.floatingactionbutton.FloatingActionButton
+                    android:id="@+id/chat"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="20dp"
+                    android:backgroundTint="@color/colorPrimary"
+                    android:foregroundTint="@color/white"
                     android:src="@drawable/ic_chat_black_24dp"
+                    android:tint="#ffffff"
                     app:fabSize="mini"
 
                     />
 
-                </LinearLayout>
-                </LinearLayout>
-
-                <com.google.android.material.floatingactionbutton.FloatingActionButton
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:tint="#ffffff"
-                    android:backgroundTint="@color/colorPrimary"
-                    android:id="@+id/main"
-                    android:foregroundTint="@color/white"
-                    android:layout_marginBottom="10dp"
-                    android:src="@drawable/ic_add_black_24dp"
-
-                    />
-
+            </LinearLayout>
         </LinearLayout>
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/main"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:backgroundTint="@color/colorPrimary"
+            android:foregroundTint="@color/white"
+            android:src="@drawable/ic_add_black_24dp"
+            android:tint="#ffffff"
+
+            />
+
+    </LinearLayout>
 
 
 </RelativeLayout>

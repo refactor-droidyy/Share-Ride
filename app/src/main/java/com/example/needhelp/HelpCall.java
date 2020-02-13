@@ -1,25 +1,21 @@
 package com.example.needhelp;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.DialogFragment;
-
-import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -31,29 +27,38 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Objects;
 
-public class HelpCall extends AppCompatActivity implements DatePickerDialog.OnDateSetListener , TimePickerDialog.OnTimeSetListener {
+public class HelpCall extends AppCompatActivity implements DatePickerDialog.OnDateSetListener, TimePickerDialog.OnTimeSetListener {
     private EditText from, to, description;
     private DatabaseReference mDatabaseReference, uploadd;
     ImageView close;
     private Button upload;
     private FirebaseAuth auth;
     private String username_data, datetime, id;
-    TextView date_picker,txact_time;
+    TextView date_picker, txact_time;
     String value, intent_time = null;
-    String hr,min,am,arrival_time,din,mahina;
+    String hr, min, am, arrival_time, din, mahina;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_help_call);
 
-        value = getIntent().getStringExtra("value");
-        intent_time = getIntent().getStringExtra("time");
+        Intent intent = getIntent();
+        String action = intent.getAction();
+        String type = intent.getType();
+
+        if (Intent.ACTION_SEND.equals(action) && type != null) {
+            if ("text/plain".equals(type)) {
+                handleSendText(intent); // Handle text being sent
+            }
+        } else {
+            value = getIntent().getStringExtra("value");
+            intent_time = getIntent().getStringExtra("time");
+        }
 
         from = findViewById(R.id.from_upload);
         to = findViewById(R.id.to_upload);
@@ -173,7 +178,7 @@ public class HelpCall extends AppCompatActivity implements DatePickerDialog.OnDa
                                         public void onComplete(@NonNull Task<Void> task) {
 
                                             if (task.isSuccessful()) {
-                                                Intent intent = new Intent( HelpCall.this, Working.class);
+                                                Intent intent = new Intent(HelpCall.this, Working.class);
                                                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                                                 startActivity(intent);
                                             }
@@ -206,23 +211,29 @@ public class HelpCall extends AppCompatActivity implements DatePickerDialog.OnDa
 
 
                 }
-
             }
         });
+    }
+
+    void handleSendText(Intent intent) {
+        String sharedText = intent.getStringExtra(Intent.EXTRA_TEXT);
+        if (sharedText != null) {
+            // Update UI to reflect text being shared
+        }
     }
 
     @Override
     public void onDateSet(DatePicker datePicker, int i, int i1, int i2) {
         Calendar c = Calendar.getInstance();
-        c.set(Calendar.YEAR,i2);
-        c.set(Calendar.MONTH,i1);
-        c.set(Calendar.DATE,i);
+        c.set(Calendar.YEAR, i2);
+        c.set(Calendar.MONTH, i1);
+        c.set(Calendar.DATE, i);
         String currentDateString = DateFormat.getDateInstance().format(c.getTime());
         date_picker.setText(currentDateString);
     }
 
     @Override
     public void onTimeSet(TimePicker timePicker, int i, int i1) {
-        txact_time.setText(i + "hr"+"Minute : "+i1);
+        txact_time.setText(i + "hr" + "Minute : " + i1);
     }
 }
