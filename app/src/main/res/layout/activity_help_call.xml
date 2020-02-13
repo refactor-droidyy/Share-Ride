@@ -36,7 +36,7 @@
                         android:layout_marginStart="10dp"
                         android:layout_toEndOf="@id/close"
                         android:fontFamily="@font/good"
-                        android:text="Request Help "
+                        android:text="New Ride Request"
                         android:textColor="#ffffff"
                         android:textSize="20sp"
                         android:textStyle="bold" />
