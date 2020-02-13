@@ -36,7 +36,7 @@
                         android:layout_marginStart="10dp"
                         android:layout_toEndOf="@id/close"
                         android:fontFamily="@font/good"
-                        android:text="New Ride Request"
+                        android:text="New Journey Request"
                         android:textColor="#ffffff"
                         android:textSize="20sp"
                         android:textStyle="bold" />
@@ -100,73 +100,57 @@
                             android:hint="Description"
                             android:inputType="text" />
 
-<!--                        <TextView-->
-<!--                            android:id="@+id/exact_date"-->
-<!--                            android:layout_width="match_parent"-->
-<!--                            android:layout_height="wrap_content"-->
-<!--                            android:layout_marginTop="20dp"-->
-<!--                            android:text="Click to choose Journey Start Date"-->
-<!--                            android:textSize="18sp" />-->
-<!--                        <TextView-->
-<!--                            android:id="@+id/exact_time"-->
-<!--                            android:layout_width="match_parent"-->
-<!--                            android:layout_height="wrap_content"-->
-<!--                            android:layout_marginTop="20dp"-->
-<!--                            android:text="Click to choose Journey Start Time"-->
-<!--                            android:textSize="18sp" />-->
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Preferred mode of travel"
+                            android:fontFamily="@font/ps"
+                            android:layout_margin="12dp"
+                            android:textSize="20sp"
+                            android:textStyle="bold" />
 
-<!--                        <LinearLayout-->
-<!--                            android:layout_width="match_parent"-->
-<!--                            android:layout_height="wrap_content"-->
-<!--                            android:layout_marginTop="10dp"-->
-<!--                            android:orientation="horizontal"-->
-<!--                            android:weightSum="4">-->
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
 
-<!--                            <Spinner-->
-<!--                                android:id="@+id/hrs"-->
-<!--                                android:layout_width="0dp"-->
-<!--                                android:layout_height="wrap_content"-->
-<!--                                android:layout_weight="1.5" />-->
+                            <Button
+                                android:id="@+id/olaBtn"
+                                android:layout_width="48dp"
+                                android:layout_height="48dp"
+                                android:background="@drawable/ola"
+                                android:layout_marginRight="6dp" />
 
+                            <Button
+                                android:id="@+id/uberBtn"
+                                android:layout_width="48dp"
+                                android:layout_height="48dp"
+                                android:layout_marginRight="6dp"
+                                android:background="@drawable/uber" />
 
-<!--                            <Spinner-->
-<!--                                android:id="@+id/minu"-->
-<!--                                android:layout_width="0dp"-->
-<!--                                android:layout_height="wrap_content"-->
-<!--                                android:layout_weight="1.5" />-->
+                            <Button
+                                android:id="@+id/indriverBtn"
+                                android:layout_width="48dp"
+                                android:layout_height="48dp"
+                                android:layout_marginRight="6dp"
+                                android:background="@drawable/indriver" />
 
+                            <Button
+                                android:id="@+id/trainBtn"
+                                android:layout_width="48dp"
+                                android:layout_height="48dp"
+                                android:layout_marginRight="6dp"
+                                android:background="@drawable/train" />
 
-<!--                            <Spinner-->
-<!--                                android:id="@+id/pm"-->
-<!--                                android:layout_width="30dp"-->
-<!--                                android:layout_height="wrap_content"-->
-<!--                                android:layout_weight="1" />-->
+                            <Button
+                                android:id="@+id/flightBtn"
+                                android:layout_width="48dp"
+                                android:layout_height="48dp"
+                                android:layout_marginRight="6dp"
+                                android:background="@drawable/plane" />
 
-
-<!--                        </LinearLayout>-->
-
-<!--                        <LinearLayout-->
-<!--                            android:layout_width="match_parent"-->
-<!--                            android:layout_height="wrap_content"-->
-<!--                            android:layout_marginTop="10dp"-->
-<!--                            android:orientation="horizontal"-->
-<!--                            android:weightSum="2">-->
-
-<!--                            <EditText-->
-<!--                                android:layout_width="match_parent"-->
-<!--                                android:layout_height="wrap_content"-->
-<!--                                android:layout_weight="1.6"-->
-<!--                                android:hint="Pickup Location"-->
-<!--                                android:inputType="text" />-->
-
-<!--                            <ImageView-->
-<!--                                android:layout_width="30dp"-->
-<!--                                android:layout_height="30dp"-->
-<!--                                android:background="@drawable/ic_add_location_black_24dp" />-->
-
-<!--                        </LinearLayout>-->
-
-
+                        </LinearLayout>
+                        n
                         <Button
                             android:id="@+id/upload"
                             android:layout_width="match_parent"
