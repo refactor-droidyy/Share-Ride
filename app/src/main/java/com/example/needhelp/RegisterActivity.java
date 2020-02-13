@@ -1,10 +1,5 @@
 package com.example.needhelp;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.RequiresApi;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Build;
@@ -16,6 +11,11 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -32,7 +32,7 @@ public class RegisterActivity extends AppCompatActivity {
     private FirebaseUser user;
     DatabaseReference root_reference;
     private Button register;
-    private EditText passwordd, emaill, username,phone;
+    private EditText passwordd, emaill, username, phone;
     private TextView redirecttosignin;
     private FirebaseAuth auth;
     private ProgressDialog dialog;
@@ -85,18 +85,16 @@ public class RegisterActivity extends AppCompatActivity {
     private void createnewacount() {
         final String Eemail = emaill.getText().toString();
         String ppass = passwordd.getText().toString();
-        final  String phhone= phone.getText().toString();
+        final String phhone = phone.getText().toString();
         final String usernaaam = username.getText().toString();
 
-        if (TextUtils.isEmpty(Eemail) || TextUtils.isEmpty(ppass) ||  TextUtils.isEmpty(usernaaam) || TextUtils.isEmpty(phhone)) {
+        if (TextUtils.isEmpty(Eemail) || TextUtils.isEmpty(ppass) || TextUtils.isEmpty(usernaaam) || TextUtils.isEmpty(phhone)) {
             Toast.makeText(RegisterActivity.this, "All Fields Are Necessary", Toast.LENGTH_SHORT).show();
-        } else if(Eemail.contains("iiitl.ac.in")) {
-
+        } else {
             dialog.setTitle("Creating New Account");
             dialog.setMessage("Please Wait While We Process Your Request");
             dialog.setCanceledOnTouchOutside(true);
             dialog.show();
-
 
             auth.createUserWithEmailAndPassword(Eemail, ppass)
                     .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
@@ -114,10 +112,9 @@ public class RegisterActivity extends AppCompatActivity {
                                 hashMap.put("id", userid);
                                 hashMap.put("username_item", usernaaam);
                                 hashMap.put("imageURL", "noimage");
-                                hashMap.put("status","offline");
-                                hashMap.put("email",Eemail);
-                                hashMap.put("phone",phhone);
-
+                                hashMap.put("status", "offline");
+                                hashMap.put("email", Eemail);
+                                hashMap.put("phone", phhone);
 
 
                                 root_reference.setValue(hashMap).addOnCompleteListener(new OnCompleteListener<Void>() {
@@ -131,7 +128,7 @@ public class RegisterActivity extends AppCompatActivity {
                                                 if (task.isSuccessful()) {
                                                     Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
                                                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-                                                    intent.putExtra("name",usernaaam);
+                                                    intent.putExtra("name", usernaaam);
 
                                                     startActivity(intent);
                                                     Toast.makeText(RegisterActivity.this, "Please check your email for verification .....", Toast.LENGTH_SHORT).show();
@@ -149,11 +146,8 @@ public class RegisterActivity extends AppCompatActivity {
                                 Toast.makeText(RegisterActivity.this, "" + Objects.requireNonNull(task.getException()).toString(), Toast.LENGTH_SHORT).show();
                                 dialog.dismiss();
                             }
-
                         }
                     });
-        }else{
-            Toast.makeText(RegisterActivity.this,"Please Enter Your College Email-ID",Toast.LENGTH_LONG).show();
         }
     }
 

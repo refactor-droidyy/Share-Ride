@@ -43,28 +43,28 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="15dp"
                     android:layout_marginTop="10dp"
-                    android:fontFamily="@font/good"
+                    android:fontFamily="@font/ps"
                     android:text="UserName"
-                    android:textSize="18sp"
+                    android:textSize="24sp"
                     android:textStyle="bold" />
 
-                <TextView
-                    android:id="@+id/emailwa"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="15dp"
-                    android:layout_marginTop="10dp"
-                    android:fontFamily="@font/good"
-                    android:text="lit2018068@iiit.ac.in"
-                    android:textSize="14sp"
-                    android:textStyle="bold" />
+                <!--                <TextView-->
+                <!--                    android:id="@+id/emailwa"-->
+                <!--                    android:layout_width="match_parent"-->
+                <!--                    android:layout_height="wrap_content"-->
+                <!--                    android:layout_marginStart="15dp"-->
+                <!--                    android:layout_marginTop="10dp"-->
+                <!--                    android:fontFamily="@font/good"-->
+                <!--                    android:text="lit2018068@iiit.ac.in"-->
+                <!--                    android:textSize="14sp"-->
+                <!--                    android:textStyle="bold" />-->
 
                 <TextView
                     android:id="@+id/time"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="15dp"
-                    android:layout_marginTop="10dp"
+                    android:layout_marginTop="8dp"
                     android:fontFamily="@font/good"
                     android:text="UserName"
                     android:textColor="@color/colorPrimaryDark"

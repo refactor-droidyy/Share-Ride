@@ -11,7 +11,6 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
@@ -20,11 +19,8 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
 import java.util.HashMap;
@@ -44,7 +40,7 @@ public class Custompopup extends Activity {
     private Button request;
     int Current_state = 0;
     FirebaseUser curretUser;
-    private  DatabaseReference reference;
+    private DatabaseReference reference;
     String Currentstate;
     String title;
 
@@ -65,7 +61,7 @@ public class Custompopup extends Activity {
         int width = dm.widthPixels;
         int height = dm.heightPixels;
 
-        getWindow().setLayout((int)(width*.8),(int)(height*.6));
+        getWindow().setLayout((int) (width * .8), (int) (height * .55));
 
         WindowManager.LayoutParams params = getWindow().getAttributes();
         params.gravity = Gravity.CENTER;
@@ -81,13 +77,13 @@ public class Custompopup extends Activity {
         text.setText(name);
 
         curretUser = FirebaseAuth.getInstance().getCurrentUser();
-        reference= FirebaseDatabase.getInstance().getReference().child("Friend_Request");
+        reference = FirebaseDatabase.getInstance().getReference().child("Friend_Request");
         idd = getIntent().getExtras().getString("Id");
         final String imageUrl = getIntent().getExtras().getString("imageUrl");
 
         Picasso.get()
                 .load(imageUrl)
-                .resize(100,100)
+                .resize(100, 100)
                 .into(profile_image);
 
         assert idd != null;
@@ -124,7 +120,7 @@ public class Custompopup extends Activity {
                 if (!user.getUid().equals(idd)) {
                     Intent intt = new Intent(Custompopup.this, Message.class);
                     intt.putExtra("ID", idd);
-                    intt.putExtra("imgUrl",imageUrl);
+                    intt.putExtra("imgUrl", imageUrl);
                     startActivity(intt);
                     finish();
                 }
@@ -141,35 +137,34 @@ public class Custompopup extends Activity {
 //        });
 
 
-
     }
 
     @SuppressLint("SetTextI18n")
     private void sendRequest() {
         request.setEnabled(false);
 
-        if(Current_state == 0){
+        if (Current_state == 0) {
 
             assert idd != null;
 
-            HashMap<String,String> hashMap = new HashMap<>();
-            hashMap.put("requesttype","sent");
-            hashMap.put("id",idd);
-            hashMap.put("friend","true");
+            HashMap<String, String> hashMap = new HashMap<>();
+            hashMap.put("requesttype", "sent");
+            hashMap.put("id", idd);
+            hashMap.put("friend", "true");
             reference.child(curretUser.getUid()).child(idd).setValue(hashMap).addOnCompleteListener(new OnCompleteListener<Void>() {
                 @Override
                 public void onComplete(@NonNull Task<Void> task) {
-                    HashMap<String,String> hashMap = new HashMap<>();
-                    hashMap.put("requesttype","recieved");
-                    hashMap.put("id",curretUser.getUid());
-                    hashMap.put("friend","false");
+                    HashMap<String, String> hashMap = new HashMap<>();
+                    hashMap.put("requesttype", "recieved");
+                    hashMap.put("id", curretUser.getUid());
+                    hashMap.put("friend", "false");
                     reference.child(idd).child(curretUser.getUid()).setValue(hashMap).addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override
                         public void onSuccess(Void aVoid) {
 
-                                request.setEnabled(true);
-                                request.setText("Cancel Request");
-                                Current_state  = 1;
+                            request.setEnabled(true);
+                            request.setText("Cancel Request");
+                            Current_state = 1;
 
                         }
                     });
@@ -179,7 +174,7 @@ public class Custompopup extends Activity {
             });
         }
 
-        if(Current_state == 1){
+        if (Current_state == 1) {
             assert idd != null;
             reference.child(idd).child(curretUser.getUid()).removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
                 @Override
