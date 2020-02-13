@@ -1,15 +1,7 @@
 package com.example.needhelp;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.Manifest;
 import android.annotation.SuppressLint;
-import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
@@ -20,6 +12,13 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -40,7 +39,7 @@ public class Message extends AppCompatActivity {
     private ImageView profile_image;
     private TextView username;
     private ImageView close;
-    private TextView  statuss;
+    private TextView statuss;
 
     FirebaseUser fireBse;
     DatabaseReference reference;
@@ -77,7 +76,7 @@ public class Message extends AppCompatActivity {
 
         close = findViewById(R.id.close);
         recyclerView.setHasFixedSize(true);
-        LinearLayoutManager manager =  new LinearLayoutManager(getApplicationContext());
+        LinearLayoutManager manager = new LinearLayoutManager(getApplicationContext());
         manager.setStackFromEnd(true);
         recyclerView.setLayoutManager(manager);
 
@@ -94,22 +93,22 @@ public class Message extends AppCompatActivity {
 
         Picasso.get()
                 .load(imageUrl)
-                .resize(100,100)
+                .resize(100, 100)
                 .into(profile_image);
 
         fireBse = FirebaseAuth.getInstance().getCurrentUser();
         assert userid != null;
         reference = FirebaseDatabase.getInstance().getReference("USERS").child(userid);
 
-        send.setOnClickListener( new View.OnClickListener() {
+        send.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
                 String msg = message.getText().toString();
-                if(!msg.equals("")){
-                    sendMessage(fireBse.getUid(),userid,msg);
-                }else{
-                    Toast.makeText(Message.this,"Please Type A Message",Toast.LENGTH_LONG).show();
+                if (!msg.equals("")) {
+                    sendMessage(fireBse.getUid(), userid, msg);
+                } else {
+                    Toast.makeText(Message.this, "Please Type A Message", Toast.LENGTH_LONG).show();
                 }
                 message.setText("");
             }
@@ -123,9 +122,9 @@ public class Message extends AppCompatActivity {
                 User user = dataSnapshot.getValue(User.class);
                 assert user != null;
 
-                    username.setText(user.getUsername_item());
+                username.setText(user.getUsername_item());
 
-                readMessages(fireBse.getUid(),userid,user.getImageURL());
+                readMessages(fireBse.getUid(), userid, user.getImageURL());
 
             }
 
@@ -138,10 +137,10 @@ public class Message extends AppCompatActivity {
     }
 
     private void makeCall() {
-        if(ContextCompat.checkSelfPermission(Message.this,Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED){
+        if (ContextCompat.checkSelfPermission(Message.this, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
 
-            ActivityCompat.requestPermissions(Message.this,new String[] {Manifest.permission.CALL_PHONE},REQUEST_CALL);
-        }else{
+            ActivityCompat.requestPermissions(Message.this, new String[]{Manifest.permission.CALL_PHONE}, REQUEST_CALL);
+        } else {
             startActivity(new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + "7007229338")));
         }
     }
@@ -156,15 +155,15 @@ public class Message extends AppCompatActivity {
 
                 mchats.clear();
 
-                for(DataSnapshot snapshots : dataSnapshot.getChildren()){
+                for (DataSnapshot snapshots : dataSnapshot.getChildren()) {
 
                     Chat chat = snapshots.getValue(Chat.class);
                     assert chat != null;
-                    if(chat.getReciever().equals(myid) && chat.getSender().equals(userid) || chat.getReciever().equals(userid) && chat.getSender().equals(myid)) {
+                    if (chat.getReciever().equals(myid) && chat.getSender().equals(userid) || chat.getReciever().equals(userid) && chat.getSender().equals(myid)) {
                         mchats.add(chat);
                     }
 
-                    messageAdapter = new MessageAdapter(Message.this,mchats,imageurl);
+                    messageAdapter = new MessageAdapter(Message.this, mchats, imageurl);
                     recyclerView.setAdapter(messageAdapter);
                 }
             }
@@ -174,17 +173,16 @@ public class Message extends AppCompatActivity {
 
             }
         });
-
     }
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        if(requestCode == REQUEST_CALL){
-            if(grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED){
+        if (requestCode == REQUEST_CALL) {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 makeCall();
-            }else {
-                Toast.makeText(Message.this,"Denied Permission",Toast.LENGTH_LONG).show();
+            } else {
+                Toast.makeText(Message.this, "Denied Permission", Toast.LENGTH_LONG).show();
             }
         }
     }
@@ -192,11 +190,11 @@ public class Message extends AppCompatActivity {
     private void sendMessage(String sender, String reciever, String messag) {
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference();
 
-        HashMap<String,Object> hashMap = new HashMap<>();
+        HashMap<String, Object> hashMap = new HashMap<>();
 
-        hashMap.put("sender",sender);
-        hashMap.put("reciever",reciever);
-        hashMap.put("message",messag);
+        hashMap.put("sender", sender);
+        hashMap.put("reciever", reciever);
+        hashMap.put("message", messag);
 
         reference.child("Chats").push().setValue(hashMap);
 

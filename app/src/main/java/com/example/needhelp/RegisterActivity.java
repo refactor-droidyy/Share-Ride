@@ -92,7 +92,7 @@ public class RegisterActivity extends AppCompatActivity {
 
         if (TextUtils.isEmpty(Eemail) || TextUtils.isEmpty(ppass) || TextUtils.isEmpty(usernaaam) || TextUtils.isEmpty(phhone)) {
             Toast.makeText(RegisterActivity.this, "All Fields Are Necessary", Toast.LENGTH_SHORT).show();
-        } else {
+        } else if (Eemail.contains("@")) {
             dialog.setTitle("Creating New Account");
             dialog.setMessage("Please Wait While We Process Your Request");
             dialog.setCanceledOnTouchOutside(true);
@@ -134,7 +134,7 @@ public class RegisterActivity extends AppCompatActivity {
                                                     intent.putExtra("name", usernaaam);
 
                                                     startActivity(intent);
-                                                    Toast.makeText(RegisterActivity.this, "Please check your email for verification .....", Toast.LENGTH_SHORT).show();
+                                                    Toast.makeText(RegisterActivity.this, "Please check your email for verification ...", Toast.LENGTH_SHORT).show();
                                                     dialog.dismiss();
                                                 } else {
                                                     Toast.makeText(RegisterActivity.this, "" + Objects.requireNonNull(task.getException()).getMessage(), Toast.LENGTH_SHORT).show();
@@ -151,7 +151,8 @@ public class RegisterActivity extends AppCompatActivity {
                             }
                         }
                     });
+        } else {
+            Toast.makeText(RegisterActivity.this, "Please Enter Correct Email-ID", Toast.LENGTH_LONG).show();
         }
     }
-
 }

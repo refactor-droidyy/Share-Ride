@@ -170,6 +170,33 @@
 
 
             <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="48dp"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="10dp"
+                    android:fontFamily="@font/ps"
+                    android:gravity="center"
+                    android:text="Prefered Mode of Travel"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+                <ImageView
+                    android:id="@+id/prefModeImgView"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:layout_marginLeft="64dp"
+                    android:src="@drawable/ola" />
+
+
+            </LinearLayout>
+
+
+            <LinearLayout
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
                 android:orientation="horizontal">
@@ -180,12 +207,12 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="8dp"
                     android:layout_weight="0.5"
-                    android:fontFamily="@font/ps"
                     android:background="@drawable/button_design"
-                    android:textAppearance="@style/TextAppearance.MaterialComponents.Button"
-                    android:textColor="#fff"
+                    android:fontFamily="@font/ps"
                     android:padding="12dp"
-                    android:text="Accept Request" />
+                    android:text="Accept Request"
+                    android:textAppearance="@style/TextAppearance.MaterialComponents.Button"
+                    android:textColor="#fff" />
 
                 <Button
                     android:id="@+id/chatBtn"
@@ -193,12 +220,12 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="8dp"
                     android:layout_weight="0.5"
-                    android:fontFamily="@font/ps"
                     android:background="@drawable/button_design"
-                    android:textAppearance="@style/TextAppearance.MaterialComponents.Button"
-                    android:textColor="#fff"
+                    android:fontFamily="@font/ps"
                     android:padding="12dp"
-                    android:text="Chat" />
+                    android:text="Chat"
+                    android:textAppearance="@style/TextAppearance.MaterialComponents.Button"
+                    android:textColor="#fff" />
             </LinearLayout>
         </LinearLayout>
 
