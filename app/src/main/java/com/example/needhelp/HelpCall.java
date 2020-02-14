@@ -2,7 +2,10 @@ package com.example.needhelp;
 
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
+import android.content.ActivityNotFoundException;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -133,10 +136,6 @@ public class HelpCall extends AppCompatActivity implements DatePickerDialog.OnDa
             }
         });
 
-//        String[] arraySpinner = new String[]{
-//                "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"
-//        };
-
         username_data = getIntent().getStringExtra("nameee");
 
         mDatabaseReference = FirebaseDatabase.getInstance().getReference().child("item_details");
@@ -192,7 +191,9 @@ public class HelpCall extends AppCompatActivity implements DatePickerDialog.OnDa
                                     hashMap.put("email", email);
                                     hashMap.put("id", id);
                                     hashMap.put("imageUrl", imageURL);
-                                    hashMap.put("phone",phone);
+                                    hashMap.put("phone", phone);
+
+
 
                                     if (value == null) {
                                         mDatabaseReference.child(id + time).setValue(hashMap).addOnCompleteListener(new OnCompleteListener<Void>() {
@@ -203,6 +204,13 @@ public class HelpCall extends AppCompatActivity implements DatePickerDialog.OnDa
                                                     Intent intent = new Intent(HelpCall.this, Working.class);
                                                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                                                     startActivity(intent);
+
+                                                    if (type_ride.equals("ola")) {
+                                                        openOla();
+                                                    }
+                                                    if (type_ride.equals("uber")) {
+                                                        openUber();
+                                                    }
                                                 }
                                             }
                                         });
@@ -254,7 +262,8 @@ public class HelpCall extends AppCompatActivity implements DatePickerDialog.OnDa
                                     hashMap.put("email", email);
                                     hashMap.put("id", id);
                                     hashMap.put("imageUrl", imageURL);
-                                    hashMap.put("phone","N/A");
+                                    hashMap.put("phone", "N/A");
+
                                     if (value == null) {
                                         mDatabaseReference.child(id + time).setValue(hashMap).addOnCompleteListener(new OnCompleteListener<Void>() {
                                             @Override
@@ -299,6 +308,43 @@ public class HelpCall extends AppCompatActivity implements DatePickerDialog.OnDa
                 }
             }
         });
+    }
+
+    private void openOla() {
+        Intent launchIntent = getPackageManager().getLaunchIntentForPackage("com.olacabs.customer");
+        if (launchIntent != null) {
+            startActivity(launchIntent);//null pointer check in case package name was not found
+        } else {
+            Uri uri = Uri.parse("market://details?id=com.olacabs.customer");
+            Intent goToMarket = new Intent(Intent.ACTION_VIEW, uri);
+
+            goToMarket.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY |
+                    Intent.FLAG_ACTIVITY_NEW_DOCUMENT |
+                    Intent.FLAG_ACTIVITY_MULTIPLE_TASK);
+            try {
+                startActivity(goToMarket);
+            } catch (ActivityNotFoundException e) {
+                startActivity(new Intent(Intent.ACTION_VIEW,
+                        Uri.parse("http://play.google.com/store/apps/details?id=com.olacabs.customer")));
+            }
+        }
+    }
+
+    private void openUber() {
+        PackageManager pm = getPackageManager();
+        try {
+            pm.getPackageInfo("com.ubercab", PackageManager.GET_ACTIVITIES);
+            String uri = "uber://?action=setPickup&pickup=my_location";
+            Intent intent = new Intent(Intent.ACTION_VIEW);
+            intent.setData(Uri.parse(uri));
+            startActivity(intent);
+        } catch (PackageManager.NameNotFoundException e) {
+            try {
+                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=com.ubercab")));
+            } catch (android.content.ActivityNotFoundException anfe) {
+                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://play.google.com/store/apps/details?id=com.ubercab")));
+            }
+        }
     }
 
     void handleSendText(Intent intent) {

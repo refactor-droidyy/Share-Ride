@@ -19,7 +19,7 @@
             android:id="@+id/profile"/>
 
         <item
-            android:title="Ccohats"
+            android:title="Chats"
             app:showAsAction="never"
             android:icon="@drawable/comment"
             android:id="@+id/chats"/>
