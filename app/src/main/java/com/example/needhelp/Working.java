@@ -160,8 +160,9 @@ public class Working extends AppCompatActivity {
                 startActivity(new Intent(Working.this, Converstion.class));
                 finish();
                 break;
-            case R.id.actio_search:
-
+            case R.id.myrides:
+                startActivity(new Intent(Working.this,MyRides.class));
+                finish();
 
         }
         return true;

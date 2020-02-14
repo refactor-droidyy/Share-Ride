@@ -103,7 +103,6 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         holder.relativeLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 Intent intent = new Intent(mContext.getApplicationContext(), Custompopup.class);
                 intent.putExtra("Id", upload.getId());
                 intent.putExtra("username", upload.getUsername());
