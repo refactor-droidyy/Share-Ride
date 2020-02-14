@@ -11,17 +11,9 @@ public class Upload {
     private String imageUrl;
     private String travel_time;
     private String mode_travel;
+    private String ride_type;
 
-    public Upload(String from, String username_item, String to, String description, String time, String email, String id, String imageURL) {
-        this.from = from;
-        this.username_item = username_item;
-        this.to = to;
-        this.description = description;
-        this.time = time;
-        this.email = email;
-        this.id = id;
-        this.imageUrl = imageURL;
-    }
+
 
     public String getTravel_time() {
         return travel_time;
@@ -39,7 +31,15 @@ public class Upload {
         this.mode_travel = mode_travel;
     }
 
-    public Upload(String from, String username_item, String to, String description, String time, String email, String id, String imageUrl, String travel_time, String mode_travel) {
+    public String getRide_type() {
+        return ride_type;
+    }
+
+    public void setRide_type(String ride_type) {
+        this.ride_type = ride_type;
+    }
+
+    public Upload(String from, String username_item, String to, String description, String time, String email, String id, String imageUrl, String travel_time, String mode_travel, String ride_type) {
         this.from = from;
         this.username_item = username_item;
         this.to = to;
@@ -50,6 +50,7 @@ public class Upload {
         this.imageUrl = imageUrl;
         this.travel_time = travel_time;
         this.mode_travel = mode_travel;
+        this.ride_type = ride_type;
     }
 
     public String getUsername_item() {
