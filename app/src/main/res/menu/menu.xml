@@ -13,6 +13,11 @@
             android:icon="@drawable/journey"
             android:id="@+id/uploadss"/>
         <item
+            android:title="My Rides"
+            app:showAsAction="never"
+            android:icon="@drawable/journey"
+            android:id="@+id/myrides"/>
+        <item
             android:title="My Profile"
             app:showAsAction="never"
             android:icon="@drawable/profile"

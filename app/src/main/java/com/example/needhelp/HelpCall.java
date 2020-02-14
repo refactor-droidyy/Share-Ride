@@ -55,6 +55,7 @@ public class HelpCall extends AppCompatActivity implements DatePickerDialog.OnDa
     String value, intent_time = null;
     String hr, min, am, arrival_time, din, mahina;
     private Button ola, uber, inDrive, train, plain, walk;
+    String from_intent,to_intent,desc_intent,ride_type_intent,companion_intent;
     private RadioGroup radioGroup;
     private RadioButton radioButton;
     RideRequestButton requestButton;
@@ -73,6 +74,12 @@ public class HelpCall extends AppCompatActivity implements DatePickerDialog.OnDa
         autoCompleteTextView.setAdapter(new PlaceAutoSuggestAdapter(HelpCall.this, android.R.layout.simple_list_item_1));
         AutoCompleteTextView autoCompleteTextView1 =findViewById(R.id.to_upload);
         autoCompleteTextView1.setAdapter(new PlaceAutoSuggestAdapter(HelpCall.this, android.R.layout.simple_list_item_1));
+        from = findViewById(R.id.from_upload);
+        to = findViewById(R.id.to_upload);
+        description = findViewById(R.id.description);
+        upload = findViewById(R.id.upload);
+        close = findViewById(R.id.close);
+        companions = findViewById(R.id.number_of_companions);
 
         if (Intent.ACTION_SEND.equals(action) && type != null) {
             if ("text/plain".equals(type)) {
@@ -81,14 +88,19 @@ public class HelpCall extends AppCompatActivity implements DatePickerDialog.OnDa
         } else {
             value = getIntent().getStringExtra("value");
             intent_time = getIntent().getStringExtra("time");
+            from_intent = getIntent().getStringExtra("from_intent");
+            to_intent = getIntent().getStringExtra("to_intent");
+            desc_intent = getIntent().getStringExtra("desc_intent");
+            ride_type_intent = getIntent().getStringExtra("mode_select_intent");
+            companion_intent = getIntent().getStringExtra("companions_intetn");
+
+            from.setText(from_intent);
+            to.setText(to_intent);
+            description.setText(desc_intent);
+            companions.setText(companion_intent);
+
         }
 
-        from = findViewById(R.id.from_upload);
-        to = findViewById(R.id.to_upload);
-        description = findViewById(R.id.description);
-        upload = findViewById(R.id.upload);
-        close = findViewById(R.id.close);
-        companions = findViewById(R.id.number_of_companions);
 
         ola = findViewById(R.id.olaBtn);
         uber = findViewById(R.id.uberBtn);
@@ -200,12 +212,24 @@ public class HelpCall extends AppCompatActivity implements DatePickerDialog.OnDa
                                     String imageURL = Objects.requireNonNull(dataSnapshot.child("imageURL").getValue()).toString();
                                     String phone = Objects.requireNonNull(dataSnapshot.child("phone").getValue()).toString();
                                     HashMap<String, String> hashMap = new HashMap<>();
-                                    hashMap.put("from", fromm);
-                                    hashMap.put("to", too);
-                                    hashMap.put("description", description);
-                                    hashMap.put("username_item", Username);
-                                    hashMap.put("ride_type", type_ride);
-                                    hashMap.put("companions", companionss);
+
+                                    if(from_intent.isEmpty() || to_intent.isEmpty()) {
+
+                                        hashMap.put("from", from_intent);
+                                        hashMap.put("to", to_intent);
+                                        hashMap.put("description", desc_intent);
+                                        hashMap.put("username_item", Username);
+                                        hashMap.put("ride_type", ride_type_intent);
+                                        hashMap.put("companions", companion_intent);
+                                    }else{
+                                        hashMap.put("from", fromm);
+                                        hashMap.put("to", too);
+                                        hashMap.put("description", description);
+                                        hashMap.put("username_item", Username);
+                                        hashMap.put("ride_type", type_ride);
+                                        hashMap.put("companions", companionss);
+                                    }
+
                                     if (intent_time == null) {
                                         hashMap.put("time", String.valueOf(time));
                                     } else {

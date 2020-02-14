@@ -8,6 +8,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -24,19 +26,23 @@ import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder> {
+public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder> implements Filterable {
 
     private Context mContext;
     private List<Upload> mUploads;
+    private List<Upload> uploadListFiltered;
     int x = 0;
 
     RecyclerViewAdapter(Context mContext, List<Upload> mUploads) {
         this.mContext = mContext;
         this.mUploads = mUploads;
+        uploadListFiltered = new ArrayList<>(mUploads);
     }
 
     @NonNull
@@ -97,7 +103,6 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         holder.relativeLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 Intent intent = new Intent(mContext.getApplicationContext(), Custompopup.class);
                 intent.putExtra("Id", upload.getId());
                 intent.putExtra("username", upload.getUsername());
@@ -120,7 +125,6 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
                         holder.reqBtn.setEnabled(false);
                         holder.reqBtn.setTextColor(Color.GREEN);
                         for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                            //    Toast.makeText(mContext, "" + snapshot.child("companions").getValue(), Toast.LENGTH_SHORT).show();
                             x = Integer.parseInt(String.valueOf(snapshot.child("companions").getValue()));
                             x -= 1;
                             holder.companion_count.setText(String.valueOf(x));
@@ -151,6 +155,71 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     public int getItemCount() {
         return mUploads.size();
     }
+
+    @Override
+    public Filter getFilter() {
+        return exampleFilter;
+    }
+
+    private Filter exampleFilter = new Filter() {
+        @Override
+        protected FilterResults performFiltering(CharSequence charSequence) {
+           List<Upload> filteredList = new ArrayList<>();
+           if(charSequence == null || charSequence.length() == 0){
+               filteredList.addAll(uploadListFiltered);
+           }else {
+               String filterPattern = charSequence.toString().toLowerCase().trim();
+               for(Upload item : uploadListFiltered){
+                   if(item.getTo().toLowerCase().contains(filterPattern) || item.getFrom().toLowerCase().contains(filterPattern)){
+                       filteredList.add(item);
+                   }
+               }
+           }
+           FilterResults results = new FilterResults();
+           results.values = filteredList;
+           return results;
+        }
+
+        @Override
+        protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
+
+            mUploads.clear();
+            mUploads.addAll((List) filterResults.values);
+            notifyDataSetChanged();
+        }
+    };
+
+//    @Override
+//    public Filter getFilter() {
+//        return new Filter() {
+//            @Override
+//            protected FilterResults performFiltering(CharSequence charSequence) {
+//                String charString = charSequence.toString();
+//                if (charString.isEmpty()) {
+//                  uploadListFiltered = mUploads;
+//                } else {
+//                    List<Upload> filteredList = new ArrayList<>();
+//                    for (Upload row : mUploads) {
+//                        if (row.getFrom().toLowerCase().contains(charString.toLowerCase()) || row.getTo().contains(charSequence)) {
+//                            filteredList.add(row);
+//                        }
+//                    }
+//
+//                    uploadListFiltered = filteredList;
+//                }
+//
+//                FilterResults filterResults = new FilterResults();
+//                filterResults.values = uploadListFiltered;
+//                return filterResults;
+//            }
+//
+//            @Override
+//            protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
+//
+//            }
+//        };
+//    }
+
 
     static class ViewHolder extends RecyclerView.ViewHolder {
         TextView ffrom, tto, description, username, time;

@@ -20,7 +20,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
         signin = findViewById(R.id.signin);
         signin.setOnClickListener(new View.OnClickListener() {
             @Override
