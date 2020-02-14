@@ -3,6 +3,7 @@ package com.example.needhelp.activity;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -98,9 +99,7 @@ public class Working extends AppCompatActivity {
                     if (!firebaseUser.getUid().equals(upload.getId())) {
                         mUploads.add(upload);
                     }
-
                     adapter = new RecyclerViewAdapter(getApplicationContext(), mUploads);
-
                     recyclerView.setAdapter(adapter);
                 }
             }
@@ -166,8 +165,15 @@ public class Working extends AppCompatActivity {
                 startActivity(new Intent(Working.this, MyRides.class));
                 finish();
             case R.id.actio_emergncy:
+                Intent email = new Intent(Intent.ACTION_SEND);
+                email.putExtra(Intent.EXTRA_EMAIL, new String[]{ "lit2018068@iiitl.ac.in"});
+                email.putExtra(Intent.EXTRA_SUBJECT, "Emergency");
+                email.putExtra(Intent.EXTRA_TEXT, "I am in a great trouble I need help please help me");
 
+                //need this to prompts email client only
+                email.setType("message/rfc822");
 
+                startActivity(Intent.createChooser(email, "Choose an Email client :"));
         }
         return true;
     }
