@@ -50,8 +50,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         holder.tto.setText(upload.getTo());
         holder.description.setText(upload.getDescription());
         holder.username.setText(upload.getUsername());
-        @SuppressLint("SimpleDateFormat")
-        final SimpleDateFormat dateformat = new SimpleDateFormat("dd MMM, yyyy hh:mm aa");
+        @SuppressLint("SimpleDateFormat") final SimpleDateFormat dateformat = new SimpleDateFormat("dd MMM, yyyy hh:mm aa");
         final long time = Long.parseLong(upload.getTime());
         holder.time.setText(dateformat.format(time));
         //holder.email.setText(upload.getEmail());
@@ -99,6 +98,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
                 intent.putExtra("Id", upload.getId());
                 intent.putExtra("username", upload.getUsername());
                 intent.putExtra("imageUrl", upload.getImageUrl());
+                intent.putExtra("phone", upload.getPhone());
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 mContext.startActivity(intent);
             }
@@ -146,7 +146,6 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             username = itemView.findViewById(R.id.username);
             time = itemView.findViewById(R.id.time);
             relativeLayout = itemView.findViewById(R.id.relative);
-            //email = itemView.findViewById(R.id.emailwa);
             chatBtn = itemView.findViewById(R.id.chatBtn);
             reqBtn = itemView.findViewById(R.id.reqBtn);
             prefered_mode = itemView.findViewById(R.id.prefModeImgView);

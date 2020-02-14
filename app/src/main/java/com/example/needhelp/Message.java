@@ -52,8 +52,7 @@ public class Message extends AppCompatActivity {
     RecyclerView recyclerView;
     String userid;
     ImageView makeCall;
-
-
+    String phone;
     Intent intent;
 
     @Override
@@ -67,10 +66,12 @@ public class Message extends AppCompatActivity {
         send = findViewById(R.id.send);
         recyclerView = findViewById(R.id.recycler_view_mess);
         makeCall = findViewById(R.id.make_call);
+        phone = getIntent().getExtras().getString("phone");
+
         makeCall.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                makeCall();
+                makeCall(phone);
             }
         });
 
@@ -90,6 +91,7 @@ public class Message extends AppCompatActivity {
 
         userid = intent.getStringExtra("ID");
         final String imageUrl = getIntent().getExtras().getString("imgUrl");
+
 
         Picasso.get()
                 .load(imageUrl)
@@ -136,12 +138,12 @@ public class Message extends AppCompatActivity {
 
     }
 
-    private void makeCall() {
+    private void makeCall(String phone) {
         if (ContextCompat.checkSelfPermission(Message.this, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
 
             ActivityCompat.requestPermissions(Message.this, new String[]{Manifest.permission.CALL_PHONE}, REQUEST_CALL);
         } else {
-            startActivity(new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + "7007229338")));
+            startActivity(new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + phone)));
         }
     }
 
@@ -180,7 +182,7 @@ public class Message extends AppCompatActivity {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         if (requestCode == REQUEST_CALL) {
             if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                makeCall();
+                makeCall(phone);
             } else {
                 Toast.makeText(Message.this, "Denied Permission", Toast.LENGTH_LONG).show();
             }

@@ -10,6 +10,8 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
@@ -40,21 +42,16 @@ public class HelpCall extends AppCompatActivity implements DatePickerDialog.OnDa
     private String type_ride;
     private String username_data, datetime, id;
     TextView date_picker, txact_time;
-    String value, intent_time, to_intent, from_intent, desc_intent, companion_intent, ride_type_intent = null;
+    String value, intent_time = null;
     String hr, min, am, arrival_time, din, mahina;
     private Button ola, uber, inDrive, train, plain, walk;
-    private String fromm, too, descriptionn, companionss;
+    private RadioGroup radioGroup;
+    private RadioButton radioButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_help_call);
-        from = findViewById(R.id.from_upload);
-        to = findViewById(R.id.to_upload);
-        description = findViewById(R.id.description);
-        upload = findViewById(R.id.upload);
-        close = findViewById(R.id.close);
-        companions = findViewById(R.id.number_of_companions);
 
         Intent intent = getIntent();
         String action = intent.getAction();
@@ -67,20 +64,14 @@ public class HelpCall extends AppCompatActivity implements DatePickerDialog.OnDa
         } else {
             value = getIntent().getStringExtra("value");
             intent_time = getIntent().getStringExtra("time");
-            to_intent = getIntent().getStringExtra("to_intent");
-            from_intent = getIntent().getStringExtra("from_intent");
-            desc_intent = getIntent().getStringExtra("desc_intent");
-            companion_intent = getIntent().getStringExtra("companions_intetn");
-            ride_type_intent = getIntent().getStringExtra("mode_select_intent");
-
-            from.setText(from_intent);
-            to.setText(to_intent);
-            description.setText(desc_intent);
-            companions.setText(companion_intent);
-            type_ride = ride_type_intent;
-
         }
 
+        from = findViewById(R.id.from_upload);
+        to = findViewById(R.id.to_upload);
+        description = findViewById(R.id.description);
+        upload = findViewById(R.id.upload);
+        close = findViewById(R.id.close);
+        companions = findViewById(R.id.number_of_companions);
 
         ola = findViewById(R.id.olaBtn);
         uber = findViewById(R.id.uberBtn);
@@ -142,9 +133,9 @@ public class HelpCall extends AppCompatActivity implements DatePickerDialog.OnDa
             }
         });
 
-        String[] arraySpinner = new String[]{
-                "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"
-        };
+//        String[] arraySpinner = new String[]{
+//                "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"
+//        };
 
         username_data = getIntent().getStringExtra("nameee");
 
@@ -155,87 +146,154 @@ public class HelpCall extends AppCompatActivity implements DatePickerDialog.OnDa
             @Override
             public void onClick(View view) {
 
-                fromm = from.getText().toString();
-                too = to.getText().toString();
-                descriptionn = description.getText().toString();
-                companionss = companions.getText().toString();
+
+                final String fromm = from.getText().toString();
+                final String too = to.getText().toString();
+                final String description = HelpCall.this.description.getText().toString();
+                final String companionss = companions.getText().toString();
                 Calendar c = Calendar.getInstance();
                 // @SuppressLint("SimpleDateFormat") SimpleDateFormat dateformat = new SimpleDateFormat("dd MMM,yy hh:mm aa");
                 final long time = System.currentTimeMillis();
                 // datetime = dateformat.format(c.getTime());
 
+                radioGroup = findViewById(R.id.postGroup);
 
-                if (TextUtils.isEmpty(fromm) || TextUtils.isEmpty(too) || TextUtils.isEmpty(descriptionn)) {
+                int selectedId = radioGroup.getCheckedRadioButtonId();
+
+                // find the radiobutton by returned id
+                radioButton = (RadioButton) findViewById(selectedId);
+
+
+                if (TextUtils.isEmpty(fromm) || TextUtils.isEmpty(too) || TextUtils.isEmpty(description)) {
                     Toast.makeText(getApplicationContext(), "All Fields Are Necessary", Toast.LENGTH_SHORT).show();
                 } else {
-                    uploadd.child(id).addValueEventListener(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    if (radioButton.getText().toString().contains("organisation")) {
+                        uploadd.child(id).addValueEventListener(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
-                            if (dataSnapshot.exists()) {
-                                String Username = Objects.requireNonNull(dataSnapshot.child("username_item").getValue()).toString();
-                                String email = Objects.requireNonNull(dataSnapshot.child("email").getValue()).toString();
-                                String imageURL = Objects.requireNonNull(dataSnapshot.child("imageURL").getValue()).toString();
-                                HashMap<String, String> hashMap = new HashMap<>();
-
-                                if (from_intent == null) {
-                                    hashMap.put("time", intent_time);
-                                    hashMap.put("from", from_intent);
-                                    hashMap.put("to", to_intent);
-                                    hashMap.put("description", desc_intent);
-                                    hashMap.put("username_item", Username);
-                                    hashMap.put("ride_type", ride_type_intent);
-                                    hashMap.put("companions", companion_intent);
-
-                                } else {
-                                    hashMap.put("time", String.valueOf(time));
+                                if (dataSnapshot.exists()) {
+                                    String Username = Objects.requireNonNull(dataSnapshot.child("username_item").getValue()).toString();
+                                    String email = Objects.requireNonNull(dataSnapshot.child("email").getValue()).toString();
+                                    String imageURL = Objects.requireNonNull(dataSnapshot.child("imageURL").getValue()).toString();
+                                    String phone = Objects.requireNonNull(dataSnapshot.child("phone").getValue()).toString();
+                                    HashMap<String, String> hashMap = new HashMap<>();
                                     hashMap.put("from", fromm);
                                     hashMap.put("to", too);
-                                    hashMap.put("description", descriptionn);
+                                    hashMap.put("description", description);
                                     hashMap.put("username_item", Username);
                                     hashMap.put("ride_type", type_ride);
                                     hashMap.put("companions", companionss);
-                                }
+                                    if (intent_time == null) {
+                                        hashMap.put("time", String.valueOf(time));
+                                    } else {
+                                        hashMap.put("time", intent_time);
+                                    }
+                                    hashMap.put("email", email);
+                                    hashMap.put("id", id);
+                                    hashMap.put("imageUrl", imageURL);
+                                    hashMap.put("phone",phone);
 
-                                hashMap.put("email", email);
-                                hashMap.put("id", id);
-                                hashMap.put("imageUrl", imageURL);
-                                if (value == null) {
-                                    mDatabaseReference.child(id + time).setValue(hashMap).addOnCompleteListener(new OnCompleteListener<Void>() {
-                                        @Override
-                                        public void onComplete(@NonNull Task<Void> task) {
+                                    if (value == null) {
+                                        mDatabaseReference.child(id + time).setValue(hashMap).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                            @Override
+                                            public void onComplete(@NonNull Task<Void> task) {
 
-                                            if (task.isSuccessful()) {
-                                                Intent intent = new Intent(HelpCall.this, Working.class);
-                                                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-                                                startActivity(intent);
+                                                if (task.isSuccessful()) {
+                                                    Intent intent = new Intent(HelpCall.this, Working.class);
+                                                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                                                    startActivity(intent);
+                                                }
                                             }
-                                        }
-                                    });
-                                } else {
-                                    mDatabaseReference.child(value).setValue(hashMap).addOnCompleteListener(new OnCompleteListener<Void>() {
-                                        @Override
-                                        public void onComplete(@NonNull Task<Void> task) {
+                                        });
+                                    } else {
+                                        mDatabaseReference.child(value).setValue(hashMap).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                            @Override
+                                            public void onComplete(@NonNull Task<Void> task) {
 
-                                            if (task.isSuccessful()) {
-                                                Toast.makeText(HelpCall.this, "Edited Successfully", Toast.LENGTH_SHORT).show();
-                                                Intent intent = new Intent(HelpCall.this, Myuploads.class);
-                                                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-                                                startActivity(intent);
+                                                if (task.isSuccessful()) {
+                                                    Toast.makeText(HelpCall.this, "Edited Successfully", Toast.LENGTH_SHORT).show();
+                                                    Intent intent = new Intent(HelpCall.this, Myuploads.class);
+                                                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                                                    startActivity(intent);
+                                                }
+
                                             }
+                                        });
+                                    }
 
-                                        }
-                                    });
                                 }
+                            }
+
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError databaseError) {
 
                             }
-                        }
+                        });
+                    } else {
+                        uploadd.child(id).addValueEventListener(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
-                        @Override
-                        public void onCancelled(@NonNull DatabaseError databaseError) {
+                                if (dataSnapshot.exists()) {
+                                    String Username = "Anonymus User";
+                                    String email = " ";
+                                    String imageURL = "https://miro.medium.com/max/350/1*MccriYX-ciBniUzRKAUsAw.png";
+                                    HashMap<String, String> hashMap = new HashMap<>();
+                                    hashMap.put("from", fromm);
+                                    hashMap.put("to", too);
+                                    hashMap.put("description", description);
+                                    hashMap.put("username_item", Username);
+                                    hashMap.put("ride_type", type_ride);
+                                    hashMap.put("companions", companionss);
+                                    if (intent_time == null) {
+                                        hashMap.put("time", String.valueOf(time));
+                                    } else {
+                                        hashMap.put("time", intent_time);
+                                    }
+                                    hashMap.put("email", email);
+                                    hashMap.put("id", id);
+                                    hashMap.put("imageUrl", imageURL);
+                                    hashMap.put("phone","N/A");
+                                    if (value == null) {
+                                        mDatabaseReference.child(id + time).setValue(hashMap).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                            @Override
+                                            public void onComplete(@NonNull Task<Void> task) {
 
-                        }
-                    });
+                                                if (task.isSuccessful()) {
+                                                    Intent intent = new Intent(HelpCall.this, Working.class);
+                                                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                                                    startActivity(intent);
+                                                }
+                                            }
+                                        });
+                                    } else {
+                                        mDatabaseReference.child(value).setValue(hashMap).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                            @Override
+                                            public void onComplete(@NonNull Task<Void> task) {
+
+                                                if (task.isSuccessful()) {
+                                                    Toast.makeText(HelpCall.this, "Edited Successfully", Toast.LENGTH_SHORT).show();
+                                                    Intent intent = new Intent(HelpCall.this, Myuploads.class);
+                                                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                                                    startActivity(intent);
+                                                }
+
+                                            }
+                                        });
+                                    }
+
+                                }
+                            }
+
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                            }
+                        });
+
+                        //post in normal
+                    }
 
 
                 }

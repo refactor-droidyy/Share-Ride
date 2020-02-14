@@ -185,11 +185,41 @@
                             <EditText
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:hint="Add No of Companions"
+                                android:hint="No of co-travelers you want to have"
                                 android:inputType="number"
                                 android:id="@+id/number_of_companions"
                                 android:textAlignment="center"
                                 />
+
+
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <RadioGroup
+                                android:id="@+id/postGroup"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content">
+
+                                <RadioButton
+                                    android:id="@+id/orgCheckBtn"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Post within your organisation"/>
+
+                                <RadioButton
+                                    android:id="@+id/anonyBtn"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Post anonymously"/>
+
+                            </RadioGroup>
+
+
 
                         </LinearLayout>
 
