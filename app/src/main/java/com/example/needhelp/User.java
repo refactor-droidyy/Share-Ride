@@ -2,15 +2,17 @@ package com.example.needhelp;
 
 public class User {
 
-     String id;
-     String username_item;
-     String imageURL;
-     String status;
-     String search;
-     String email;
-     String phone;
+     private String id;
+     private  String username_item;
+     private String imageURL;
+     private String status;
+     private String search;
+     private String email;
+     private String phone;
+     private String organisation;
 
-    public User(String id, String username_item, String imageURL, String status, String search, String email, String phone) {
+
+    public User(String id, String username_item, String imageURL, String status, String search, String email, String phone, String organisation) {
         this.id = id;
         this.username_item = username_item;
         this.imageURL = imageURL;
@@ -18,10 +20,19 @@ public class User {
         this.search = search;
         this.email = email;
         this.phone = phone;
+        this.organisation = organisation;
     }
 
     public User(){
         //default constructor
+    }
+
+    public String getOrganisation() {
+        return organisation;
+    }
+
+    public void setOrganisation(String organisation) {
+        this.organisation = organisation;
     }
 
     public String getId() {

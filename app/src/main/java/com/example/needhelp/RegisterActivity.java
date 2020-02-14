@@ -32,7 +32,7 @@ public class RegisterActivity extends AppCompatActivity {
     private FirebaseUser user;
     DatabaseReference root_reference;
     private Button register;
-    private EditText passwordd, emaill, username, phone;
+    private EditText passwordd, emaill, username, phone,organisation;
     private TextView redirecttosignin;
     private FirebaseAuth auth;
     private ProgressDialog dialog;
@@ -50,6 +50,7 @@ public class RegisterActivity extends AppCompatActivity {
         redirecttosignin = findViewById(R.id.already_account);
         phone = findViewById(R.id.phone_input_reg);
         close = findViewById(R.id.close);
+        organisation = findViewById(R.id.organization_input);
 
         tlbr = findViewById(R.id.reg_toolbar);
         setSupportActionBar(tlbr);
@@ -87,10 +88,11 @@ public class RegisterActivity extends AppCompatActivity {
         String ppass = passwordd.getText().toString();
         final String phhone = phone.getText().toString();
         final String usernaaam = username.getText().toString();
+        final String organisationn = organisation.getText().toString();
 
         if (TextUtils.isEmpty(Eemail) || TextUtils.isEmpty(ppass) || TextUtils.isEmpty(usernaaam) || TextUtils.isEmpty(phhone)) {
             Toast.makeText(RegisterActivity.this, "All Fields Are Necessary", Toast.LENGTH_SHORT).show();
-        } else {
+        } else if (Eemail.contains("@")) {
             dialog.setTitle("Creating New Account");
             dialog.setMessage("Please Wait While We Process Your Request");
             dialog.setCanceledOnTouchOutside(true);
@@ -115,6 +117,7 @@ public class RegisterActivity extends AppCompatActivity {
                                 hashMap.put("status", "offline");
                                 hashMap.put("email", Eemail);
                                 hashMap.put("phone", phhone);
+                                hashMap.put("organisation",organisationn);
 
 
                                 root_reference.setValue(hashMap).addOnCompleteListener(new OnCompleteListener<Void>() {
@@ -131,7 +134,7 @@ public class RegisterActivity extends AppCompatActivity {
                                                     intent.putExtra("name", usernaaam);
 
                                                     startActivity(intent);
-                                                    Toast.makeText(RegisterActivity.this, "Please check your email for verification .....", Toast.LENGTH_SHORT).show();
+                                                    Toast.makeText(RegisterActivity.this, "Please check your email for verification ...", Toast.LENGTH_SHORT).show();
                                                     dialog.dismiss();
                                                 } else {
                                                     Toast.makeText(RegisterActivity.this, "" + Objects.requireNonNull(task.getException()).getMessage(), Toast.LENGTH_SHORT).show();
@@ -148,7 +151,8 @@ public class RegisterActivity extends AppCompatActivity {
                             }
                         }
                     });
+        } else {
+            Toast.makeText(RegisterActivity.this, "Please Enter Correct Email-ID", Toast.LENGTH_LONG).show();
         }
     }
-
 }

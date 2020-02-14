@@ -62,6 +62,7 @@ public class Profile extends AppCompatActivity {
     private TextView name;
     private TextView email;
     private TextView phone;
+    private TextView organisation;
     private LinearLayout call;
     public ImageView close, photo;
     private TextView addinfo;
@@ -86,6 +87,7 @@ public class Profile extends AppCompatActivity {
         close = findViewById(R.id.close);
         call = findViewById(R.id.make_call);
 
+        organisation = findViewById(R.id.org_display);
         addinfo = findViewById(R.id.upload_new);
         dialog = new ProgressDialog(this);
         postref = FirebaseStorage.getInstance().getReference("uploads");
@@ -96,7 +98,7 @@ public class Profile extends AppCompatActivity {
         call.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-               // makeCallIntent();
+                // makeCallIntent();
             }
         });
         photo.setOnClickListener(new View.OnClickListener() {
@@ -114,10 +116,10 @@ public class Profile extends AppCompatActivity {
         addinfo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                Intent intent = new Intent(Profile.this,EditImage.class);
-//                intent.putExtra("url",url);
-//                startActivity(intent);
-               uploadimagetofirebasedatabase();
+                Intent intent = new Intent(Profile.this, EditImage.class);
+                intent.putExtra("url", url);
+                startActivity(intent);
+                //uploadimagetofirebasedatabase();
             }
         });
         close.setOnClickListener(new View.OnClickListener() {
@@ -139,13 +141,15 @@ public class Profile extends AppCompatActivity {
                 String emaill = Objects.requireNonNull(dataSnapshot.child("email").getValue()).toString();
                 phonee = Objects.requireNonNull(dataSnapshot.child("phone").getValue()).toString();
                 url = Objects.requireNonNull(dataSnapshot.child("imageURL").getValue()).toString();
+                String orgg = Objects.requireNonNull(dataSnapshot.child("organisation").getValue()).toString();
                 Picasso.get()
                         .load(url)
-                        .resize(100,100)
+                        .resize(100, 100)
                         .into(photo);
                 name.setText(username);
                 email.setText(emaill);
                 phone.setText(phonee);
+                organisation.setText(orgg);
 
             }
 
@@ -159,7 +163,7 @@ public class Profile extends AppCompatActivity {
     private void uploadimagetofirebasedatabase() {
         final ProgressDialog pd = new ProgressDialog(getApplicationContext());
         pd.setMessage("Uploading");
-        if(mImageUri != null){
+        if (mImageUri != null) {
             final StorageReference fileref = postref.child(fileName);
             mUploadTask = fileref.putFile(mImageUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                 @Override
@@ -169,14 +173,14 @@ public class Profile extends AppCompatActivity {
                         public void onSuccess(Uri uri) {
                             String downloadUrl = String.valueOf(uri);
                             DatabaseReference dbref = FirebaseDatabase.getInstance().getReference("USERS").child(FirebaseAuth.getInstance().getCurrentUser().getUid());
-                            HashMap<String,Object> hashMap=new HashMap<>();
-                            hashMap.put("imageURL",downloadUrl);
+                            HashMap<String, Object> hashMap = new HashMap<>();
+                            hashMap.put("imageURL", downloadUrl);
                             dbref.updateChildren(hashMap).addOnSuccessListener(new OnSuccessListener<Void>() {
                                 @Override
                                 public void onSuccess(Void aVoid) {
                                     dialog.dismiss();
                                     Toast.makeText(getApplicationContext(), "Upload Successful", Toast.LENGTH_LONG).show();
-                                                                  }
+                                }
                             });
 
                         }
@@ -189,8 +193,8 @@ public class Profile extends AppCompatActivity {
                 }
             });
 
-        }else{
-            Toast.makeText(getApplicationContext(),"Please Select A Image",LENGTH_LONG).show();
+        } else {
+            Toast.makeText(getApplicationContext(), "Please Select A Image", LENGTH_LONG).show();
             pd.dismiss();
         }
 
@@ -229,7 +233,7 @@ public class Profile extends AppCompatActivity {
         if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE) {
             CropImage.ActivityResult result = CropImage.getActivityResult(data);
             if (resultCode == RESULT_OK) {
-               mImageUri = (result.getUri());
+                mImageUri = (result.getUri());
                 if (mImageUri.getScheme().equals("file")) {
                     fileName = mImageUri.getLastPathSegment();
                 }

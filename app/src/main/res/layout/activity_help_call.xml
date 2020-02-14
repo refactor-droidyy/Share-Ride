@@ -36,7 +36,7 @@
                         android:layout_marginStart="10dp"
                         android:layout_toEndOf="@id/close"
                         android:fontFamily="@font/good"
-                        android:text="Request Help "
+                        android:text="New Journey Request"
                         android:textColor="#ffffff"
                         android:textSize="20sp"
                         android:textStyle="bold" />
@@ -79,8 +79,8 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="10dp"
-                            android:hint="From"
                             android:fontFamily="@font/good"
+                            android:hint="From"
                             android:inputType="text" />
 
                         <EditText
@@ -100,80 +100,104 @@
                             android:hint="Description"
                             android:inputType="text" />
 
-<!--                        <TextView-->
-<!--                            android:id="@+id/exact_date"-->
-<!--                            android:layout_width="match_parent"-->
-<!--                            android:layout_height="wrap_content"-->
-<!--                            android:layout_marginTop="20dp"-->
-<!--                            android:text="Click to choose Journey Start Date"-->
-<!--                            android:textSize="18sp" />-->
-<!--                        <TextView-->
-<!--                            android:id="@+id/exact_time"-->
-<!--                            android:layout_width="match_parent"-->
-<!--                            android:layout_height="wrap_content"-->
-<!--                            android:layout_marginTop="20dp"-->
-<!--                            android:text="Click to choose Journey Start Time"-->
-<!--                            android:textSize="18sp" />-->
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="12dp"
+                            android:layout_marginBottom="12dp"
+                            android:fontFamily="@font/ps"
+                            android:text="Preferred mode of travel"
+                            android:textAlignment="center"
+                            android:textSize="20sp"
+                            android:textStyle="bold" />
 
-<!--                        <LinearLayout-->
-<!--                            android:layout_width="match_parent"-->
-<!--                            android:layout_height="wrap_content"-->
-<!--                            android:layout_marginTop="10dp"-->
-<!--                            android:orientation="horizontal"-->
-<!--                            android:weightSum="4">-->
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:orientation="horizontal">
 
-<!--                            <Spinner-->
-<!--                                android:id="@+id/hrs"-->
-<!--                                android:layout_width="0dp"-->
-<!--                                android:layout_height="wrap_content"-->
-<!--                                android:layout_weight="1.5" />-->
+                            <Button
+                                android:id="@+id/olaBtn"
+                                android:layout_width="48dp"
+                                android:layout_height="48dp"
+                                android:layout_marginRight="6dp"
+                                android:background="@drawable/ola" />
 
+                            <Button
+                                android:id="@+id/uberBtn"
+                                android:layout_width="48dp"
+                                android:layout_height="48dp"
+                                android:layout_marginRight="6dp"
+                                android:background="@drawable/uber" />
 
-<!--                            <Spinner-->
-<!--                                android:id="@+id/minu"-->
-<!--                                android:layout_width="0dp"-->
-<!--                                android:layout_height="wrap_content"-->
-<!--                                android:layout_weight="1.5" />-->
+                            <Button
+                                android:id="@+id/indriverBtn"
+                                android:layout_width="48dp"
+                                android:layout_height="48dp"
+                                android:layout_marginRight="6dp"
+                                android:background="@drawable/indriver" />
 
+                            <Button
+                                android:id="@+id/trainBtn"
+                                android:layout_width="48dp"
+                                android:layout_height="48dp"
+                                android:layout_marginRight="6dp"
+                                android:background="@drawable/train" />
 
-<!--                            <Spinner-->
-<!--                                android:id="@+id/pm"-->
-<!--                                android:layout_width="30dp"-->
-<!--                                android:layout_height="wrap_content"-->
-<!--                                android:layout_weight="1" />-->
+                            <Button
+                                android:id="@+id/flightBtn"
+                                android:layout_width="48dp"
+                                android:layout_height="48dp"
+                                android:layout_marginRight="6dp"
+                                android:background="@drawable/plane" />
 
+                            <Button
+                                android:id="@+id/walkingBtn"
+                                android:layout_width="48dp"
+                                android:layout_height="48dp"
+                                android:layout_marginRight="6dp"
+                                android:background="@drawable/walking" />
 
-<!--                        </LinearLayout>-->
+                        </LinearLayout>
 
-<!--                        <LinearLayout-->
-<!--                            android:layout_width="match_parent"-->
-<!--                            android:layout_height="wrap_content"-->
-<!--                            android:layout_marginTop="10dp"-->
-<!--                            android:orientation="horizontal"-->
-<!--                            android:weightSum="2">-->
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:fontFamily="@font/ps"
+                            android:text="Number of Companions"
+                            android:textAlignment="center"
+                            android:textSize="20dp" />
 
-<!--                            <EditText-->
-<!--                                android:layout_width="match_parent"-->
-<!--                                android:layout_height="wrap_content"-->
-<!--                                android:layout_weight="1.6"-->
-<!--                                android:hint="Pickup Location"-->
-<!--                                android:inputType="text" />-->
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:orientation="vertical">
 
-<!--                            <ImageView-->
-<!--                                android:layout_width="30dp"-->
-<!--                                android:layout_height="30dp"-->
-<!--                                android:background="@drawable/ic_add_location_black_24dp" />-->
+                            <ImageView
+                                android:id="@+id/userImgView"
+                                android:layout_width="48dp"
+                                android:src="@drawable/user"
+                                android:layout_height="48dp" />
 
-<!--                        </LinearLayout>-->
+                            <EditText
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:hint="Add No of Companions"
+                                android:textAlignment="center"
+                                />
 
+                        </LinearLayout>
 
                         <Button
                             android:id="@+id/upload"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:fontFamily="@font/good"
                             android:layout_marginTop="30dp"
                             android:background="@drawable/button_design"
+                            android:fontFamily="@font/good"
                             android:text="Submit Request"
                             android:textColor="#ffffff" />
 
