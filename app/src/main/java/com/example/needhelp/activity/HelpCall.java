@@ -9,6 +9,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
@@ -22,6 +23,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.needhelp.PlaceAutoSuggestAdapter;
 import com.example.needhelp.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -31,8 +33,14 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.uber.sdk.android.rides.RideParameters;
+import com.uber.sdk.android.rides.RideRequestButton;
+import com.uber.sdk.android.rides.RideRequestDeeplink;
+import com.uber.sdk.core.auth.Scope;
+import com.uber.sdk.core.client.SessionConfiguration;
 
 import java.text.DateFormat;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Objects;
@@ -52,6 +60,8 @@ public class HelpCall extends AppCompatActivity implements DatePickerDialog.OnDa
     String from_intent,to_intent,desc_intent,ride_type_intent,companion_intent;
     private RadioGroup radioGroup;
     private RadioButton radioButton;
+    RideRequestButton requestButton;
+    SessionConfiguration config;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,13 +72,16 @@ public class HelpCall extends AppCompatActivity implements DatePickerDialog.OnDa
         String action = intent.getAction();
         String type = intent.getType();
 
+        AutoCompleteTextView autoCompleteTextView=findViewById(R.id.from_upload);
+        autoCompleteTextView.setAdapter(new PlaceAutoSuggestAdapter(HelpCall.this, android.R.layout.simple_list_item_1));
+        AutoCompleteTextView autoCompleteTextView1 =findViewById(R.id.to_upload);
+        autoCompleteTextView1.setAdapter(new PlaceAutoSuggestAdapter(HelpCall.this, android.R.layout.simple_list_item_1));
         from = findViewById(R.id.from_upload);
         to = findViewById(R.id.to_upload);
         description = findViewById(R.id.description);
         upload = findViewById(R.id.upload);
         close = findViewById(R.id.close);
         companions = findViewById(R.id.number_of_companions);
-
 
         if (Intent.ACTION_SEND.equals(action) && type != null) {
             if ("text/plain".equals(type)) {
@@ -97,6 +110,8 @@ public class HelpCall extends AppCompatActivity implements DatePickerDialog.OnDa
         train = findViewById(R.id.trainBtn);
         plain = findViewById(R.id.flightBtn);
         walk = findViewById(R.id.walkingBtn);
+        requestButton = findViewById(R.id.requestButton);
+
 
         ola.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -155,6 +170,13 @@ public class HelpCall extends AppCompatActivity implements DatePickerDialog.OnDa
 
         mDatabaseReference = FirebaseDatabase.getInstance().getReference().child("item_details");
         uploadd = FirebaseDatabase.getInstance().getReference().child("USERS");
+
+        requestButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                initialiseAndDeeplinkRideParams();
+            }
+        });
 
         upload.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -221,7 +243,6 @@ public class HelpCall extends AppCompatActivity implements DatePickerDialog.OnDa
                                     hashMap.put("phone", phone);
 
 
-
                                     if (value == null) {
                                         mDatabaseReference.child(id + time).setValue(hashMap).addOnCompleteListener(new OnCompleteListener<Void>() {
                                             @Override
@@ -252,7 +273,6 @@ public class HelpCall extends AppCompatActivity implements DatePickerDialog.OnDa
                                                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                                                     startActivity(intent);
                                                 }
-
                                             }
                                         });
                                     }
@@ -394,5 +414,27 @@ public class HelpCall extends AppCompatActivity implements DatePickerDialog.OnDa
     @Override
     public void onTimeSet(TimePicker timePicker, int i, int i1) {
         txact_time.setText(i + "hr" + "Minute : " + i1);
+    }
+
+    private void initialiseAndDeeplinkRideParams() {
+        config = new SessionConfiguration.Builder()
+                .setClientId("mo7Mlwn9KYjoBB3QusGmDwGOxf722-b_") //This is necessary
+                .setRedirectUri("com.example.app.uberauth://redirect")//This is necessary if you'll be using implicit grant
+                .setEnvironment(SessionConfiguration.Environment.SANDBOX) //Useful for testing your app in the sandbox environment
+                .setScopes(Arrays.asList(Scope.PROFILE, Scope.RIDE_WIDGETS)) //Your scopes for authentication here
+                .build();
+        RideParameters rideParams = new RideParameters.Builder()
+                .setProductId("a1111c8c-c720-46c3-8534-2fcdd730040d")
+                .setPickupLocation(25.4299, 81.7712, "IIIT ALLAHABAD", "IIIT Allahabad")
+                .setDropoffLocation(26.8005, 81.0238, "IIIT Lucknow", "IIIT Lucknow")
+                .build();
+
+        requestButton.setRideParameters(rideParams);
+
+        RideRequestDeeplink deeplink = new RideRequestDeeplink.Builder(this)
+                .setSessionConfiguration(config)
+                .setRideParameters(rideParams)
+                .build();
+        deeplink.execute();
     }
 }
