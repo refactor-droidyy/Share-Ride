@@ -80,31 +80,12 @@ public class Profile extends AppCompatActivity {
 
         updateinfo();
 
-        call.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                // makeCallIntent();
-            }
-        });
-        photo.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (mUploadTask != null && mUploadTask.isInProgress()) {
-                    Toast.makeText(getApplicationContext(), "Upload In Progress", LENGTH_LONG).show();
-                } else {
-                    openFileChooser();
-                }
-
-            }
-        });
-
         addinfo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(Profile.this, EditImage.class);
                 intent.putExtra("url", url);
                 startActivity(intent);
-                //uploadimagetofirebasedatabase();
             }
         });
         close.setOnClickListener(new View.OnClickListener() {
@@ -143,87 +124,5 @@ public class Profile extends AppCompatActivity {
 
             }
         });
-    }
-
-    private void uploadimagetofirebasedatabase() {
-        final ProgressDialog pd = new ProgressDialog(getApplicationContext());
-        pd.setMessage("Uploading");
-        if (mImageUri != null) {
-            final StorageReference fileref = postref.child(fileName);
-            mUploadTask = fileref.putFile(mImageUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                @Override
-                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                    fileref.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-                        @Override
-                        public void onSuccess(Uri uri) {
-                            String downloadUrl = String.valueOf(uri);
-                            DatabaseReference dbref = FirebaseDatabase.getInstance().getReference("USERS").child(FirebaseAuth.getInstance().getCurrentUser().getUid());
-                            HashMap<String, Object> hashMap = new HashMap<>();
-                            hashMap.put("imageURL", downloadUrl);
-                            dbref.updateChildren(hashMap).addOnSuccessListener(new OnSuccessListener<Void>() {
-                                @Override
-                                public void onSuccess(Void aVoid) {
-                                    dialog.dismiss();
-                                    Toast.makeText(getApplicationContext(), "Upload Successful", Toast.LENGTH_LONG).show();
-                                }
-                            });
-
-                        }
-                    }).addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception e) {
-                            Toast.makeText(getApplicationContext(), "Upload UnSuccessful", Toast.LENGTH_LONG).show();
-                        }
-                    });
-                }
-            });
-
-        } else {
-            Toast.makeText(getApplicationContext(), "Please Select A Image", LENGTH_LONG).show();
-            pd.dismiss();
-        }
-
-    }
-
-
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        if (requestCode == REQUEST_WRITE_PERMISSION && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-            CropImage.startPickImageActivity(Profile.this);
-        }
-    }
-
-    private void openFileChooser() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            requestPermissions(new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, REQUEST_WRITE_PERMISSION);
-        } else {
-            CropImage.startPickImageActivity(Profile.this);
-        }
-    }
-
-    @Override
-    @SuppressLint("NewApi")
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-
-        super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == CropImage.PICK_IMAGE_CHOOSER_REQUEST_CODE && resultCode == Activity.RESULT_OK) {
-            Uri imageUri = CropImage.getPickImageResultUri(this, data);
-
-            CropImage.activity(imageUri)
-                    .setGuidelines(CropImageView.Guidelines.ON)
-                    .setMultiTouchEnabled(true)
-                    .setAspectRatio(1, 1)
-                    .start(this);
-        }
-        if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE) {
-            CropImage.ActivityResult result = CropImage.getActivityResult(data);
-            if (resultCode == RESULT_OK) {
-                mImageUri = (result.getUri());
-                if (mImageUri.getScheme().equals("file")) {
-                    fileName = mImageUri.getLastPathSegment();
-                }
-                photo.setImageURI(result.getUri());
-            }
-        }
     }
 }
