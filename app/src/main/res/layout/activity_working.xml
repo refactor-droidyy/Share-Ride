@@ -27,7 +27,7 @@
             android:id="@+id/toolbar_work"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#2569f8"
+            android:background="#003366"
             android:theme="@style/AppTheme">
 
         </androidx.appcompat.widget.Toolbar>
