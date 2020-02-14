@@ -77,7 +77,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
                 holder.prefered_mode.setImageResource(R.drawable.plane);
                 break;
             case "walk":
-                holder.prefered_mode.setImageResource(R.drawable.plane);
+                holder.prefered_mode.setImageResource(R.drawable.walking);
                 break;
             default:
                 holder.prefered_mode.setImageResource(R.drawable.ola);

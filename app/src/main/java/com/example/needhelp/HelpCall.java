@@ -32,17 +32,17 @@ import java.util.HashMap;
 import java.util.Objects;
 
 public class HelpCall extends AppCompatActivity implements DatePickerDialog.OnDateSetListener, TimePickerDialog.OnTimeSetListener {
-    private EditText from, to, description;
+    private EditText from, to, description, companions;
     private DatabaseReference mDatabaseReference, uploadd;
     ImageView close;
     private Button upload;
     private FirebaseAuth auth;
-    private String type_ride ;
+    private String type_ride;
     private String username_data, datetime, id;
     TextView date_picker, txact_time;
     String value, intent_time = null;
     String hr, min, am, arrival_time, din, mahina;
-    private Button ola,uber,inDrive,train,plain;
+    private Button ola, uber, inDrive, train, plain, walk;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,46 +67,55 @@ public class HelpCall extends AppCompatActivity implements DatePickerDialog.OnDa
         description = findViewById(R.id.description);
         upload = findViewById(R.id.upload);
         close = findViewById(R.id.close);
+        companions = findViewById(R.id.number_of_companions);
 
         ola = findViewById(R.id.olaBtn);
         uber = findViewById(R.id.uberBtn);
         inDrive = findViewById(R.id.indriverBtn);
         train = findViewById(R.id.trainBtn);
         plain = findViewById(R.id.flightBtn);
+        walk = findViewById(R.id.walkingBtn);
 
         ola.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 type_ride = "ola";
-                Toast.makeText(getApplicationContext(),"Ola Selected",Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "Ola Selected", Toast.LENGTH_SHORT).show();
             }
         });
         uber.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 type_ride = "uber";
-                Toast.makeText(getApplicationContext(),"Uber Selected",Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "Uber Selected", Toast.LENGTH_SHORT).show();
             }
         });
         inDrive.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 type_ride = "inDrive";
-                Toast.makeText(getApplicationContext(),"inDrive Selected",Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "inDrive Selected", Toast.LENGTH_SHORT).show();
             }
         });
         train.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 type_ride = "train";
-                Toast.makeText(getApplicationContext(),"Train Selected",Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "Train Selected", Toast.LENGTH_SHORT).show();
             }
         });
         plain.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 type_ride = "flight";
-                Toast.makeText(getApplicationContext(),"Flight Selected",Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "Flight Selected", Toast.LENGTH_SHORT).show();
+            }
+        });
+        walk.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                type_ride = "walk";
+                Toast.makeText(getApplicationContext(), "Walk Selected", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -136,7 +145,7 @@ public class HelpCall extends AppCompatActivity implements DatePickerDialog.OnDa
                 final String fromm = from.getText().toString();
                 final String too = to.getText().toString();
                 final String description = HelpCall.this.description.getText().toString();
-
+                final String companionss = companions.getText().toString();
                 Calendar c = Calendar.getInstance();
                 // @SuppressLint("SimpleDateFormat") SimpleDateFormat dateformat = new SimpleDateFormat("dd MMM,yy hh:mm aa");
                 final long time = System.currentTimeMillis();
@@ -159,7 +168,8 @@ public class HelpCall extends AppCompatActivity implements DatePickerDialog.OnDa
                                 hashMap.put("to", too);
                                 hashMap.put("description", description);
                                 hashMap.put("username_item", Username);
-                                hashMap.put("ride_type",type_ride);
+                                hashMap.put("ride_type", type_ride);
+                                hashMap.put("companions", companionss);
                                 if (intent_time == null) {
                                     hashMap.put("time", String.valueOf(time));
                                 } else {

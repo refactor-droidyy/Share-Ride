@@ -186,6 +186,8 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:hint="Add No of Companions"
+                                android:inputType="number"
+                                android:id="@+id/number_of_companions"
                                 android:textAlignment="center"
                                 />
 
