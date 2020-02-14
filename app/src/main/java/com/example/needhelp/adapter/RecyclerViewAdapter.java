@@ -41,7 +41,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     private Context mContext;
     private List<Upload> mUploads;
     private List<Upload> uploadListFiltered;
-    int x = 0;
+    int x,i = 0;
     private String CURRENT_STATE;
 
     public RecyclerViewAdapter(Context mContext, List<Upload> mUploads) {
@@ -128,14 +128,19 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
                 query.addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        holder.reqBtn.setEnabled(false);
-                        holder.reqBtn.setTextColor(Color.GREEN);
-                        for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                            x = Integer.parseInt(String.valueOf(snapshot.child("companions").getValue()));
-                            x -= 1;
+                        if(i % 2 == 0) {
+                            holder.reqBtn.setText("Cancel Request");
+                            holder.reqBtn.setTextColor(Color.RED);
+                            x = Integer.parseInt(upload.getCompanions());
+                            x--;
                             holder.companion_count.setText(String.valueOf(x));
-                            //Toast.makeText(mContext,upload.getEmail(),Toast.LENGTH_SHORT).show();
-
+                            i++;
+                        }else{
+                            holder.reqBtn.setText("Accept Request");
+                            holder.reqBtn.setTextColor(Color.GREEN);
+                            x++;
+                            holder.companion_count.setText(String.valueOf(x));
+                            i++;
                         }
                     }
                     @Override

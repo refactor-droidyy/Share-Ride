@@ -34,7 +34,7 @@
                     android:layout_marginStart="10dp"
                     android:layout_toEndOf="@id/close"
                     android:fontFamily="@font/good"
-                    android:text="My Uploads"
+                    android:text="My Journeys"
                     android:textColor="#ffffff"
                     android:textSize="20sp"
                     android:textStyle="bold" />

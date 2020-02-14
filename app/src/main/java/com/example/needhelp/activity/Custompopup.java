@@ -123,7 +123,7 @@ public class Custompopup extends Activity {
             public void onClick(View view) {
                 if (!user.getUid().equals(idd)) {
                     Intent intt = new Intent(Custompopup.this, Message.class);
-                    Toast.makeText(getApplicationContext(),id_email,Toast.LENGTH_SHORT).show();
+                   // Toast.makeText(getApplicationContext(),id_email,Toast.LENGTH_SHORT).show();
                     intt.putExtra("ID", idd);
                     intt.putExtra("imgUrl", imageUrl);
                     intt.putExtra("phone",phone);

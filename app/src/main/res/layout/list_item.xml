@@ -259,7 +259,7 @@
                     android:textSize="12sp"
                     android:text="Accept Request"
                     android:textAppearance="@style/TextAppearance.MaterialComponents.Button"
-                    android:textColor="#fff" />
+                    android:textColor="#00FF00" />
 
                 <Button
                     android:id="@+id/chatBtn"

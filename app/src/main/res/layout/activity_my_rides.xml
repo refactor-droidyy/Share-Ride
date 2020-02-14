@@ -42,12 +42,12 @@
             </RelativeLayout>
         </androidx.appcompat.widget.Toolbar>
     </com.google.android.material.appbar.AppBarLayout>
-
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/Recyclee"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@id/appbar"
-        android:padding="10dp"
-        android:id="@+id/recycleview_myrides"/>
+        android:layout_margin="10dp"
+        android:padding="5dp" />
 
 </RelativeLayout>
