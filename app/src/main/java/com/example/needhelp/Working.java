@@ -152,8 +152,8 @@ public class Working extends AppCompatActivity {
                 startActivity(new Intent(Working.this, MainActivity.class));
                 finish();
                 break;
-            case R.id.about:
-                startActivity(new Intent(Working.this, About.class));
+            case R.id.chats:
+                startActivity(new Intent(Working.this, Converstion.class));
                 finish();
                 break;
 

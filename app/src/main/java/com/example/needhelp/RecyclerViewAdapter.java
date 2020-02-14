@@ -8,16 +8,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.airbnb.lottie.L;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -123,7 +120,6 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
                         holder.reqBtn.setEnabled(false);
                         holder.reqBtn.setTextColor(Color.GREEN);
                         for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                        //    Toast.makeText(mContext, "" + snapshot.child("companions").getValue(), Toast.LENGTH_SHORT).show();
                             x = Integer.parseInt(String.valueOf(snapshot.child("companions").getValue()));
                             x -= 1;
                             holder.companion_count.setText(String.valueOf(x));
