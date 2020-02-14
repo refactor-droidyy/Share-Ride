@@ -47,4 +47,5 @@ dependencies {
     implementation 'com.theartofdev.edmodo:android-image-cropper:2.8.0'
 
     implementation 'com.android.support:customtabs:27.1.1'
+    implementation 'com.airbnb.android:lottie:3.3.1'
 }

@@ -2,22 +2,33 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <item
-        android:title="My Uploads"
-        app:showAsAction="never"
-        android:id="@+id/uploadss"/>
-    <item
-        android:title="Profile"
-        app:showAsAction="never"
-        android:id="@+id/profile"/>
+    <item android:title="Main Menu"
+        android:icon="@drawable/ic_more_vert_black_24dp"
+        app:showAsAction="always">
 
-    <item
-        android:title="About"
-        app:showAsAction="never"
-        android:id="@+id/about"/>
-    <item
-        android:title="Logout"
-        app:showAsAction="never"
-        android:id="@+id/logout"/>
+    <menu>
+        <item
+            android:title="My Journeys"
+            app:showAsAction="never"
+            android:icon="@drawable/journey"
+            android:id="@+id/uploadss"/>
+        <item
+            android:title="My Profile"
+            app:showAsAction="never"
+            android:icon="@drawable/profile"
+            android:id="@+id/profile"/>
+
+        <item
+            android:title="About"
+            app:showAsAction="never"
+            android:icon="@drawable/comment"
+            android:id="@+id/about"/>
+        <item
+            android:title="Logout"
+            app:showAsAction="never"
+            android:icon="@drawable/logout"
+            android:id="@+id/logout"/>
+    </menu>
+    </item>
 
 </menu>
