@@ -12,6 +12,8 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
+import com.example.needhelp.activity.Working;
+
 public class About extends AppCompatActivity {
     ImageView close;
     LinearLayout github_profile;
@@ -51,7 +53,7 @@ public class About extends AppCompatActivity {
         close.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(About.this,Working.class));
+                startActivity(new Intent(About.this, Working.class));
                 finish();
             }
         });

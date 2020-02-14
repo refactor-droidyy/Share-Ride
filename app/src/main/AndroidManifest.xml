@@ -18,23 +18,23 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MyRides"></activity>
-        <activity android:name=".EditImage" />
-        <activity android:name=".Splash">
+        <activity android:name=".activity.MyRides"></activity>
+        <activity android:name=".activity.EditImage" />
+        <activity android:name=".activity.Splash">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Myuploads" />
-        <activity android:name=".Message" />
+        <activity android:name=".activity.Myuploads" />
+        <activity android:name=".activity.Message" />
         <activity
-            android:name=".Custompopup"
+            android:name=".activity.Custompopup"
             android:theme="@style/AppTheme.Popup" />
-        <activity android:name=".Profile" />
+        <activity android:name=".activity.Profile" />
         <activity android:name=".About" />
-        <activity android:name=".HelpCall">
+        <activity android:name=".activity.HelpCall">
             <intent-filter>
                 <action android:name="android.intent.action.SEND" />
 
@@ -43,12 +43,12 @@
                 <data android:mimeType="text/plain" />
             </intent-filter>
         </activity>
-        <activity android:name=".Converstion" />
-        <activity android:name=".ResetPassword" />
-        <activity android:name=".Working" />
-        <activity android:name=".RegisterActivity" />
-        <activity android:name=".LoginActivity" />
-        <activity android:name=".MainActivity" />
+        <activity android:name=".activity.Converstion" />
+        <activity android:name=".authentication.ResetPassword" />
+        <activity android:name=".activity.Working" />
+        <activity android:name=".authentication.RegisterActivity" />
+        <activity android:name=".authentication.LoginActivity" />
+        <activity android:name=".activity.MainActivity" />
         <activity
             android:name="com.theartofdev.edmodo.cropper.CropImageActivity"
             android:theme="@style/Base.Theme.AppCompat" />
