@@ -79,8 +79,8 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="10dp"
-                            android:hint="From"
                             android:fontFamily="@font/good"
+                            android:hint="From"
                             android:inputType="text" />
 
                         <EditText
@@ -103,9 +103,9 @@
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="Preferred mode of travel"
-                            android:fontFamily="@font/ps"
                             android:layout_margin="12dp"
+                            android:fontFamily="@font/ps"
+                            android:text="Preferred mode of travel"
                             android:textSize="20sp"
                             android:textStyle="bold" />
 
@@ -118,8 +118,8 @@
                                 android:id="@+id/olaBtn"
                                 android:layout_width="48dp"
                                 android:layout_height="48dp"
-                                android:background="@drawable/ola"
-                                android:layout_marginRight="6dp" />
+                                android:layout_marginRight="6dp"
+                                android:background="@drawable/ola" />
 
                             <Button
                                 android:id="@+id/uberBtn"
@@ -151,13 +151,14 @@
 
                         </LinearLayout>
                         n
+
                         <Button
                             android:id="@+id/upload"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:fontFamily="@font/good"
                             android:layout_marginTop="30dp"
                             android:background="@drawable/button_design"
+                            android:fontFamily="@font/good"
                             android:text="Submit Request"
                             android:textColor="#ffffff" />
 

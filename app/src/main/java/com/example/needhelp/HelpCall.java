@@ -37,10 +37,12 @@ public class HelpCall extends AppCompatActivity implements DatePickerDialog.OnDa
     ImageView close;
     private Button upload;
     private FirebaseAuth auth;
+    private String type_ride ;
     private String username_data, datetime, id;
     TextView date_picker, txact_time;
     String value, intent_time = null;
     String hr, min, am, arrival_time, din, mahina;
+    private Button ola,uber,inDrive,train,plain;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,24 +67,48 @@ public class HelpCall extends AppCompatActivity implements DatePickerDialog.OnDa
         description = findViewById(R.id.description);
         upload = findViewById(R.id.upload);
         close = findViewById(R.id.close);
-        //date_picker = findViewById(R.id.exact_date);
 
-//        txact_time = findViewById(R.id.exact_time);
-//        txact_time.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                DialogFragment timePicker = new TimePickerFragment();
-//                timePicker.show(getSupportFragmentManager(),"time picker");
-//            }
-//        });
+        ola = findViewById(R.id.olaBtn);
+        uber = findViewById(R.id.uberBtn);
+        inDrive = findViewById(R.id.indriverBtn);
+        train = findViewById(R.id.trainBtn);
+        plain = findViewById(R.id.flightBtn);
 
-//        date_picker.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                DialogFragment datePicker = new DataPickerFragment();
-//                datePicker.show(getSupportFragmentManager(),"date picker");
-//            }
-//        });
+        ola.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                type_ride = "ola";
+                Toast.makeText(getApplicationContext(),"Ola Selected",Toast.LENGTH_SHORT).show();
+            }
+        });
+        uber.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                type_ride = "uber";
+                Toast.makeText(getApplicationContext(),"Uber Selected",Toast.LENGTH_SHORT).show();
+            }
+        });
+        inDrive.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                type_ride = "inDrive";
+                Toast.makeText(getApplicationContext(),"inDrive Selected",Toast.LENGTH_SHORT).show();
+            }
+        });
+        train.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                type_ride = "train";
+                Toast.makeText(getApplicationContext(),"Train Selected",Toast.LENGTH_SHORT).show();
+            }
+        });
+        plain.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                type_ride = "flight";
+                Toast.makeText(getApplicationContext(),"Flight Selected",Toast.LENGTH_SHORT).show();
+            }
+        });
 
         auth = FirebaseAuth.getInstance();
         id = Objects.requireNonNull(auth.getCurrentUser()).getUid();
@@ -97,37 +123,6 @@ public class HelpCall extends AppCompatActivity implements DatePickerDialog.OnDa
         String[] arraySpinner = new String[]{
                 "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"
         };
-//       // Spinner s = (Spinner) findViewById(R.id.hrs);
-//        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
-//                android.R.layout.simple_spinner_item, arraySpinner);
-//        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-//        s.setAdapter(adapter);
-//
-//        hr = s.getSelectedItem().toString();
-//
-//        String[] arraySpinner2 = new String[]{
-//                "10", "20", "30", "40", "50"
-//        };
-//        Spinner s1 = (Spinner) findViewById(R.id.minu);
-//        ArrayAdapter<String> adapter2 = new ArrayAdapter<String>(this,
-//                android.R.layout.simple_spinner_item, arraySpinner2);
-//        adapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-//        s1.setAdapter(adapter2);
-//
-//        min = s1.getSelectedItem().toString();
-//
-//        String[] arraySpinner3 = new String[]{
-//                "AM", "PM"
-//        };
-//        Spinner s2 = (Spinner) findViewById(R.id.pm);
-//        ArrayAdapter<String> adapter3 = new ArrayAdapter<String>(this,
-//                android.R.layout.simple_spinner_item, arraySpinner3);
-//        adapter3.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-//        s2.setAdapter(adapter3);
-//
-//        am = s2.getSelectedItem().toString();
-//
-//        arrival_time = hr + ":" + min + " " + am;
 
         username_data = getIntent().getStringExtra("nameee");
 
@@ -164,6 +159,7 @@ public class HelpCall extends AppCompatActivity implements DatePickerDialog.OnDa
                                 hashMap.put("to", too);
                                 hashMap.put("description", description);
                                 hashMap.put("username_item", Username);
+                                hashMap.put("ride_type",type_ride);
                                 if (intent_time == null) {
                                     hashMap.put("time", String.valueOf(time));
                                 } else {

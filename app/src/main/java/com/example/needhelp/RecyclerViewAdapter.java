@@ -7,6 +7,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -48,10 +50,40 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         holder.tto.setText(upload.getTo());
         holder.description.setText(upload.getDescription());
         holder.username.setText(upload.getUsername());
-        @SuppressLint("SimpleDateFormat") final SimpleDateFormat dateformat = new SimpleDateFormat("dd MMM, yyyy hh:mm aa");
+        @SuppressLint("SimpleDateFormat")
+        final SimpleDateFormat dateformat = new SimpleDateFormat("dd MMM, yyyy hh:mm aa");
         final long time = Long.parseLong(upload.getTime());
         holder.time.setText(dateformat.format(time));
         //holder.email.setText(upload.getEmail());
+
+        switch (upload.getRide_type()) {
+            case "ola":
+                holder.prefered_mode.setImageResource(R.drawable.ola);
+
+                break;
+            case "uber":
+                holder.prefered_mode.setImageResource(R.drawable.uber);
+
+                break;
+            case "inDrive":
+                holder.prefered_mode.setImageResource(R.drawable.indriver);
+
+                break;
+            case "train":
+
+                holder.prefered_mode.setImageResource(R.drawable.train);
+                break;
+            case "flight":
+                holder.prefered_mode.setImageResource(R.drawable.plane);
+                break;
+            case "walk":
+                holder.prefered_mode.setImageResource(R.drawable.plane);
+                break;
+            default:
+                holder.prefered_mode.setImageResource(R.drawable.ola);
+                break;
+        }
+
         Picasso.get()
                 .load(upload.getImageUrl())
                 .resize(100, 100)
@@ -100,6 +132,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         CircleImageView imageUrl;
         RelativeLayout relativeLayout;
         Button chatBtn, reqBtn;
+        ImageView prefered_mode;
 
         ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -113,6 +146,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             //email = itemView.findViewById(R.id.emailwa);
             chatBtn = itemView.findViewById(R.id.chatBtn);
             reqBtn = itemView.findViewById(R.id.reqBtn);
+            prefered_mode = itemView.findViewById(R.id.prefModeImgView);
         }
     }
 }
