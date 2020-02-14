@@ -57,6 +57,7 @@ public class HelpCall extends AppCompatActivity implements DatePickerDialog.OnDa
     private RadioGroup radioGroup;
     private RadioButton radioButton;
     RideRequestButton requestButton;
+    SessionConfiguration config;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -89,29 +90,11 @@ public class HelpCall extends AppCompatActivity implements DatePickerDialog.OnDa
         train = findViewById(R.id.trainBtn);
         plain = findViewById(R.id.flightBtn);
         walk = findViewById(R.id.walkingBtn);
-
-        SessionConfiguration config = new SessionConfiguration.Builder()
-                .setClientId("mo7Mlwn9KYjoBB3QusGmDwGOxf722-b_") //This is necessary
-                .setRedirectUri("https://www.google.com") //This is necessary if you'll be using implicit grant
-                .setEnvironment(SessionConfiguration.Environment.SANDBOX) //Useful for testing your app in the sandbox environment
-                .setScopes(Arrays.asList(Scope.PROFILE, Scope.RIDE_WIDGETS)) //Your scopes for authentication here
-                .build();
-
         requestButton = findViewById(R.id.requestButton);
 
-        RideParameters rideParams = new RideParameters.Builder()
-                .setProductId("a1111c8c-c720-46c3-8534-2fcdd730040d")
-                .setPickupLocation(25.4299, 81.7712, "IIIT ALLAHABAD", "IIIT Allahabad")
-                .setDropoffLocation(26.8005, 81.0238, "IIIT Lucknow", "IIIT Lucknow")
-                .build();
 
-        requestButton.setRideParameters(rideParams);
 
-        RideRequestDeeplink deeplink = new RideRequestDeeplink.Builder(this)
-                .setSessionConfiguration(config)
-                .setRideParameters(rideParams)
-                .build();
-        deeplink.execute();
+
 
         ola.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -170,6 +153,13 @@ public class HelpCall extends AppCompatActivity implements DatePickerDialog.OnDa
 
         mDatabaseReference = FirebaseDatabase.getInstance().getReference().child("item_details");
         uploadd = FirebaseDatabase.getInstance().getReference().child("USERS");
+
+        requestButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                initialiseAndDeeplinkRideParams();
+            }
+        });
 
         upload.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -395,5 +385,27 @@ public class HelpCall extends AppCompatActivity implements DatePickerDialog.OnDa
     @Override
     public void onTimeSet(TimePicker timePicker, int i, int i1) {
         txact_time.setText(i + "hr" + "Minute : " + i1);
+    }
+
+    private void initialiseAndDeeplinkRideParams() {
+        config = new SessionConfiguration.Builder()
+                .setClientId("mo7Mlwn9KYjoBB3QusGmDwGOxf722-b_") //This is necessary
+                .setRedirectUri("com.example.app.uberauth://redirect")//This is necessary if you'll be using implicit grant
+                .setEnvironment(SessionConfiguration.Environment.SANDBOX) //Useful for testing your app in the sandbox environment
+                .setScopes(Arrays.asList(Scope.PROFILE, Scope.RIDE_WIDGETS)) //Your scopes for authentication here
+                .build();
+        RideParameters rideParams = new RideParameters.Builder()
+                .setProductId("a1111c8c-c720-46c3-8534-2fcdd730040d")
+                .setPickupLocation(25.4299, 81.7712, "IIIT ALLAHABAD", "IIIT Allahabad")
+                .setDropoffLocation(26.8005, 81.0238, "IIIT Lucknow", "IIIT Lucknow")
+                .build();
+
+        requestButton.setRideParameters(rideParams);
+
+        RideRequestDeeplink deeplink = new RideRequestDeeplink.Builder(this)
+                .setSessionConfiguration(config)
+                .setRideParameters(rideParams)
+                .build();
+        deeplink.execute();
     }
 }
