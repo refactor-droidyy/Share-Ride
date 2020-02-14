@@ -164,6 +164,7 @@ public class Working extends AppCompatActivity {
             case R.id.myrides:
                 startActivity(new Intent(Working.this, MyRides.class));
                 finish();
+                break;
             case R.id.actio_emergncy:
                 Intent email = new Intent(Intent.ACTION_SEND);
                 email.putExtra(Intent.EXTRA_EMAIL, new String[]{ "lit2018068@iiitl.ac.in"});
@@ -174,6 +175,7 @@ public class Working extends AppCompatActivity {
                 email.setType("message/rfc822");
 
                 startActivity(Intent.createChooser(email, "Choose an Email client :"));
+                break;
         }
         return true;
     }

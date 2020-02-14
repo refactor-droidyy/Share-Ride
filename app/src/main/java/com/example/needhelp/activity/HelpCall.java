@@ -62,6 +62,7 @@ public class HelpCall extends AppCompatActivity implements DatePickerDialog.OnDa
     private RadioButton radioButton;
     RideRequestButton requestButton;
     SessionConfiguration config;
+    private long time;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -189,7 +190,7 @@ public class HelpCall extends AppCompatActivity implements DatePickerDialog.OnDa
                 final String companionss = companions.getText().toString();
                 Calendar c = Calendar.getInstance();
                 // @SuppressLint("SimpleDateFormat") SimpleDateFormat dateformat = new SimpleDateFormat("dd MMM,yy hh:mm aa");
-                final long time = System.currentTimeMillis();
+                time = System.currentTimeMillis();
                 // datetime = dateformat.format(c.getTime());
 
                 radioGroup = findViewById(R.id.postGroup);
