@@ -9,6 +9,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
@@ -68,6 +69,11 @@ public class HelpCall extends AppCompatActivity implements DatePickerDialog.OnDa
         String action = intent.getAction();
         String type = intent.getType();
 
+        AutoCompleteTextView autoCompleteTextView=findViewById(R.id.from_upload);
+        autoCompleteTextView.setAdapter(new PlaceAutoSuggestAdapter(HelpCall.this, android.R.layout.simple_list_item_1));
+        AutoCompleteTextView autoCompleteTextView1 =findViewById(R.id.to_upload);
+        autoCompleteTextView1.setAdapter(new PlaceAutoSuggestAdapter(HelpCall.this, android.R.layout.simple_list_item_1));
+
         if (Intent.ACTION_SEND.equals(action) && type != null) {
             if ("text/plain".equals(type)) {
                 handleSendText(intent); // Handle text being sent
@@ -91,9 +97,6 @@ public class HelpCall extends AppCompatActivity implements DatePickerDialog.OnDa
         plain = findViewById(R.id.flightBtn);
         walk = findViewById(R.id.walkingBtn);
         requestButton = findViewById(R.id.requestButton);
-
-
-
 
 
         ola.setOnClickListener(new View.OnClickListener() {
