@@ -27,16 +27,8 @@
             android:id="@+id/toolbar_work"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:foregroundTint="@color/white"
+            android:background="#2569f8"
             android:theme="@style/AppTheme">
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/good"
-                android:text="@string/app_name"
-                android:textColor="#ffffff"
-                android:textSize="18sp" />
 
         </androidx.appcompat.widget.Toolbar>
     </com.google.android.material.appbar.AppBarLayout>

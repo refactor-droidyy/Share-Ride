@@ -2,12 +2,17 @@ package com.example.needhelp;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.OvershootInterpolator;
+import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.SearchView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -41,6 +46,7 @@ public class Working extends AppCompatActivity {
     private DatabaseReference reference;
     private List<Upload> mUploads;
     private String message;
+    private ImageView search;
 
     OvershootInterpolator interpolator = new OvershootInterpolator();
 
@@ -51,36 +57,14 @@ public class Working extends AppCompatActivity {
         setContentView(R.layout.activity_working);
 
         message = getIntent().getStringExtra("namee");
-
         Toolbar toolbar = findViewById(R.id.toolbar_work);
         setSupportActionBar(toolbar);
+        toolbar.setTitleTextColor(Color.WHITE);
         Objects.requireNonNull(getSupportActionBar()).dispatchMenuVisibilityChanged(true);
 
         initialfabMenu();
 
-//        first.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                closeMenu();
-//            }
-//        });
 
-//        second.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Intent intent = new Intent(Working.this, HelpCall.class);
-//                intent.putExtra("nameee", message);
-//                startActivity(intent);
-//            }
-//        });
-
-//        third.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                startActivity(new Intent(Working.this, Converstion.class));
-//            }
-//        });
-//
         main.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -129,8 +113,28 @@ public class Working extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         super.onCreateOptionsMenu(menu);
-        getMenuInflater().inflate(R.menu.menu, menu);
 
+        MenuInflater menuInflater1 = getMenuInflater();
+        menuInflater1.inflate(R.menu.menu1,menu);
+        MenuInflater menuInflater = getMenuInflater();
+        menuInflater.inflate(R.menu.menu, menu);
+
+        MenuItem searchItem = menu.findItem(R.id.actio_search);
+
+        SearchView searchView = (SearchView) searchItem.getActionView();
+
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String s) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String s) {
+                adapter.getFilter().filter(s);
+                return false;
+            }
+        });
         return true;
     }
 
@@ -156,6 +160,8 @@ public class Working extends AppCompatActivity {
                 startActivity(new Intent(Working.this, Converstion.class));
                 finish();
                 break;
+            case R.id.actio_search:
+
 
         }
         return true;
