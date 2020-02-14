@@ -181,17 +181,63 @@
                     android:layout_marginLeft="10dp"
                     android:fontFamily="@font/ps"
                     android:gravity="center"
-                    android:text="Prefered Mode of Travel"
+                    android:text="Preferred Mode of Travel"
                     android:textSize="20sp"
                     android:textStyle="bold" />
 
                 <ImageView
                     android:id="@+id/prefModeImgView"
-                    android:layout_width="48dp"
-                    android:layout_height="48dp"
+                    android:layout_gravity="center"
+                    android:layout_width="36dp"
+                    android:layout_height="36dp"
                     android:layout_marginLeft="64dp"
                     android:src="@drawable/ola" />
 
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="48dp"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="10dp"
+                    android:fontFamily="@font/ps"
+                    android:gravity="center"
+                    android:text="No of Companions"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+                <ImageView
+                    android:id="@+id/userImageView"
+                    android:layout_width="36dp"
+                    android:layout_height="36dp"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="90dp"
+                    android:src="@drawable/user" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:fontFamily="@font/ps"
+                    android:text="x"
+                    android:textSize="24sp" />
+
+                <TextView
+                    android:id="@+id/companionCount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="4dp"
+                    android:fontFamily="@font/ps"
+                    android:text="1"
+                    android:textSize="28sp" />
 
             </LinearLayout>
 
