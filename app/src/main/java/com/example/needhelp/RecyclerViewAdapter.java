@@ -56,6 +56,8 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         holder.time.setText(dateformat.format(time));
         //holder.email.setText(upload.getEmail());
 
+        holder.companion_count.setText(upload.getCompanions());
+
         switch (upload.getRide_type()) {
             case "ola":
                 holder.prefered_mode.setImageResource(R.drawable.ola);
@@ -77,7 +79,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
                 holder.prefered_mode.setImageResource(R.drawable.plane);
                 break;
             case "walk":
-                holder.prefered_mode.setImageResource(R.drawable.plane);
+                holder.prefered_mode.setImageResource(R.drawable.walking);
                 break;
             default:
                 holder.prefered_mode.setImageResource(R.drawable.ola);
@@ -133,6 +135,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         RelativeLayout relativeLayout;
         Button chatBtn, reqBtn;
         ImageView prefered_mode;
+        TextView companion_count;
 
         ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -147,6 +150,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             chatBtn = itemView.findViewById(R.id.chatBtn);
             reqBtn = itemView.findViewById(R.id.reqBtn);
             prefered_mode = itemView.findViewById(R.id.prefModeImgView);
+            companion_count = itemView.findViewById(R.id.companionCount);
         }
     }
 }
