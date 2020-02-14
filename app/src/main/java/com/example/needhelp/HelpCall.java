@@ -30,8 +30,14 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.uber.sdk.android.rides.RideParameters;
+import com.uber.sdk.android.rides.RideRequestButton;
+import com.uber.sdk.android.rides.RideRequestDeeplink;
+import com.uber.sdk.core.auth.Scope;
+import com.uber.sdk.core.client.SessionConfiguration;
 
 import java.text.DateFormat;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Objects;
@@ -50,6 +56,7 @@ public class HelpCall extends AppCompatActivity implements DatePickerDialog.OnDa
     private Button ola, uber, inDrive, train, plain, walk;
     private RadioGroup radioGroup;
     private RadioButton radioButton;
+    RideRequestButton requestButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,6 +89,29 @@ public class HelpCall extends AppCompatActivity implements DatePickerDialog.OnDa
         train = findViewById(R.id.trainBtn);
         plain = findViewById(R.id.flightBtn);
         walk = findViewById(R.id.walkingBtn);
+
+        SessionConfiguration config = new SessionConfiguration.Builder()
+                .setClientId("mo7Mlwn9KYjoBB3QusGmDwGOxf722-b_") //This is necessary
+                .setRedirectUri("https://www.google.com") //This is necessary if you'll be using implicit grant
+                .setEnvironment(SessionConfiguration.Environment.SANDBOX) //Useful for testing your app in the sandbox environment
+                .setScopes(Arrays.asList(Scope.PROFILE, Scope.RIDE_WIDGETS)) //Your scopes for authentication here
+                .build();
+
+        requestButton = findViewById(R.id.requestButton);
+
+        RideParameters rideParams = new RideParameters.Builder()
+                .setProductId("a1111c8c-c720-46c3-8534-2fcdd730040d")
+                .setPickupLocation(25.4299, 81.7712, "IIIT ALLAHABAD", "IIIT Allahabad")
+                .setDropoffLocation(26.8005, 81.0238, "IIIT Lucknow", "IIIT Lucknow")
+                .build();
+
+        requestButton.setRideParameters(rideParams);
+
+        RideRequestDeeplink deeplink = new RideRequestDeeplink.Builder(this)
+                .setSessionConfiguration(config)
+                .setRideParameters(rideParams)
+                .build();
+        deeplink.execute();
 
         ola.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -194,7 +224,6 @@ public class HelpCall extends AppCompatActivity implements DatePickerDialog.OnDa
                                     hashMap.put("phone", phone);
 
 
-
                                     if (value == null) {
                                         mDatabaseReference.child(id + time).setValue(hashMap).addOnCompleteListener(new OnCompleteListener<Void>() {
                                             @Override
@@ -225,7 +254,6 @@ public class HelpCall extends AppCompatActivity implements DatePickerDialog.OnDa
                                                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                                                     startActivity(intent);
                                                 }
-
                                             }
                                         });
                                     }
