@@ -209,7 +209,7 @@
                     android:layout_marginLeft="10dp"
                     android:fontFamily="@font/ps"
                     android:gravity="center"
-                    android:text="No of Companions"
+                    android:text="Remaining Companions"
                     android:textSize="20sp"
                     android:textStyle="bold" />
 
@@ -218,7 +218,7 @@
                     android:layout_width="36dp"
                     android:layout_height="36dp"
                     android:layout_gravity="center"
-                    android:layout_marginLeft="90dp"
+                    android:layout_marginLeft="50dp"
                     android:src="@drawable/user" />
 
                 <TextView
