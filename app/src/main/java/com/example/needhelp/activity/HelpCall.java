@@ -215,21 +215,20 @@ public class HelpCall extends AppCompatActivity implements DatePickerDialog.OnDa
                                     String phone = Objects.requireNonNull(dataSnapshot.child("phone").getValue()).toString();
                                     HashMap<String, String> hashMap = new HashMap<>();
 
-                                    if(from_intent.isEmpty() || to_intent.isEmpty()) {
-
-                                        hashMap.put("from", from_intent);
-                                        hashMap.put("to", to_intent);
-                                        hashMap.put("description", desc_intent);
-                                        hashMap.put("username_item", Username);
-                                        hashMap.put("ride_type", ride_type_intent);
-                                        hashMap.put("companions", companion_intent);
-                                    }else{
+                                    if(from_intent == null || to_intent == null) {
                                         hashMap.put("from", fromm);
                                         hashMap.put("to", too);
                                         hashMap.put("description", description);
                                         hashMap.put("username_item", Username);
                                         hashMap.put("ride_type", type_ride);
                                         hashMap.put("companions", companionss);
+                                    }else{
+                                        hashMap.put("from", from_intent);
+                                        hashMap.put("to", to_intent);
+                                        hashMap.put("description", desc_intent);
+                                        hashMap.put("username_item", Username);
+                                        hashMap.put("ride_type", ride_type_intent);
+                                        hashMap.put("companions", companion_intent);
                                     }
 
                                     if (intent_time == null) {
