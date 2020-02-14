@@ -13,10 +13,10 @@ public class Upload {
     private String mode_travel;
     private String ride_type;
     private String companions;
+    private String phone;
 
-
-    public Upload(String from, String username_item, String to, String description, String time, String email, String id,
-                  String imageUrl, String travel_time, String mode_travel, String ride_type, String companions) {
+    public Upload(String from, String username_item, String to, String description, String time, String email, String id, String imageUrl,
+                  String travel_time, String mode_travel, String ride_type, String companions, String phone) {
         this.from = from;
         this.username_item = username_item;
         this.to = to;
@@ -29,8 +29,17 @@ public class Upload {
         this.mode_travel = mode_travel;
         this.ride_type = ride_type;
         this.companions = companions;
+        this.phone = phone;
     }
 
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
 
     public String getTravel_time() {
         return travel_time;

@@ -42,7 +42,7 @@ public class Custompopup extends Activity {
     FirebaseUser curretUser;
     private DatabaseReference reference;
     String Currentstate;
-    String title;
+    String title,phone;
 
 
     @SuppressLint("SetTextI18n")
@@ -72,7 +72,7 @@ public class Custompopup extends Activity {
 
         close = findViewById(R.id.close);
         text = findViewById(R.id.username_item);
-//        Currentstate = "not_friend";
+        phone = Objects.requireNonNull(getIntent().getExtras()).getString("phone");
         final String name = Objects.requireNonNull(getIntent().getExtras()).getString("username");
         text.setText(name);
 
@@ -121,6 +121,7 @@ public class Custompopup extends Activity {
                     Intent intt = new Intent(Custompopup.this, Message.class);
                     intt.putExtra("ID", idd);
                     intt.putExtra("imgUrl", imageUrl);
+                    intt.putExtra("phone",phone);
                     startActivity(intt);
                     finish();
                 }
