@@ -191,8 +191,6 @@
 
                         </LinearLayout>
 
->>>>>>> c052c4ca7b5611bf61d2d5c2ae86b967fe103261
-
                         <Button
                             android:id="@+id/upload"
                             android:layout_width="match_parent"
