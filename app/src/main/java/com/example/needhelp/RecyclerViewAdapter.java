@@ -37,9 +37,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(mContext).inflate(R.layout.list_item, parent, false);
-
         final ViewHolder holder = new ViewHolder(v);
-
         return holder;
     }
 
@@ -130,7 +128,6 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
     static class ViewHolder extends RecyclerView.ViewHolder {
         TextView ffrom, tto, description, username, time;
-        // TextView email;
         CircleImageView imageUrl;
         RelativeLayout relativeLayout;
         Button chatBtn, reqBtn;

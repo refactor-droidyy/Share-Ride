@@ -89,7 +89,6 @@ public class MyUploadAdapterr extends RecyclerView.Adapter<MyUploadAdapterr.View
                         for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                             Intent intent = new Intent(view.getContext(), HelpCall.class);
                             intent.putExtra("value", snapshot.getRef().getKey());
-                           // Toast.makeText(mContext, ""+snapshot.getRef().getKey(), Toast.LENGTH_SHORT).show();
                             intent.putExtra("time", upload.getTime());
                             intent.putExtra("from_intent",upload.getFrom());
                             intent.putExtra("to_intent",upload.getTo());
