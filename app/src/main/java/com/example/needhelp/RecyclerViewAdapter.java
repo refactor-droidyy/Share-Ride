@@ -3,6 +3,7 @@ package com.example.needhelp;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +17,13 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.airbnb.lottie.L;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
 import java.text.SimpleDateFormat;
@@ -27,6 +35,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
     private Context mContext;
     private List<Upload> mUploads;
+    int x = 0;
 
     RecyclerViewAdapter(Context mContext, List<Upload> mUploads) {
         this.mContext = mContext;
@@ -105,7 +114,27 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         holder.reqBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(mContext.getApplicationContext(), "To be implemented", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(mContext.getApplicationContext(), "To be implemented", Toast.LENGTH_SHORT).show();
+                DatabaseReference reference = FirebaseDatabase.getInstance().getReference();
+                Query query = reference.child("item_details").orderByChild("time").equalTo(upload.getTime());
+                query.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        holder.reqBtn.setEnabled(false);
+                        holder.reqBtn.setTextColor(Color.GREEN);
+                        for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                        //    Toast.makeText(mContext, "" + snapshot.child("companions").getValue(), Toast.LENGTH_SHORT).show();
+                            x = Integer.parseInt(String.valueOf(snapshot.child("companions").getValue()));
+                            x -= 1;
+                            holder.companion_count.setText(String.valueOf(x));
+
+                        }
+                    }
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                    }
+                });
             }
         });
 
