@@ -3,7 +3,6 @@ package com.example.needhelp.activity;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Color;
-import android.net.Uri;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -116,7 +115,7 @@ public class Working extends AppCompatActivity {
         super.onCreateOptionsMenu(menu);
 
         MenuInflater menuInflater1 = getMenuInflater();
-        menuInflater1.inflate(R.menu.menu1,menu);
+        menuInflater1.inflate(R.menu.menu1, menu);
         MenuInflater menuInflater = getMenuInflater();
         menuInflater.inflate(R.menu.menu, menu);
 
@@ -167,7 +166,7 @@ public class Working extends AppCompatActivity {
                 break;
             case R.id.actio_emergncy:
                 Intent email = new Intent(Intent.ACTION_SEND);
-                email.putExtra(Intent.EXTRA_EMAIL, new String[]{ "lit2018068@iiitl.ac.in"});
+                email.putExtra(Intent.EXTRA_EMAIL, new String[]{"lit2018068@iiitl.ac.in"});
                 email.putExtra(Intent.EXTRA_SUBJECT, "Emergency");
                 email.putExtra(Intent.EXTRA_TEXT, "I am in a great trouble I need help please help me");
 
@@ -181,25 +180,7 @@ public class Working extends AppCompatActivity {
     }
 
     private void initialfabMenu() {
-
-//        first = findViewById(R.id.back);
-//        second = findViewById(R.id.upload);
-//        third = findViewById(R.id.chat);
         main = findViewById(R.id.main);
-//        linearLayout = findViewById(R.id.linearcolor);
-
-//        firstt = findViewById(R.id.txt_back);
-//        secondd = findViewById(R.id.txt_upload);
-//        thirdd = findViewById(R.id.txt_chat);
-
-//        first.setAlpha(0f);
-//        second.setAlpha(0f);
-//        third.setAlpha(0f);
-//
-//        first.setTranslationY(200f);
-//        second.setTranslationY(200f);
-//        third.setTranslationY(200f);
-
     }
 
 

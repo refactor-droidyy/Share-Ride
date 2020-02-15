@@ -23,8 +23,8 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.needhelp.PlaceAutoSuggestAdapter;
 import com.example.needhelp.R;
+import com.example.needhelp.adapter.PlaceAutoSuggestAdapter;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -57,7 +57,7 @@ public class HelpCall extends AppCompatActivity implements DatePickerDialog.OnDa
     String value, intent_time = null;
     String hr, min, am, arrival_time, din, mahina;
     private Button ola, uber, inDrive, train, plain, walk;
-    String from_intent,to_intent,desc_intent,ride_type_intent,companion_intent;
+    String from_intent, to_intent, desc_intent, ride_type_intent, companion_intent;
     private RadioGroup radioGroup;
     private RadioButton radioButton;
     RideRequestButton requestButton;
@@ -73,9 +73,9 @@ public class HelpCall extends AppCompatActivity implements DatePickerDialog.OnDa
         String action = intent.getAction();
         String type = intent.getType();
 
-        AutoCompleteTextView autoCompleteTextView=findViewById(R.id.from_upload);
+        AutoCompleteTextView autoCompleteTextView = findViewById(R.id.from_upload);
         autoCompleteTextView.setAdapter(new PlaceAutoSuggestAdapter(HelpCall.this, android.R.layout.simple_list_item_1));
-        AutoCompleteTextView autoCompleteTextView1 =findViewById(R.id.to_upload);
+        AutoCompleteTextView autoCompleteTextView1 = findViewById(R.id.to_upload);
         autoCompleteTextView1.setAdapter(new PlaceAutoSuggestAdapter(HelpCall.this, android.R.layout.simple_list_item_1));
         from = findViewById(R.id.from_upload);
         to = findViewById(R.id.to_upload);
@@ -216,14 +216,14 @@ public class HelpCall extends AppCompatActivity implements DatePickerDialog.OnDa
                                     String phone = Objects.requireNonNull(dataSnapshot.child("phone").getValue()).toString();
                                     HashMap<String, String> hashMap = new HashMap<>();
 
-                                    if(from_intent == null || to_intent == null) {
+                                    if (from_intent == null || to_intent == null) {
                                         hashMap.put("from", fromm);
                                         hashMap.put("to", too);
                                         hashMap.put("description", description);
                                         hashMap.put("username_item", Username);
                                         hashMap.put("ride_type", type_ride);
                                         hashMap.put("companions", companionss);
-                                    }else{
+                                    } else {
                                         hashMap.put("from", from_intent);
                                         hashMap.put("to", to_intent);
                                         hashMap.put("description", desc_intent);

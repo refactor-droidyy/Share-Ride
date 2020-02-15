@@ -1,9 +1,5 @@
 package com.example.needhelp.authentication;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
@@ -14,6 +10,10 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import com.example.needhelp.R;
 import com.example.needhelp.activity.Working;
@@ -26,13 +26,13 @@ import java.util.Objects;
 
 public class LoginActivity extends AppCompatActivity {
 
-        private ProgressDialog loading;
-        private FirebaseAuth mauth;
-        private Button signin;
-        private EditText uuser, ppaswrd;
-        private TextView newuser, reset;
-        private ImageView close;
-        private String message;
+    private ProgressDialog loading;
+    private FirebaseAuth mauth;
+    private Button signin;
+    private EditText uuser, ppaswrd;
+    private TextView newuser, reset;
+    private ImageView close;
+    private String message;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,7 +48,6 @@ public class LoginActivity extends AppCompatActivity {
 
         Toolbar tlbr = findViewById(R.id.toolbar_log);
         setSupportActionBar(tlbr);
-
 
 
         message = getIntent().getStringExtra("name");
@@ -104,7 +103,7 @@ public class LoginActivity extends AppCompatActivity {
                                 if (Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).isEmailVerified()) {
                                     Intent intent = new Intent(LoginActivity.this, Working.class);
                                     intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                                    intent.putExtra("namee",message);
+                                    intent.putExtra("namee", message);
                                     startActivity(intent);
                                     loading.dismiss();
                                     finish();
@@ -118,7 +117,6 @@ public class LoginActivity extends AppCompatActivity {
                                 Toast.makeText(LoginActivity.this, "" + Objects.requireNonNull(task.getException()).toString(), Toast.LENGTH_SHORT).show();
                                 loading.dismiss();
                             }
-
                         }
                     });
         }

@@ -20,8 +20,8 @@ import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.needhelp.adapter.MessageAdapter;
 import com.example.needhelp.R;
+import com.example.needhelp.adapter.MessageAdapter;
 import com.example.needhelp.model.Chat;
 import com.example.needhelp.model.User;
 import com.google.firebase.auth.FirebaseAuth;

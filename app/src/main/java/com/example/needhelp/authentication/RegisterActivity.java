@@ -33,7 +33,7 @@ public class RegisterActivity extends AppCompatActivity {
     private FirebaseUser user;
     DatabaseReference root_reference;
     private Button register;
-    private EditText passwordd, emaill, username, phone,organisation;
+    private EditText passwordd, emaill, username, phone, organisation;
     private TextView redirecttosignin;
     private FirebaseAuth auth;
     private ProgressDialog dialog;
@@ -118,7 +118,7 @@ public class RegisterActivity extends AppCompatActivity {
                                 hashMap.put("status", "offline");
                                 hashMap.put("email", Eemail);
                                 hashMap.put("phone", phhone);
-                                hashMap.put("organisation",organisationn);
+                                hashMap.put("organisation", organisationn);
 
 
                                 root_reference.setValue(hashMap).addOnCompleteListener(new OnCompleteListener<Void>() {

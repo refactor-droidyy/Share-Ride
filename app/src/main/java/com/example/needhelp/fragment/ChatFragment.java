@@ -1,16 +1,15 @@
 package com.example.needhelp.fragment;
 
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.TextView;
 
 import com.example.needhelp.R;
 import com.example.needhelp.adapter.UserAdapter;
@@ -61,32 +60,31 @@ public class ChatFragment extends Fragment {
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
-         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+        firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
 
-         userList = new HashSet<>();
-         reference = FirebaseDatabase.getInstance().getReference("Chats");
+        userList = new HashSet<>();
+        reference = FirebaseDatabase.getInstance().getReference("Chats");
 
 
-         reference.addValueEventListener(new ValueEventListener() {
+        reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
-                    for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
 
-                        Chat chat = snapshot.getValue(Chat.class);
+                    Chat chat = snapshot.getValue(Chat.class);
 
-                        assert chat != null;
-                        if (chat.getSender().equals(firebaseUser.getUid())) {
-                            userList.add(chat.getReciever());
-                        }
-                        if (chat.getReciever().equals(firebaseUser.getUid())) {
-                            userList.add(chat.getSender());
-
-                        }
+                    assert chat != null;
+                    if (chat.getSender().equals(firebaseUser.getUid())) {
+                        userList.add(chat.getReciever());
                     }
+                    if (chat.getReciever().equals(firebaseUser.getUid())) {
+                        userList.add(chat.getSender());
 
-                     readChats();
+                    }
                 }
+                readChats();
+            }
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
@@ -110,21 +108,21 @@ public class ChatFragment extends Fragment {
 
                 mUsers.clear();
 
-                    for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
 
-                        User user = snapshot.getValue(User.class);
+                    User user = snapshot.getValue(User.class);
 
-                        for (String id : userList) {
-                            assert user != null;
-                            if (user.getId().equals(id)) {
-                                mUsers.add(user);
-                                }
-                            }
+                    for (String id : userList) {
+                        assert user != null;
+                        if (user.getId().equals(id)) {
+                            mUsers.add(user);
                         }
-
-                    userAdapter = new UserAdapter(getContext(), mUsers);
-                    recyclerView.setAdapter(userAdapter);
+                    }
                 }
+
+                userAdapter = new UserAdapter(getContext(), mUsers);
+                recyclerView.setAdapter(userAdapter);
+            }
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
@@ -132,6 +130,4 @@ public class ChatFragment extends Fragment {
             }
         });
     }
-
-
 }

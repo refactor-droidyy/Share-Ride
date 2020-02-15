@@ -1,8 +1,5 @@
 package com.example.needhelp;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.browser.customtabs.CustomTabsIntent;
-
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.graphics.Color;
@@ -11,6 +8,9 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.browser.customtabs.CustomTabsIntent;
 
 import com.example.needhelp.activity.Working;
 
@@ -62,7 +62,7 @@ public class About extends AppCompatActivity {
         submit_article.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                sendMail( "mailto:lit2018068@iiitl.ac.in?subject=Article submission for Share Ride App");
+                sendMail("mailto:lit2018068@iiitl.ac.in?subject=Article submission for Share Ride App");
             }
         });
     }

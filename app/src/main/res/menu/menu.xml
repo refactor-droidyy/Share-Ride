@@ -10,7 +10,7 @@
         <item
             android:title="My Journeys"
             app:showAsAction="never"
-            android:icon="@drawable/journey"
+            android:icon="@drawable/ic_location_on_black_24dp"
             android:id="@+id/uploadss"/>
         <item
             android:title="My Rides"

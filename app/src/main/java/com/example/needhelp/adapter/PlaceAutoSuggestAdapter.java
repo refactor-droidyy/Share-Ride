@@ -1,4 +1,4 @@
-package com.example.needhelp;
+package com.example.needhelp.adapter;
 
 import android.content.Context;
 import android.widget.ArrayAdapter;
@@ -16,46 +16,45 @@ public class PlaceAutoSuggestAdapter extends ArrayAdapter implements Filterable 
     int resource;
     Context context;
 
-    PlaceApi placeApi=new PlaceApi();
+    PlaceApi placeApi = new PlaceApi();
 
-    public PlaceAutoSuggestAdapter(Context context,int resId){
-        super(context,resId);
-        this.context=context;
-        this.resource=resId;
+    public PlaceAutoSuggestAdapter(Context context, int resId) {
+        super(context, resId);
+        this.context = context;
+        this.resource = resId;
 
     }
 
     @Override
-    public int getCount(){
+    public int getCount() {
         return results.size();
     }
 
     @Override
-    public String getItem(int pos){
+    public String getItem(int pos) {
         return results.get(pos);
     }
 
     @Override
-    public Filter getFilter(){
-        Filter filter=new Filter() {
+    public Filter getFilter() {
+        Filter filter = new Filter() {
             @Override
             protected FilterResults performFiltering(CharSequence constraint) {
-                FilterResults filterResults=new FilterResults();
-                if(constraint!=null){
-                    results=placeApi.autoComplete(constraint.toString());
+                FilterResults filterResults = new FilterResults();
+                if (constraint != null) {
+                    results = placeApi.autoComplete(constraint.toString());
 
-                    filterResults.values=results;
-                    filterResults.count=results.size();
+                    filterResults.values = results;
+                    filterResults.count = results.size();
                 }
                 return filterResults;
             }
 
             @Override
             protected void publishResults(CharSequence constraint, FilterResults results) {
-                if(results!=null && results.count>0){
+                if (results != null && results.count > 0) {
                     notifyDataSetChanged();
-                }
-                else{
+                } else {
                     notifyDataSetInvalidated();
                 }
 

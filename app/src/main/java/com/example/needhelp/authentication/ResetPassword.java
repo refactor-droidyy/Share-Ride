@@ -1,10 +1,5 @@
 package com.example.needhelp.authentication;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.RequiresApi;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
@@ -13,6 +8,11 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import com.example.needhelp.R;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -74,10 +74,8 @@ public class ResetPassword extends AppCompatActivity {
                                 Toast.makeText(ResetPassword.this, "" + Objects.requireNonNull(task.getException()).getMessage(), Toast.LENGTH_LONG).show();
 
                             }
-
                         }
                     });
-
                 }
             }
         });

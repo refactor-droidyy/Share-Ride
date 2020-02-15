@@ -38,11 +38,11 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.Viewhold
     @NonNull
     @Override
     public Viewholder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        if(viewType == MSG_TYPE_RIGHT) {
-            View view = LayoutInflater.from(context).inflate(R.layout.chat_right,parent,false);
+        if (viewType == MSG_TYPE_RIGHT) {
+            View view = LayoutInflater.from(context).inflate(R.layout.chat_right, parent, false);
             return new MessageAdapter.Viewholder(view);
-        }else{
-            View view  = LayoutInflater.from(context).inflate(R.layout.chat_left,parent,false);
+        } else {
+            View view = LayoutInflater.from(context).inflate(R.layout.chat_left, parent, false);
             return new MessageAdapter.Viewholder(view);
         }
 
@@ -50,7 +50,7 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.Viewhold
 
     @Override
     public void onBindViewHolder(@NonNull Viewholder holder, int position) {
-        Chat chat  = list.get(position);
+        Chat chat = list.get(position);
         holder.show_message.setText(chat.getMessage());
 
     }
@@ -61,8 +61,9 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.Viewhold
     }
 
 
-    public class Viewholder extends RecyclerView.ViewHolder{
+    public class Viewholder extends RecyclerView.ViewHolder {
         TextView show_message;
+
         public Viewholder(@NonNull View itemView) {
             super(itemView);
             show_message = itemView.findViewById(R.id.show_message);
@@ -72,9 +73,9 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.Viewhold
     @Override
     public int getItemViewType(int position) {
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
-        if(list.get(position).getSender().equals(firebaseUser.getUid())){
+        if (list.get(position).getSender().equals(firebaseUser.getUid())) {
             return MSG_TYPE_RIGHT;
-        }else{
+        } else {
             return MSG_TYPE_LEFT;
         }
     }

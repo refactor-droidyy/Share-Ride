@@ -41,7 +41,7 @@
         android:id="@+id/textView2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:fontFamily="@font/good"
+        android:fontFamily="@font/ds"
         android:text="Find travel buddies, Save money !"
         android:textAlignment="center"
         android:textColor="#000000"

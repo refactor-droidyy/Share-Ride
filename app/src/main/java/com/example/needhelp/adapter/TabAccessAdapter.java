@@ -1,10 +1,12 @@
-package com.example.needhelp;
+package com.example.needhelp.adapter;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 
+import com.example.needhelp.Group;
+import com.example.needhelp.Request;
 import com.example.needhelp.fragment.ChatFragment;
 
 public class TabAccessAdapter extends FragmentPagerAdapter {

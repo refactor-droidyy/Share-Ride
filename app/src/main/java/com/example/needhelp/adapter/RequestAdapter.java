@@ -1,4 +1,4 @@
-package com.example.needhelp;
+package com.example.needhelp.adapter;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -12,6 +12,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.needhelp.R;
 import com.example.needhelp.model.User;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -39,7 +40,7 @@ public class RequestAdapter extends RecyclerView.Adapter<RequestAdapter.Viewhold
     @NonNull
     @Override
     public Viewholder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view  = LayoutInflater.from(context).inflate(R.layout.request_item,parent,false);
+        View view = LayoutInflater.from(context).inflate(R.layout.request_item, parent, false);
         return new RequestAdapter.Viewholder(view);
     }
 
@@ -54,13 +55,13 @@ public class RequestAdapter extends RecyclerView.Adapter<RequestAdapter.Viewhold
         holder.accept.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(final View view) {
-                HashMap<String,String> hashMap = new HashMap<>();
-                hashMap.put("friend","false");
+                HashMap<String, String> hashMap = new HashMap<>();
+                hashMap.put("friend", "false");
                 databaseReference.child(s).child(userr.getUid()).setValue(hashMap).addOnCompleteListener(new OnCompleteListener<Void>() {
                     @SuppressLint("ShowToast")
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
-                        Toast.makeText(view.getContext()," Now you can chat ",Toast.LENGTH_SHORT);
+                        Toast.makeText(view.getContext(), " Now you can chat ", Toast.LENGTH_SHORT);
                     }
                 });
 
@@ -78,9 +79,10 @@ public class RequestAdapter extends RecyclerView.Adapter<RequestAdapter.Viewhold
 
         TextView name;
         Button accept;
+
         public Viewholder(@NonNull View itemView) {
             super(itemView);
-            name=itemView.findViewById(R.id.NAME);
+            name = itemView.findViewById(R.id.NAME);
             accept = itemView.findViewById(R.id.buttonacc);
         }
     }

@@ -3,9 +3,10 @@ package com.example.needhelp;
 public class Block {
     private String name;
 
-    public Block(){
+    public Block() {
 
     }
+
     public String getName() {
         return name;
     }

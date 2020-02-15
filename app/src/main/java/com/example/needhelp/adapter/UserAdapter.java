@@ -33,7 +33,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view  = LayoutInflater.from(mContext).inflate(R.layout.user_item,parent,false);
+        View view = LayoutInflater.from(mContext).inflate(R.layout.user_item, parent, false);
         return new UserAdapter.ViewHolder(view);
     }
 
@@ -47,15 +47,15 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(mContext, Message.class);
-                intent.putExtra("ID",user.getId());
-                intent.putExtra("imgUrl",user.getImageURL());
+                intent.putExtra("ID", user.getId());
+                intent.putExtra("imgUrl", user.getImageURL());
                 mContext.startActivity(intent);
             }
         });
 
         Picasso.get()
                 .load(user.getImageURL())
-                .resize(120,120)
+                .resize(120, 120)
                 .into(holder.imageUrl);
     }
 

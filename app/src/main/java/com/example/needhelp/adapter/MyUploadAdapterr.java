@@ -14,8 +14,8 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.needhelp.R;
-import com.example.needhelp.model.Upload;
 import com.example.needhelp.activity.HelpCall;
+import com.example.needhelp.model.Upload;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -91,11 +91,11 @@ public class MyUploadAdapterr extends RecyclerView.Adapter<MyUploadAdapterr.View
                             Intent intent = new Intent(view.getContext(), HelpCall.class);
                             intent.putExtra("value", snapshot.getRef().getKey());
                             intent.putExtra("time", upload.getTime());
-                            intent.putExtra("from_intent",upload.getFrom());
-                            intent.putExtra("to_intent",upload.getTo());
-                            intent.putExtra("desc_intent",upload.getDescription());
-                            intent.putExtra("mode_select_intent",upload.getRide_type());
-                            intent.putExtra("companions_intetn",upload.getCompanions());
+                            intent.putExtra("from_intent", upload.getFrom());
+                            intent.putExtra("to_intent", upload.getTo());
+                            intent.putExtra("desc_intent", upload.getDescription());
+                            intent.putExtra("mode_select_intent", upload.getRide_type());
+                            intent.putExtra("companions_intetn", upload.getCompanions());
                             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                             mContext.startActivity(intent);
                         }

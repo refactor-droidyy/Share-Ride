@@ -11,7 +11,6 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
@@ -45,7 +44,7 @@ public class Custompopup extends Activity {
     private DatabaseReference reference;
     String Currentstate;
     private TextView email_item;
-    private String title,phone,name,imageUrl,id_email;
+    private String title, phone, name, imageUrl, id_email;
 
     @SuppressLint("SetTextI18n")
     @Override
@@ -92,30 +91,6 @@ public class Custompopup extends Activity {
 
         assert idd != null;
 
-//        // checking if the request is performed or not
-//        reference.child(idd).addValueEventListener(new ValueEventListener() {
-//            @SuppressLint("SetTextI18n")
-//            @Override
-//            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-//                for(DataSnapshot snapshot : dataSnapshot.getChildren()){
-//                    Regain regain = snapshot.getValue(Regain.class);
-//                    assert regain != null;
-//                    String type = regain.getRequesttype();
-//                    if(type.equals("recieved")){
-//                        request.setEnabled(true);
-//                        request.setText("Cancel Request");
-//                        Current_state  = 1;
-//                    }
-//
-//                }
-//            }
-//
-//            @Override
-//            public void onCancelled(@NonNull DatabaseError databaseError) {
-//
-//            }
-//        });
-
 
         chatting.setOnClickListener(new View.OnClickListener() {
             @SuppressLint("ShowToast")
@@ -123,26 +98,15 @@ public class Custompopup extends Activity {
             public void onClick(View view) {
                 if (!user.getUid().equals(idd)) {
                     Intent intt = new Intent(Custompopup.this, Message.class);
-                   // Toast.makeText(getApplicationContext(),id_email,Toast.LENGTH_SHORT).show();
+                    // Toast.makeText(getApplicationContext(),id_email,Toast.LENGTH_SHORT).show();
                     intt.putExtra("ID", idd);
                     intt.putExtra("imgUrl", imageUrl);
-                    intt.putExtra("phone",phone);
+                    intt.putExtra("phone", phone);
                     startActivity(intt);
                     finish();
                 }
             }
         });
-
-
-//        request.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//
-//                sendRequest();
-//            }
-//        });
-
-
     }
 
     @SuppressLint("SetTextI18n")
@@ -193,10 +157,8 @@ public class Custompopup extends Activity {
                             request.setText("Request For Share Ride");
                         }
                     });
-
                 }
             });
-
         }
     }
 }

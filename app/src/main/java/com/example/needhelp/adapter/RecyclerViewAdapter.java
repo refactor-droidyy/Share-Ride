@@ -13,15 +13,14 @@ import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.needhelp.activity.Custompopup;
 import com.example.needhelp.R;
-import com.example.needhelp.model.Upload;
+import com.example.needhelp.activity.Custompopup;
 import com.example.needhelp.activity.Message;
+import com.example.needhelp.model.Upload;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -41,7 +40,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     private Context mContext;
     private List<Upload> mUploads;
     private List<Upload> uploadListFiltered;
-    int x,i = 0;
+    int x, i = 0;
     private String CURRENT_STATE;
 
     public RecyclerViewAdapter(Context mContext, List<Upload> mUploads) {
@@ -113,7 +112,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
                 intent.putExtra("username", upload.getUsername());
                 intent.putExtra("imageUrl", upload.getImageUrl());
                 intent.putExtra("phone", upload.getPhone());
-                intent.putExtra("emaill",upload.getEmail());
+                intent.putExtra("emaill", upload.getEmail());
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 mContext.startActivity(intent);
             }
@@ -128,14 +127,14 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
                 query.addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        if(i % 2 == 0) {
+                        if (i % 2 == 0) {
                             holder.reqBtn.setText("Cancel Request");
                             holder.reqBtn.setTextColor(Color.RED);
                             x = Integer.parseInt(upload.getCompanions());
                             x--;
                             holder.companion_count.setText(String.valueOf(x));
                             i++;
-                        }else{
+                        } else {
                             holder.reqBtn.setText("Accept Request");
                             holder.reqBtn.setTextColor(Color.GREEN);
                             x++;
@@ -143,6 +142,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
                             i++;
                         }
                     }
+
                     @Override
                     public void onCancelled(@NonNull DatabaseError databaseError) {
 
@@ -176,20 +176,20 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     private Filter exampleFilter = new Filter() {
         @Override
         protected FilterResults performFiltering(CharSequence charSequence) {
-           List<Upload> filteredList = new ArrayList<>();
-           if(charSequence == null || charSequence.length() == 0){
-               filteredList.addAll(uploadListFiltered);
-           }else {
-               String filterPattern = charSequence.toString().toLowerCase().trim();
-               for(Upload item : uploadListFiltered){
-                   if(item.getTo().toLowerCase().contains(filterPattern) || item.getFrom().toLowerCase().contains(filterPattern)){
-                       filteredList.add(item);
-                   }
-               }
-           }
-           FilterResults results = new FilterResults();
-           results.values = filteredList;
-           return results;
+            List<Upload> filteredList = new ArrayList<>();
+            if (charSequence == null || charSequence.length() == 0) {
+                filteredList.addAll(uploadListFiltered);
+            } else {
+                String filterPattern = charSequence.toString().toLowerCase().trim();
+                for (Upload item : uploadListFiltered) {
+                    if (item.getTo().toLowerCase().contains(filterPattern) || item.getFrom().toLowerCase().contains(filterPattern)) {
+                        filteredList.add(item);
+                    }
+                }
+            }
+            FilterResults results = new FilterResults();
+            results.values = filteredList;
+            return results;
         }
 
         @Override

@@ -31,12 +31,12 @@ public class Regain {
     public Regain(String id, String requesttype, String friend) {
         this.id = id;
         this.requesttype = requesttype;
-        this.friend=friend;
+        this.friend = friend;
     }
 
     public String requesttype;
 
-    public Regain(){
+    public Regain() {
 
     }
 
